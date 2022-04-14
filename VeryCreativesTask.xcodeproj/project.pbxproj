@@ -35,6 +35,8 @@
 		7CBE0B562808B79A0098B205 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B412808B79A0098B205 /* NetworkRouter.swift */; };
 		7CBE0B572808B79A0098B205 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B422808B79A0098B205 /* NetworkManager.swift */; };
 		7CBE0B582808B79A0098B205 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B442808B79A0098B205 /* MovieResponse.swift */; };
+		7CBE0B5F2808BA560098B205 /* NavigationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B5A2808BA560098B205 /* NavigationRoute.swift */; };
+		7CBE0B622808BA560098B205 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B5E2808BA560098B205 /* Route.swift */; };
 		C3498A766B58D4D40FDD7CF6 /* Pods_VeryCreativesTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512D32FCB7768F554A8BFB11 /* Pods_VeryCreativesTask.framework */; };
 		DC853DDDAF4180F7070C4DF0 /* Pods_VeryCreativesTask_VeryCreativesTaskUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673AFF44CF156A5D68C1A5CB /* Pods_VeryCreativesTask_VeryCreativesTaskUITests.framework */; };
 /* End PBXBuildFile section */
@@ -93,6 +95,8 @@
 		7CBE0B412808B79A0098B205 /* NetworkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		7CBE0B422808B79A0098B205 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7CBE0B442808B79A0098B205 /* MovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
+		7CBE0B5A2808BA560098B205 /* NavigationRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
+		7CBE0B5E2808BA560098B205 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		B6EBEA2615F8C64503BDD3AB /* Pods-VeryCreativesTaskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeryCreativesTaskTests.debug.xcconfig"; path = "Target Support Files/Pods-VeryCreativesTaskTests/Pods-VeryCreativesTaskTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9402075BE203A669A9D45D9 /* Pods-VeryCreativesTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeryCreativesTask.release.xcconfig"; path = "Target Support Files/Pods-VeryCreativesTask/Pods-VeryCreativesTask.release.xcconfig"; sourceTree = "<group>"; };
 		D673C708BBDF12254A4F6DA9 /* Pods_VeryCreativesTaskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VeryCreativesTaskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,8 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				7CBE0B1D2808B79A0098B205 /* Utilities */,
+				7CBE0B592808BA560098B205 /* Navigation */,
 				7CBE0B372808B79A0098B205 /* Services */,
-				7CBE0B452808B79A0098B205 /* Navigation */,
 				7CBE0B202808B79A0098B205 /* Scenes */,
 				7CBE0B1A2808B5C60098B205 /* Assets */,
 				7CBE0B192808B5B50098B205 /* Core */,
@@ -380,9 +384,11 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		7CBE0B452808B79A0098B205 /* Navigation */ = {
+		7CBE0B592808BA560098B205 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				7CBE0B5A2808BA560098B205 /* NavigationRoute.swift */,
+				7CBE0B5E2808BA560098B205 /* Route.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -648,8 +654,10 @@
 				7CBE0B472808B79A0098B205 /* Reachability.swift in Sources */,
 				7CBE0B482808B79A0098B205 /* HomePresenter.swift in Sources */,
 				7CBE0B4A2808B79A0098B205 /* MovieCollectionViewCell.swift in Sources */,
+				7CBE0B5F2808BA560098B205 /* NavigationRoute.swift in Sources */,
 				7CBE0B562808B79A0098B205 /* NetworkRouter.swift in Sources */,
 				7CBE0B572808B79A0098B205 /* NetworkManager.swift in Sources */,
+				7CBE0B622808BA560098B205 /* Route.swift in Sources */,
 				7CBE0B462808B79A0098B205 /* Constants.swift in Sources */,
 				7CBE0B522808B79A0098B205 /* DatabaseProtocol.swift in Sources */,
 				7CBE0B4C2808B79A0098B205 /* FavoritesPresenter.swift in Sources */,
