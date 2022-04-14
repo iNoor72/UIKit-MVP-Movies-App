@@ -81,7 +81,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let vc = MovieDetailsViewController(nibName: "MovieDetailsViewController", bundle: nil)
+        vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.topRatedMoviesList?.results?[indexPath.row])!, detailsView: vc)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

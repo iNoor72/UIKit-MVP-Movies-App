@@ -22,6 +22,7 @@ struct Constants {
     struct XIBs {
         static let FavoriteMovieTableViewCell = "FavoriteMovieTableViewCell"
         static let MovieCollectionViewCell = "MovieCollectionViewCell"
+        static let MovieDetailsViewController = "MovieDetailsViewController"
     }
     
     struct ViewControllers {

@@ -13,9 +13,7 @@ enum NetworkRouter: URLRequestConvertible {
     case topRated
     case popular
     case movie(id: Int)
-    
-//    static let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=\(Constants.APIKey)")!
-//    static let baseURL = "https://www.themoviedb.org/3/"
+
     var path: String {
         switch self {
         case .topRated:
@@ -37,6 +35,19 @@ enum NetworkRouter: URLRequestConvertible {
             return .get
         }
     }
+    
+    //We don't need headers but if needed, uncomment the code and write the headers
+    
+//    var headers: [String:String] {
+//        switch self {
+//        case .topRated:
+//            return ["":""]
+//        case .popular:
+//            return ["":""]
+//        case .movie(_):
+//            return ["":""]
+//        }
+//    }
 
     
     var parameters: [String: Any] {

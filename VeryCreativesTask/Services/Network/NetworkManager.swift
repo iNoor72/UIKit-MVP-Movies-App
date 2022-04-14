@@ -35,7 +35,7 @@ class NetworkManager {
     
     func fetchMovies<T:Decodable>(type: MoviesType, completion: @escaping (T?, Error?) -> ()) {
         let url = getURL(type: type)
-//        let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=\(Constants.APIKey)")!
+        
         AF.request(url).responseDecodable { (response: DataResponse<T, AFError>) in
             switch response.result {
             case .failure(let error):
