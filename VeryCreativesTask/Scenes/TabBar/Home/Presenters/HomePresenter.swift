@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomePresenterProtocol {
-    var moviesList: [Movie] { get }
+    var moviesList: [MovieDataManagedObject] { get }
     var popularMoviesList: MovieResponse? { get }
     var topRatedMoviesList: MovieResponse? { get }
     var userMoviePreference: MoviesType { get set }
@@ -23,7 +23,7 @@ enum MoviePreference {
 
 class HomePresenter: HomePresenterProtocol {
     
-    var moviesList = [Movie]()
+    var moviesList = [MovieDataManagedObject]()
     var popularMoviesList: MovieResponse?
     var topRatedMoviesList: MovieResponse?
     var userMoviePreference: MoviesType = .topRated
@@ -33,7 +33,7 @@ class HomePresenter: HomePresenterProtocol {
         self.homeView = homeView
     }
     
-    func setMoviesList(movies: [Movie]) {
+    func setMoviesList(movies: [MovieDataManagedObject]) {
         self.moviesList = movies
     }
     

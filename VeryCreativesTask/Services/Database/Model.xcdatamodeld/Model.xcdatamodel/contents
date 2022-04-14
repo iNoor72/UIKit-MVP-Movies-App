@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Movie" representedClassName=".Movie" syncable="YES">
+    <entity name="MovieDataManagedObject" representedClassName=".MovieDataManagedObject" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="MovieResponseManagedObject" representedClassName=".MovieResponseManagedObject" syncable="YES">
+        <attribute name="movies" optional="YES" attributeType="Transformable"/>
+        <attribute name="page" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="total_pages" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="moviesList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MovieDataManagedObject"/>
+    </entity>
     <elements>
-        <element name="Movie" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="MovieResponseManagedObject" positionX="-45" positionY="0" width="128" height="89"/>
+        <element name="MovieDataManagedObject" positionX="-18" positionY="27" width="128" height="89"/>
     </elements>
 </model>
