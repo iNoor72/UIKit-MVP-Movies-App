@@ -14,14 +14,16 @@ enum NetworkRouter: URLRequestConvertible {
     case popular
     case movie(id: Int)
     
+//    static let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=\(Constants.APIKey)")!
+//    static let baseURL = "https://www.themoviedb.org/3/"
     var path: String {
         switch self {
         case .topRated:
-            return "/movie/top_rated?\(Constants.APIKey)"
+            return "/movie/top_rated"
         case .popular:
-            return "/movie/popular?\(Constants.APIKey)"
+            return "/movie/popular"
         case .movie(let movieID):
-            return "/movie/\(movieID)?\(Constants.APIKey)"
+            return "/movie/\(movieID)"
         }
     }
     
@@ -35,27 +37,17 @@ enum NetworkRouter: URLRequestConvertible {
             return .get
         }
     }
-    
-    //They're not needed, but uncomment and add header if there's any
-//    var headers: [String:String] {
-//        switch self {
-//        case .topRated:
-//            return ["":""]
-//        case .popular:
-//            return ["":""]
-//        case .movie(_):
-//            return ["":""]
-//        }
-//    }
+
     
     var parameters: [String: Any] {
         switch self {
         case .topRated:
-            return ["":""]
+            return ["api_key":"\(Constants.APIKey)"]
         case .popular:
-            return ["":""]
+            return ["api_key":"\(Constants.APIKey)"]
         case .movie(let movieID):
-            return ["movie_id":movieID]
+            return ["movie_id":movieID,
+                    "api_key":"\(Constants.APIKey)"]
         }
     }
     
@@ -63,14 +55,13 @@ enum NetworkRouter: URLRequestConvertible {
     
     
     func asURLRequest() throws -> URLRequest {
-        guard let safeURL = URL(string: Constants.baseURL) else { return URLRequest(url: Constants.dummyURL) }
+        guard var safeURL = URL(string: Constants.baseURL) else { return URLRequest(url: Constants.dummyURL) }
+        safeURL.appendPathComponent(path)
         var request = URLRequest(url: safeURL)
         request.method = method
         switch self {
-        case .movie(id: _):
-            request = try URLEncoding.default.encode(request, with: parameters)
         default:
-            print("No params for this request.")
+            request = try URLEncoding.default.encode(request, with: parameters)
         }
         
         return request
