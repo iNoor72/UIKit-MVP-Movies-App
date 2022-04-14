@@ -36,16 +36,17 @@ enum NetworkRouter: URLRequestConvertible {
         }
     }
     
-    var headers: [String:String] {
-        switch self {
-        case .topRated:
-            return ["":""]
-        case .popular:
-            return ["":""]
-        case .movie(_):
-            return ["":""]
-        }
-    }
+    //They're not needed, but uncomment and add header if there's any
+//    var headers: [String:String] {
+//        switch self {
+//        case .topRated:
+//            return ["":""]
+//        case .popular:
+//            return ["":""]
+//        case .movie(_):
+//            return ["":""]
+//        }
+//    }
     
     var parameters: [String: Any] {
         switch self {
@@ -65,7 +66,6 @@ enum NetworkRouter: URLRequestConvertible {
         guard let safeURL = URL(string: Constants.baseURL) else { return URLRequest(url: Constants.dummyURL) }
         var request = URLRequest(url: safeURL)
         request.method = method
-        request.headers = HTTPHeaders(headers)
         switch self {
         case .movie(id: _):
             request = try URLEncoding.default.encode(request, with: parameters)

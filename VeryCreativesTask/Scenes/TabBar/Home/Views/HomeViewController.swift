@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         homePresenter = HomePresenter(homeView: self)
-//        UserDefaults.standard.set(MoviesType.topRated, forKey: "UserPreference")
+        UserDefaults.standard.set("TopRated", forKey: "UserPreference")
         setupCollectionView()
         checkConnectivity()
     }
@@ -28,8 +28,8 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     private func checkConnectivity() {
         if Reachability.isConnectedToNetwork() {
             //Get data from Internet
-//            homePresenter?.fetchPopularMovies()
-//            homePresenter?.fetchTopRatedMovies()
+            homePresenter?.fetchPopularMovies()
+            homePresenter?.fetchTopRatedMovies()
         } else {
             //Get data from Database
         }
@@ -42,7 +42,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: 194, height: 229)
+        flowLayout.itemSize = CGSize(width: 150, height: 230)
         flowLayout.minimumLineSpacing = 8.0
         flowLayout.minimumInteritemSpacing = 8.0
         self.collectionView.collectionViewLayout = flowLayout
@@ -61,33 +61,21 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let topRatedMoviesCount = homePresenter?.topRatedMoviesList?.results?.count, let popularMoviesCount = homePresenter?.popularMoviesList?.results?.count {
-            guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") as? MoviesType else { return 0 }
+            guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") else { return 0 }
             
-            switch userPreference {
-            case .topRated:
-                return topRatedMoviesCount
-            case .popular:
-                return popularMoviesCount
-            case .favorites:
-                print("No imp for now")
-            }
+            //Just for now
+            return topRatedMoviesCount
         }
         
-        return 0
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CollectionViewCells.MovieCell, for: indexPath) as? MovieCollectionViewCell else { return UICollectionViewCell() }
-        guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") as? MoviesType else { return UICollectionViewCell() }
+        guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") else { return UICollectionViewCell() }
         
-        switch userPreference {
-        case .topRated:
-            cell.configure(name: homePresenter?.topRatedMoviesList?.results?[indexPath.row].title ?? "", imageURL: Constants.noImage)
-        case .popular:
-            cell.configure(name: homePresenter?.popularMoviesList?.results?[indexPath.row].title ?? "", imageURL: Constants.noImage)
-        case .favorites:
-            print("No imp for now")
-        }
+        //Just for now
+        cell.configure(name: homePresenter?.topRatedMoviesList?.results?[indexPath.row].title ?? "", imageURL: Constants.noImage)
 
         return cell
     }
