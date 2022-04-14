@@ -33,13 +33,13 @@ class NetworkManager {
         return NetworkRouter.topRated
     }
     
-    func fetchMovies<T:Decodable>(type: MoviesType, completion: @escaping ((T?, Error?) -> Void)) {
+    func fetchMovies<T:Decodable>(type: MoviesType, completion: @escaping (T?, Error?) -> ()) {
         let url = getURL(type: type)
         
-        AF.request(url).responseDecodable { (response : DataResponse<T, AFError>) in
+        AF.request(url).responseDecodable { (response: DataResponse<T, AFError>) in
             switch response.result {
             case .failure(let error):
-                print("There was a problem fetching data form API. Error: \(error.localizedDescription)")
+                print("There was a problem fetching data form API. Error: \(error)")
                 completion(nil, error)
                 
             case .success(let movieData):

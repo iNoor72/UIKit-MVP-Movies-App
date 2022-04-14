@@ -9,8 +9,9 @@ import Foundation
 
 struct MovieResponse: Codable {
     var page: Int?
-    var results: [MovieData]?
+    var total_results: Int?
     var total_pages: Int?
+    var results: [MovieData]?
     
 }
 

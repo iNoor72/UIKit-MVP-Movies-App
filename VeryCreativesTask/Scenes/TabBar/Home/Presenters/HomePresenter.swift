@@ -38,7 +38,7 @@ class HomePresenter: HomePresenterProtocol {
     }
     
     func fetchPopularMovies() {
-        NetworkManager.shared.fetchMovies(type: .popular) {[weak self] (movies: MovieResponse?, error: Error?) in
+        NetworkManager.shared.fetchMovies(type: .popular) {[weak self] (movies: MovieResponse?, error) in
             if error != nil {
                 print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
             }
@@ -53,7 +53,7 @@ class HomePresenter: HomePresenterProtocol {
     }
     
     func fetchTopRatedMovies() {
-        NetworkManager.shared.fetchMovies(type: .topRated) {[weak self] (movies: MovieResponse?, error: Error?) in
+        NetworkManager.shared.fetchMovies(type: .topRated) {[weak self] (movies: MovieResponse?, error) in
             if error != nil {
                 print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
             }
