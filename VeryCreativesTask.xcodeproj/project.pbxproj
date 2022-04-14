@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36F1BED2EA93B720F48F19A7 /* Pods_VeryCreativesTaskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D673C708BBDF12254A4F6DA9 /* Pods_VeryCreativesTaskTests.framework */; };
 		7CBE0AEA2808B59E0098B205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0AE92808B59E0098B205 /* AppDelegate.swift */; };
 		7CBE0AEC2808B59E0098B205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0AEB2808B59E0098B205 /* SceneDelegate.swift */; };
 		7CBE0AEE2808B59E0098B205 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0AED2808B59E0098B205 /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 		7CBE0B012808B5A00098B205 /* VeryCreativesTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B002808B5A00098B205 /* VeryCreativesTaskTests.swift */; };
 		7CBE0B0B2808B5A00098B205 /* VeryCreativesTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B0A2808B5A00098B205 /* VeryCreativesTaskUITests.swift */; };
 		7CBE0B0D2808B5A00098B205 /* VeryCreativesTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B0C2808B5A00098B205 /* VeryCreativesTaskUITestsLaunchTests.swift */; };
+		C3498A766B58D4D40FDD7CF6 /* Pods_VeryCreativesTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512D32FCB7768F554A8BFB11 /* Pods_VeryCreativesTask.framework */; };
+		DC853DDDAF4180F7070C4DF0 /* Pods_VeryCreativesTask_VeryCreativesTaskUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673AFF44CF156A5D68C1A5CB /* Pods_VeryCreativesTask_VeryCreativesTaskUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22B4BF9B2A6BD9E530D4F4BD /* Pods-VeryCreativesTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeryCreativesTask.debug.xcconfig"; path = "Target Support Files/Pods-VeryCreativesTask/Pods-VeryCreativesTask.debug.xcconfig"; sourceTree = "<group>"; };
+		25F69F82ECDD91021FBD3919 /* Pods-VeryCreativesTaskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeryCreativesTaskTests.release.xcconfig"; path = "Target Support Files/Pods-VeryCreativesTaskTests/Pods-VeryCreativesTaskTests.release.xcconfig"; sourceTree = "<group>"; };
+		3FD1C2B97E88DE250010DE36 /* Pods-VeryCreativesTask-VeryCreativesTaskUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeryCreativesTask-VeryCreativesTaskUITests.release.xcconfig"; path = "Target Support Files/Pods-VeryCreativesTask-VeryCreativesTaskUITests/Pods-VeryCreativesTask-VeryCreativesTaskUITests.release.xcconfig"; sourceTree = "<group>"; };
+		512D32FCB7768F554A8BFB11 /* Pods_VeryCreativesTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VeryCreativesTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		673AFF44CF156A5D68C1A5CB /* Pods_VeryCreativesTask_VeryCreativesTaskUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VeryCreativesTask_VeryCreativesTaskUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBE0AE62808B59E0098B205 /* VeryCreativesTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeryCreativesTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBE0AE92808B59E0098B205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CBE0AEB2808B59E0098B205 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +57,10 @@
 		7CBE0B062808B5A00098B205 /* VeryCreativesTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeryCreativesTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBE0B0A2808B5A00098B205 /* VeryCreativesTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeryCreativesTaskUITests.swift; sourceTree = "<group>"; };
 		7CBE0B0C2808B5A00098B205 /* VeryCreativesTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeryCreativesTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B6EBEA2615F8C64503BDD3AB /* Pods-VeryCreativesTaskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeryCreativesTaskTests.debug.xcconfig"; path = "Target Support Files/Pods-VeryCreativesTaskTests/Pods-VeryCreativesTaskTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B9402075BE203A669A9D45D9 /* Pods-VeryCreativesTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeryCreativesTask.release.xcconfig"; path = "Target Support Files/Pods-VeryCreativesTask/Pods-VeryCreativesTask.release.xcconfig"; sourceTree = "<group>"; };
+		D673C708BBDF12254A4F6DA9 /* Pods_VeryCreativesTaskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VeryCreativesTaskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4349DFB2C0AD97A99386BDB /* Pods-VeryCreativesTask-VeryCreativesTaskUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeryCreativesTask-VeryCreativesTaskUITests.debug.xcconfig"; path = "Target Support Files/Pods-VeryCreativesTask-VeryCreativesTaskUITests/Pods-VeryCreativesTask-VeryCreativesTaskUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3498A766B58D4D40FDD7CF6 /* Pods_VeryCreativesTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36F1BED2EA93B720F48F19A7 /* Pods_VeryCreativesTaskTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +84,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC853DDDAF4180F7070C4DF0 /* Pods_VeryCreativesTask_VeryCreativesTaskUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F31417770D0443293BFD4A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				22B4BF9B2A6BD9E530D4F4BD /* Pods-VeryCreativesTask.debug.xcconfig */,
+				B9402075BE203A669A9D45D9 /* Pods-VeryCreativesTask.release.xcconfig */,
+				E4349DFB2C0AD97A99386BDB /* Pods-VeryCreativesTask-VeryCreativesTaskUITests.debug.xcconfig */,
+				3FD1C2B97E88DE250010DE36 /* Pods-VeryCreativesTask-VeryCreativesTaskUITests.release.xcconfig */,
+				B6EBEA2615F8C64503BDD3AB /* Pods-VeryCreativesTaskTests.debug.xcconfig */,
+				25F69F82ECDD91021FBD3919 /* Pods-VeryCreativesTaskTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7CBE0ADD2808B59E0098B205 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +112,8 @@
 				7CBE0AFF2808B5A00098B205 /* VeryCreativesTaskTests */,
 				7CBE0B092808B5A00098B205 /* VeryCreativesTaskUITests */,
 				7CBE0AE72808B59E0098B205 /* Products */,
+				6F31417770D0443293BFD4A6 /* Pods */,
+				C769D5E6AFFA148FE5318C7A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +174,16 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		C769D5E6AFFA148FE5318C7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				512D32FCB7768F554A8BFB11 /* Pods_VeryCreativesTask.framework */,
+				673AFF44CF156A5D68C1A5CB /* Pods_VeryCreativesTask_VeryCreativesTaskUITests.framework */,
+				D673C708BBDF12254A4F6DA9 /* Pods_VeryCreativesTaskTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,9 +191,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CBE0B102808B5A00098B205 /* Build configuration list for PBXNativeTarget "VeryCreativesTask" */;
 			buildPhases = (
+				58F1D985BE74BBADA9808BEB /* [CP] Check Pods Manifest.lock */,
 				7CBE0AE22808B59E0098B205 /* Sources */,
 				7CBE0AE32808B59E0098B205 /* Frameworks */,
 				7CBE0AE42808B59E0098B205 /* Resources */,
+				ECBE000B70BD0E9C45D7EF23 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -167,6 +210,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CBE0B132808B5A00098B205 /* Build configuration list for PBXNativeTarget "VeryCreativesTaskTests" */;
 			buildPhases = (
+				F24280D6BCE9EFF44F9D8EBE /* [CP] Check Pods Manifest.lock */,
 				7CBE0AF82808B5A00098B205 /* Sources */,
 				7CBE0AF92808B5A00098B205 /* Frameworks */,
 				7CBE0AFA2808B5A00098B205 /* Resources */,
@@ -185,9 +229,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CBE0B162808B5A00098B205 /* Build configuration list for PBXNativeTarget "VeryCreativesTaskUITests" */;
 			buildPhases = (
+				9AA6AB5702D7B61BAC80D17E /* [CP] Check Pods Manifest.lock */,
 				7CBE0B022808B5A00098B205 /* Sources */,
 				7CBE0B032808B5A00098B205 /* Frameworks */,
 				7CBE0B042808B5A00098B205 /* Resources */,
+				4073696B515F376555C35BFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -268,6 +314,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4073696B515F376555C35BFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VeryCreativesTask-VeryCreativesTaskUITests/Pods-VeryCreativesTask-VeryCreativesTaskUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VeryCreativesTask-VeryCreativesTaskUITests/Pods-VeryCreativesTask-VeryCreativesTaskUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VeryCreativesTask-VeryCreativesTaskUITests/Pods-VeryCreativesTask-VeryCreativesTaskUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		58F1D985BE74BBADA9808BEB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VeryCreativesTask-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AA6AB5702D7B61BAC80D17E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VeryCreativesTask-VeryCreativesTaskUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ECBE000B70BD0E9C45D7EF23 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VeryCreativesTask/Pods-VeryCreativesTask-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VeryCreativesTask/Pods-VeryCreativesTask-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VeryCreativesTask/Pods-VeryCreativesTask-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F24280D6BCE9EFF44F9D8EBE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VeryCreativesTaskTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7CBE0AE22808B59E0098B205 /* Sources */ = {
@@ -448,6 +597,7 @@
 		};
 		7CBE0B112808B5A00098B205 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22B4BF9B2A6BD9E530D4F4BD /* Pods-VeryCreativesTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -461,6 +611,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -476,6 +627,7 @@
 		};
 		7CBE0B122808B5A00098B205 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9402075BE203A669A9D45D9 /* Pods-VeryCreativesTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -489,6 +641,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -504,6 +657,7 @@
 		};
 		7CBE0B142808B5A00098B205 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6EBEA2615F8C64503BDD3AB /* Pods-VeryCreativesTaskTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -524,6 +678,7 @@
 		};
 		7CBE0B152808B5A00098B205 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25F69F82ECDD91021FBD3919 /* Pods-VeryCreativesTaskTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -544,6 +699,7 @@
 		};
 		7CBE0B172808B5A00098B205 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4349DFB2C0AD97A99386BDB /* Pods-VeryCreativesTask-VeryCreativesTaskUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -562,6 +718,7 @@
 		};
 		7CBE0B182808B5A00098B205 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FD1C2B97E88DE250010DE36 /* Pods-VeryCreativesTask-VeryCreativesTaskUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
