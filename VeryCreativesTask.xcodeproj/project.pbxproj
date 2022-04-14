@@ -362,10 +362,10 @@
 		7CBE0B382808B79A0098B205 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				7CBE0B842808DAE90098B205 /* Model.xcdatamodeld */,
 				7CBE0B392808B79A0098B205 /* CoreDataManager.swift */,
 				7CBE0B3A2808B79A0098B205 /* DatabaseProtocol.swift */,
 				7CBE0B3B2808B79A0098B205 /* Models */,
-				7CBE0B842808DAE90098B205 /* Model.xcdatamodeld */,
 			);
 			path = Database;
 			sourceTree = "<group>";

@@ -10,6 +10,7 @@ import Foundation
 struct Constants {
     
     static let baseURL = "https://api.themoviedb.org/3"
+    static let imagesBaseURL = "https://image.tmdb.org/t/p/original"
     static let CoreDataModelFile = "Model"
     static let APIKey = "8d61230b01928fe55a53a48a41dc839b"
     static let dummyURL = URL(string: "https://google.com")!

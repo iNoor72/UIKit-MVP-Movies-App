@@ -13,6 +13,7 @@ enum NetworkRouter: URLRequestConvertible {
     case topRated
     case popular
     case movie(id: Int)
+    case image(path: String)
 
     var path: String {
         switch self {
@@ -22,6 +23,8 @@ enum NetworkRouter: URLRequestConvertible {
             return "/movie/popular"
         case .movie(let movieID):
             return "/movie/\(movieID)"
+        case .image(let path):
+            return "/\(path)"
         }
     }
     
@@ -32,6 +35,8 @@ enum NetworkRouter: URLRequestConvertible {
         case .popular:
             return .get
         case .movie(_):
+            return .get
+        case .image(_):
             return .get
         }
     }
@@ -59,6 +64,8 @@ enum NetworkRouter: URLRequestConvertible {
         case .movie(let movieID):
             return ["movie_id":movieID,
                     "api_key":"\(Constants.APIKey)"]
+        case .image(_):
+            return ["":""]
         }
     }
     

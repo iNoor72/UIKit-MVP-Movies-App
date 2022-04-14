@@ -20,10 +20,12 @@ struct MovieData: Codable {
     var id: Int?
     var title: String?
     var overview: String?
+    var poster_path: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case overview
+        case poster_path
     }
 }
