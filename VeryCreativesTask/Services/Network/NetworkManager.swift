@@ -8,19 +8,12 @@
 import Foundation
 import Alamofire
 
-enum MoviesType {
-    case topRated
-    case popular
-    case favorites
-}
-
-
 class NetworkManager {
     static let shared = NetworkManager()
     
     private init() {}
     
-    private func getURL(type: MoviesType) -> NetworkRouter {
+    private func getURL(type: MovieType) -> NetworkRouter {
         switch type {
         case .popular:
             return NetworkRouter.popular
@@ -33,7 +26,7 @@ class NetworkManager {
         return NetworkRouter.topRated
     }
     
-    func fetchMovies<T:Decodable>(type: MoviesType, completion: @escaping (T?, Error?) -> ()) {
+    func fetchMovies<T:Decodable>(type: MovieType, completion: @escaping (T?, Error?) -> ()) {
         let url = getURL(type: type)
         
         AF.request(url).responseDecodable { (response: DataResponse<T, AFError>) in

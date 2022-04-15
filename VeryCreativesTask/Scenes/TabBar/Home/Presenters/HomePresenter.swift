@@ -8,37 +8,37 @@
 import Foundation
 
 protocol HomePresenterProtocol {
-    var moviesList: [MovieDataManagedObject] { get }
+    var favoriteMovieList: [MovieDataManagedObject] { get }
     var popularMoviesList: MovieResponse? { get }
     var topRatedMoviesList: MovieResponse? { get }
-    var userMoviePreference: MoviesType { get set }
+    var userMoviePreference: MovieType { get set }
     
     func fetchPopularMovies()
     func fetchTopRatedMovies()
-}
-
-enum MoviePreference {
-    case top
+    func fetchFavoriteMovies()
+    func navigateTo(movie: MovieData)
 }
 
 class HomePresenter: HomePresenterProtocol {
     
-    var moviesList = [MovieDataManagedObject]()
+    var favoriteMovieList = [MovieDataManagedObject]()
     var popularMoviesList: MovieResponse?
     var topRatedMoviesList: MovieResponse?
-    var userMoviePreference: MoviesType = .topRated
+    var userMoviePreference: MovieType = .topRated
+    private let DatabaseManager : DatabaseProtocol
     weak var homeView: HomeViewControllerProtocol?
     
-    init(homeView: HomeViewControllerProtocol) {
+    init(DatabaseManager: DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile), homeView: HomeViewControllerProtocol) {
+        self.DatabaseManager = DatabaseManager
         self.homeView = homeView
     }
     
     func setMoviesList(movies: [MovieDataManagedObject]) {
-        self.moviesList = movies
+        self.favoriteMovieList = movies
     }
     
     func fetchPopularMovies() {
-        NetworkManager.shared.fetchMovies(type: .popular) {[weak self] (movies: MovieResponse?, error) in
+        NetworkManager.shared.fetchMovies(type: MovieType.popular) {[weak self] (movies: MovieResponse?, error: Error?) in
             if error != nil {
                 print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
             }
@@ -53,7 +53,7 @@ class HomePresenter: HomePresenterProtocol {
     }
     
     func fetchTopRatedMovies() {
-        NetworkManager.shared.fetchMovies(type: .topRated) {[weak self] (movies: MovieResponse?, error) in
+        NetworkManager.shared.fetchMovies(type: MovieType.topRated) {[weak self] (movies: MovieResponse?, error: Error?) in
             if error != nil {
                 print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
             }
@@ -65,6 +65,14 @@ class HomePresenter: HomePresenterProtocol {
                 self?.homeView?.reloadData()
             }
         }
+    }
+    
+    func fetchFavoriteMovies() {
+        DatabaseManager.fetch()
+    }
+    
+    func navigateTo(movie: MovieData) {
+        
     }
     
     

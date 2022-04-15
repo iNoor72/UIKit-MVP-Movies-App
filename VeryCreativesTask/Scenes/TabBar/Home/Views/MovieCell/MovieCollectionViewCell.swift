@@ -18,7 +18,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configure(name: String, imageURL: URL) {
+    func configure(name: String, movieImageURL: String) {
+        guard let imageURL = URL(string: (Constants.imagesBaseURL + movieImageURL)) else { return }
+        
         self.movieImage.kf.setImage(with: imageURL)
         self.movieNameLabel.text = name
     }

@@ -16,11 +16,16 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     @IBOutlet private weak var usernameLabel: UILabel!
     
     private var homePresenter: HomePresenterProtocol?
+    private var result : (Int, MovieType)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         homePresenter = HomePresenter(homeView: self)
-        UserDefaults.standard.set("TopRated", forKey: "UserPreference")
+        
+        //By default, Top Rated movies are fetched.
+        UserDefaults.standard.set(MovieType.topRated.rawValue, forKey: "UserPreference")
+        result = getMovieCountAndType(preference: "TopRated")
+        
         setupViews()
         setupCollectionView()
         checkConnectivity()
@@ -30,11 +35,20 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         if #available(iOS 14.0, *) {
             let menuItems: [UIAction] =
             [
-                UIAction(title: "Top Rated Movies", image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { (_) in
+                UIAction(title: "Top Rated Movies", image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { [weak self] _ in
+                    UserDefaults.standard.set(MovieType.topRated.rawValue, forKey: "UserPreference")
+                    self?.homePresenter?.fetchTopRatedMovies()
+                    self?.result = self?.getMovieCountAndType(preference: MovieType.topRated.rawValue)
                 }),
-                UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { (_) in
+                UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { [weak self] _ in
+                    UserDefaults.standard.set(MovieType.popular.rawValue, forKey: "UserPreference")
+                    self?.homePresenter?.fetchPopularMovies()
+                    self?.result = self?.getMovieCountAndType(preference: MovieType.popular.rawValue)
                 }),
-                UIAction(title: "Favorite Movies", image: UIImage(systemName: "star"), handler: { (_) in
+                UIAction(title: "Favorite Movies", image: UIImage(systemName: "star"), handler: { [weak self] _ in
+                    UserDefaults.standard.set(MovieType.favorites.rawValue, forKey: "UserPreference")
+                    self?.homePresenter?.fetchFavoriteMovies()
+                    self?.result = self?.getMovieCountAndType(preference: MovieType.favorites.rawValue)
                 })
             ]
             
@@ -42,7 +56,9 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
                  UIMenu(title: "Show movies menu", image: nil, identifier: nil, options: [], children: menuItems)
             
             
+            
                 let sortButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: demoMenu)
+            
             navigationItem.rightBarButtonItem = sortButton
             
         } else {
@@ -79,34 +95,74 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         collectionView.reloadData()
     }
     
+    private func getMovieCountAndType(preference: String) -> (Int, MovieType) {
+        guard let topRatedMoviesCount = homePresenter?.topRatedMoviesList?.results?.count, let popularMoviesCount = homePresenter?.popularMoviesList?.results?.count, let favoriteMoviesCount = homePresenter?.favoriteMovieList.count else { return (0, MovieType.topRated) }
+        
+        switch MovieType(rawValue: preference) {
+        case .topRated:
+            if MovieType.topRated.rawValue == preference {
+                return (topRatedMoviesCount, MovieType.topRated)
+            }
+        case .popular:
+            if MovieType.popular.rawValue == preference {
+                return (popularMoviesCount, MovieType.popular)
+            }
+            
+        case .favorites:
+            if MovieType.favorites.rawValue == preference {
+                return (favoriteMoviesCount, MovieType.favorites)
+            }
+        case .none:
+            return (0, MovieType.topRated)
+        }
+        
+        return (0, MovieType.topRated)
+    }
+    
     
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let topRatedMoviesCount = homePresenter?.topRatedMoviesList?.results?.count, let popularMoviesCount = homePresenter?.popularMoviesList?.results?.count {
-            guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") else { return 0 }
-            
-            //Just for now
-            return topRatedMoviesCount
-        }
-        
-        return 10
+        guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") else { return 0 }
+        result = getMovieCountAndType(preference: userPreference as! String)
+        return result?.0 ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CollectionViewCells.MovieCell, for: indexPath) as? MovieCollectionViewCell else { return UICollectionViewCell() }
-        guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") else { return UICollectionViewCell() }
         
-        //Just for now
-        cell.configure(name: homePresenter?.topRatedMoviesList?.results?[indexPath.row].title ?? "", imageURL: Constants.noImage)
+        guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") else { return UICollectionViewCell() }
+        result = getMovieCountAndType(preference: userPreference as! String)
+        
+        switch result?.1 ?? MovieType.topRated {
+        case .topRated:
+            cell.configure(name: homePresenter?.topRatedMoviesList?.results?[indexPath.row].title ?? "", movieImageURL: homePresenter?.topRatedMoviesList?.results?[indexPath.row].poster_path ?? "")
+            
+        case .popular:
+            cell.configure(name: homePresenter?.popularMoviesList?.results?[indexPath.row].title ?? "", movieImageURL: homePresenter?.popularMoviesList?.results?[indexPath.row].poster_path ?? "")
+            
+        case .favorites:
+            cell.configure(name: homePresenter?.favoriteMovieList[indexPath.row].title ?? "", movieImageURL: homePresenter?.favoriteMovieList[indexPath.row].imageURL ?? "")
+        }
 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = MovieDetailsViewController(nibName: "MovieDetailsViewController", bundle: nil)
-        vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.topRatedMoviesList?.results?[indexPath.row])!, detailsView: vc)
+        
+        switch result?.1 ?? MovieType.topRated {
+        case .topRated:
+            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.topRatedMoviesList?.results?[indexPath.row])!, detailsView: vc)
+        case .popular:
+            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.popularMoviesList?.results?[indexPath.row])!, detailsView: vc)
+            
+        case .favorites:
+//            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
+            print("nothing")
+
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
