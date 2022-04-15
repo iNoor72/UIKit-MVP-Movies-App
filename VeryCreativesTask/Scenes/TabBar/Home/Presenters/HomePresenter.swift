@@ -80,7 +80,7 @@ class HomePresenter: HomePresenterProtocol {
     }
     
     func fetchFavoriteMovies() {
-        DatabaseManager.fetch()
+        favoriteMovieList = DatabaseManager.fetch()
     }
     
     func navigateToMovie(at index: Int) {

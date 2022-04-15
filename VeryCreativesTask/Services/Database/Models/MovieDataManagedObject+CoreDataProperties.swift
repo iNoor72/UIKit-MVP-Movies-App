@@ -17,8 +17,9 @@ extension MovieDataManagedObject {
     }
 
     @NSManaged public var id: Int32
-    @NSManaged public var title: String?
-    @NSManaged public var overview: String?
     @NSManaged public var imageURL: String?
+    @NSManaged public var overview: String?
+    @NSManaged public var title: String?
+    @NSManaged public var rating: Double
 
 }

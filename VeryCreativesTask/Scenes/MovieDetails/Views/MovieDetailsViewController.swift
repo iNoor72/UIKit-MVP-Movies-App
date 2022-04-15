@@ -26,7 +26,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     }
     
     private func setupViews() {
-        guard let imageURL = URL(string: Constants.imagesBaseURL + (detailsPresenter?.movie?.poster_path ?? "")) else { return }
+        guard let imageURL = URL(string: Constants.imagesBaseURL + (detailsPresenter?.movie?.backdrop_path ?? "")) else { return }
         
         movieNameLabel.text = detailsPresenter?.movie?.title ?? ""
         movieImage.kf.setImage(with: imageURL)
@@ -36,6 +36,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     private func setupFavoriteButton() {
         if #available(iOS 13.0, *) {
             favButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(didTapFavButton))
+            favButton?.tintColor = UIColor.systemYellow
             self.navigationItem.rightBarButtonItem  = favButton
         } else {
             // Fallback on earlier versions
@@ -49,12 +50,10 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
         if #available(iOS 13.0, *) {
             
             if presenter.isMovieFavorited(movie: movie) {
-                print("in fav")
                 favButton?.image = UIImage(systemName: "star")
                 detailsPresenter?.deleteMovieFromFavorites(movie: movie)
                 
             } else {
-                print("not in fav")
                 favButton?.image = UIImage(systemName: "star.fill")
                 detailsPresenter?.saveMovieAsFavorite(movie: movie)
             }

@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataManager: DatabaseProtocol {
+final class CoreDataManager: DatabaseProtocol {
     private let modelName: String
     
     init(modelName: String) {
@@ -75,10 +75,12 @@ class CoreDataManager: DatabaseProtocol {
         managedMovie.title = movie.title
         managedMovie.overview = movie.overview
         managedMovie.imageURL = movie.poster_path
+        managedMovie.rating = movie.vote_average ?? 0
         
         saveContext()
         
     }
+    
     
     func fetch() -> [Int]{
         var moviesIDArray = [Int]()
@@ -97,6 +99,23 @@ class CoreDataManager: DatabaseProtocol {
         return moviesIDArray
     }
     
+    func fetch() -> [MovieDataManagedObject] {
+        var moviesArray = [MovieDataManagedObject]()
+        let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
+        do {
+            let favoriteMovies = try managedObjectContext.fetch(fetchRequest)
+            for movie in favoriteMovies {
+                moviesArray.append(movie)
+            }
+            
+            return moviesArray
+        } catch {
+            print("There was a problem fetching data from Core Data. Error: \(error)")
+        }
+        
+        return moviesArray
+    }
+    
     func delete(movie: MovieData) {
         guard let movieID = movie.id else { return } //ID of movie to be deleted
         var favoriteMoviesList: [MovieDataManagedObject]
@@ -111,7 +130,6 @@ class CoreDataManager: DatabaseProtocol {
                     break
                 }
             }
-            
             
         } catch {
             print("There was a problem fetching data from Core Data. Error: \(error)")

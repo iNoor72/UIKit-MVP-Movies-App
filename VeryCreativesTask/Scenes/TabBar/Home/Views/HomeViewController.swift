@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     }
     
     private func setupViews() {
+        title = "Movies"
         if #available(iOS 14.0, *) {
             let menuItems: [UIAction] =
             [
@@ -76,8 +77,10 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
             //Get data from Internet
             homePresenter?.fetchPopularMovies(page: page)
             homePresenter?.fetchTopRatedMovies(page: page)
+            homePresenter?.fetchFavoriteMovies()
         } else {
             //Get data from Database
+            homePresenter?.fetchFavoriteMovies()
         }
     }
     

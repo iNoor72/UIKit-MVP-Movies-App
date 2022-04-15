@@ -38,7 +38,7 @@ class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     
     
     func isMovieFavorited(movie: MovieData) -> Bool {
-        let moviesIDArray = DatabaseManager.fetch()
+        let moviesIDArray: [Int] = DatabaseManager.fetch()
         for movieID in moviesIDArray {
             if movieID == movie.id {
                 return true
