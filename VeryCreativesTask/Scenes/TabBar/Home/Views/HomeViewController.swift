@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol HomeViewControllerProtocol: AnyObject {
+protocol HomeViewControllerProtocol: AnyObject, NavigationRoute {
     func reloadData()
 }
 
@@ -96,7 +96,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     }
     
     private func getMovieCountAndType(preference: String) -> (Int, MovieType) {
-        guard let topRatedMoviesCount = homePresenter?.topRatedMoviesList?.results?.count, let popularMoviesCount = homePresenter?.popularMoviesList?.results?.count, let favoriteMoviesCount = homePresenter?.favoriteMovieList.count else { return (0, MovieType.topRated) }
+        guard let topRatedMoviesCount = homePresenter?.topRatedMoviesList?.results?.count, let popularMoviesCount = homePresenter?.popularMoviesList?.results?.count, let favoriteMoviesCount = homePresenter?.favoriteMovieList?.count  else { return (0, MovieType.topRated) }
         
         switch MovieType(rawValue: preference) {
         case .topRated:
@@ -143,27 +143,27 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.configure(name: homePresenter?.popularMoviesList?.results?[indexPath.row].title ?? "", movieImageURL: homePresenter?.popularMoviesList?.results?[indexPath.row].poster_path ?? "")
             
         case .favorites:
-            cell.configure(name: homePresenter?.favoriteMovieList[indexPath.row].title ?? "", movieImageURL: homePresenter?.favoriteMovieList[indexPath.row].imageURL ?? "")
+            cell.configure(name: homePresenter?.favoriteMovieList?[indexPath.row].title ?? "", movieImageURL: homePresenter?.favoriteMovieList?[indexPath.row].imageURL ?? "")
         }
 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = MovieDetailsViewController(nibName: "MovieDetailsViewController", bundle: nil)
-        
         switch result?.1 ?? MovieType.topRated {
         case .topRated:
-            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.topRatedMoviesList?.results?[indexPath.row])!, detailsView: vc)
+            homePresenter?.userMoviePreference = .topRated
+            homePresenter?.navigateToMovie(at: indexPath.row)
         case .popular:
-            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.popularMoviesList?.results?[indexPath.row])!, detailsView: vc)
+            homePresenter?.userMoviePreference = .popular
+            homePresenter?.navigateToMovie(at: indexPath.row)
             
         case .favorites:
+            homePresenter?.userMoviePreference = .favorites
 //            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
             print("nothing")
 
         }
-        navigationController?.pushViewController(vc, animated: true)
     }
     
     

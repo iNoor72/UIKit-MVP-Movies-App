@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomePresenterProtocol {
-    var favoriteMovieList: [MovieDataManagedObject] { get }
+    var favoriteMovieList: [MovieDataManagedObject]? { get }
     var popularMoviesList: MovieResponse? { get }
     var topRatedMoviesList: MovieResponse? { get }
     var userMoviePreference: MovieType { get set }
@@ -16,12 +16,12 @@ protocol HomePresenterProtocol {
     func fetchPopularMovies()
     func fetchTopRatedMovies()
     func fetchFavoriteMovies()
-    func navigateTo(movie: MovieData)
+    func navigateToMovie(at index: Int)
 }
 
 class HomePresenter: HomePresenterProtocol {
     
-    var favoriteMovieList = [MovieDataManagedObject]()
+    var favoriteMovieList : [MovieDataManagedObject]?
     var popularMoviesList: MovieResponse?
     var topRatedMoviesList: MovieResponse?
     var userMoviePreference: MovieType = .topRated
@@ -31,11 +31,14 @@ class HomePresenter: HomePresenterProtocol {
     init(DatabaseManager: DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile), homeView: HomeViewControllerProtocol) {
         self.DatabaseManager = DatabaseManager
         self.homeView = homeView
+        
+        //For now only
+        self.favoriteMovieList = [MovieDataManagedObject]()
     }
     
-    func setMoviesList(movies: [MovieDataManagedObject]) {
-        self.favoriteMovieList = movies
-    }
+//    func setMoviesList(movies: [MovieDataManagedObject]) {
+//        self.favoriteMovieList = movies
+//    }
     
     func fetchPopularMovies() {
         NetworkManager.shared.fetchMovies(type: MovieType.popular) {[weak self] (movies: MovieResponse?, error: Error?) in
@@ -71,7 +74,23 @@ class HomePresenter: HomePresenterProtocol {
         DatabaseManager.fetch()
     }
     
-    func navigateTo(movie: MovieData) {
+    func navigateToMovie(at index: Int) {
+        switch userMoviePreference {
+        case .topRated:
+            guard let movie = topRatedMoviesList?.results?[index] else { return }
+            let route = HomeNavigationRoutes.MovieDetails(movie)
+            homeView?.navigate(to: route)
+
+        case .popular:
+            guard let movie = popularMoviesList?.results?[index] else { return }
+            let route = HomeNavigationRoutes.MovieDetails(movie)
+            homeView?.navigate(to: route)
+        case .favorites:
+            guard let movie = favoriteMovieList?[index] else { return }
+            //Yet to be implemented
+//            let route = HomeNavigationRoutes.MovieDetails(movie)
+//            homeView?.navigate(to: route)
+        }
         
     }
     
