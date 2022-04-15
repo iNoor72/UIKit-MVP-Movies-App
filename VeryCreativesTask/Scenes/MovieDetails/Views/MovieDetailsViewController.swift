@@ -21,8 +21,12 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupFavoriteButton()
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupFavoriteButton()
     }
     
     private func setupViews() {
@@ -35,7 +39,11 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     
     private func setupFavoriteButton() {
         if #available(iOS 13.0, *) {
-            favButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(didTapFavButton))
+            //Set the button based on the movie state
+            guard let movie = detailsPresenter?.movie, let result = detailsPresenter?.isMovieFavorited(movie: movie) else { return }
+            let buttonImage = result ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+            
+            favButton = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(didTapFavButton))
             favButton?.tintColor = UIColor.systemYellow
             self.navigationItem.rightBarButtonItem  = favButton
         } else {
@@ -51,10 +59,12 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
             
             if presenter.isMovieFavorited(movie: movie) {
                 favButton?.image = UIImage(systemName: "star")
+                detailsPresenter?.movie?.movieState = .normal
                 detailsPresenter?.deleteMovieFromFavorites(movie: movie)
                 
             } else {
                 favButton?.image = UIImage(systemName: "star.fill")
+                detailsPresenter?.movie?.movieState = .favorited
                 detailsPresenter?.saveMovieAsFavorite(movie: movie)
             }
             

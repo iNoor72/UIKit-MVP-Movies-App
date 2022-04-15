@@ -59,11 +59,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
             
             let demoMenu: UIMenu =
                  UIMenu(title: "Show movies menu", image: nil, identifier: nil, options: [], children: menuItems)
-            
-            
-            
                 let sortButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: demoMenu)
-            
             navigationItem.rightBarButtonItem = sortButton
             
         } else {

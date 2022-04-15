@@ -8,11 +8,7 @@
 import Foundation
 import CoreData
 
-protocol CoreDataToJSONConverter {
-    func convertManagedObjectToResponse<T:Decodable>(movie: MovieDataManagedObject) -> T
-}
-
-final class CoreDataManager: DatabaseProtocol, CoreDataToJSONConverter {
+final class CoreDataManager: DatabaseProtocol {
     private let modelName: String
     
     init(modelName: String) {
@@ -140,9 +136,5 @@ final class CoreDataManager: DatabaseProtocol, CoreDataToJSONConverter {
         }
         
         saveContext()
-    }
-    
-    func convertManagedObjectToResponse<T:Decodable>(movie: MovieDataManagedObject) -> T {
-        
     }
 }

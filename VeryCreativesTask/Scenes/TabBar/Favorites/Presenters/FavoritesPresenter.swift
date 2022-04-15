@@ -7,9 +7,15 @@
 
 import Foundation
 
+enum MovieState {
+    case favorited
+    case normal
+}
+
 protocol FavoritesPresenterProtocol {
     var favoritedMovies: [MovieDataManagedObject]? { get }
     var moviesToBeDeleted: [MovieDataManagedObject]? { get }
+    var movieState: MovieState? { get }
     
     func fetchFavoriteMovies()
     func navigateToMovie(at index: Int)
@@ -20,11 +26,13 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     
     var favoritedMovies: [MovieDataManagedObject]?
     var moviesToBeDeleted: [MovieDataManagedObject]?
+    var movieState: MovieState?
     weak var favoritesView: FavoritesViewControllerProtocol?
-    private let DatabaseManager : DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile)
+    private var DatabaseManager : DatabaseProtocol
     
-    init(favoritesView: FavoritesViewControllerProtocol) {
+    init(DatabaseManager: DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile), favoritesView: FavoritesViewControllerProtocol) {
         self.favoritesView = favoritesView
+        self.DatabaseManager = DatabaseManager
     }
     
     func fetchFavoriteMovies() {
@@ -34,14 +42,27 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     
     func navigateToMovie(at index: Int) {
         //Need to change to reponse data movie
-        guard let movie = favoritedMovies?[index] else { return }
-//        let route = FavoritesNavigationRoutes.MovieDetails(movie)
-//        homeView?.navigate(to: route)
+        guard let model = favoritedMovies?[index] else { return }
+        let movie = convertModelToResponse(model: model)
+        let route = FavoritesNavigationRoutes.MovieDetails(movie)
+        favoritesView?.navigate(to: route)
     }
     
     func deleteMovies(movies: [MovieDataManagedObject]) {
-        for movie in movies {
-//            DatabaseManager.delete(movie: movie)
+        for movieModel in movies {
+            let movie = convertModelToResponse(model: movieModel)
+            DatabaseManager.delete(movie: movie)
         }
     }
+    
+    func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {
+        for movie in NetworkRepository.shared.fetchedMovies {
+            if model.id == movie.id ?? 0 {
+                return movie
+            }
+        }
+        return MovieData()
+    }
+    
+    
 }

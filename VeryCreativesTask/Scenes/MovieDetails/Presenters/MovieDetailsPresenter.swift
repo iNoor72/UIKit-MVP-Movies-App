@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MovieDetailsPresenterProtocol {
-    var movie: MovieData? { get }
+    var movie: MovieData? { get set }
     
     func isMovieFavorited(movie: MovieData) -> Bool
     func saveMovieAsFavorite(movie: MovieData)
@@ -38,11 +38,8 @@ class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     
     
     func isMovieFavorited(movie: MovieData) -> Bool {
-        let moviesIDArray: [Int] = DatabaseManager.fetch()
-        for movieID in moviesIDArray {
-            if movieID == movie.id {
-                return true
-            }
+        if movie.movieState == .favorited {
+            return true
         }
         
         return false

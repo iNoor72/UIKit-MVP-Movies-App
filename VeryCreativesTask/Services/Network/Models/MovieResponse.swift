@@ -24,6 +24,7 @@ struct MovieData: Codable {
     var backdrop_path: String?
     var vote_average: Double?
     
+    var movieState: MovieState?
     enum CodingKeys: String, CodingKey {
         case id
         case title

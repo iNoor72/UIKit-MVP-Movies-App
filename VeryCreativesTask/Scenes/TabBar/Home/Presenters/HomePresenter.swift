@@ -48,10 +48,13 @@ class HomePresenter: HomePresenterProtocol {
             }
             
             if self?.popularMoviesList == nil {
+                guard let moviesArray = movies?.results else { return }
                 self?.popularMoviesList = movies
+                NetworkRepository.shared.fetchedMovies += moviesArray
             } else {
                 guard let moreMovies = movies?.results else { return }
                 self?.popularMoviesList?.results! += moreMovies
+                NetworkRepository.shared.fetchedMovies += moreMovies
             }
             
             
@@ -68,10 +71,13 @@ class HomePresenter: HomePresenterProtocol {
             }
             
             if self?.topRatedMoviesList == nil {
+                guard let moviesArray = movies?.results else { return }
                 self?.topRatedMoviesList = movies
+                NetworkRepository.shared.fetchedMovies += moviesArray
             } else {
                 guard let moreMovies = movies?.results else { return }
                 self?.topRatedMoviesList?.results! += moreMovies
+                NetworkRepository.shared.fetchedMovies += moreMovies
             }
             
             DispatchQueue.main.async {
@@ -95,6 +101,7 @@ class HomePresenter: HomePresenterProtocol {
             guard let movie = popularMoviesList?.results?[index] else { return }
             let route = HomeNavigationRoutes.MovieDetails(movie)
             homeView?.navigate(to: route)
+            
         case .favorites:
             guard let movie = favoriteMovieList?[index] else { return }
             let movieResponsee = convertModelToResponse(model: movie)
@@ -105,17 +112,7 @@ class HomePresenter: HomePresenterProtocol {
     }
     
     func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {
-        guard let topRatedMoviesList = topRatedMoviesList?.results else { return MovieData() }
-        guard let popularMoviesList = popularMoviesList?.results else { return MovieData() }
-        
-        for movie in topRatedMoviesList {
-            if model.id == movie.id ?? 0 {
-                return movie
-            }
-        }
-        
-        //If not found...
-        for movie in popularMoviesList {
+        for movie in NetworkRepository.shared.fetchedMovies {
             if model.id == movie.id ?? 0 {
                 return movie
             }
