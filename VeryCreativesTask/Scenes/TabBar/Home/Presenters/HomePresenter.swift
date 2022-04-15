@@ -17,6 +17,7 @@ protocol HomePresenterProtocol {
     func fetchTopRatedMovies(page: Int)
     func fetchFavoriteMovies()
     func navigateToMovie(at index: Int)
+    func convertModelToResponse(model: MovieDataManagedObject) -> MovieData
 }
 
 class HomePresenter: HomePresenterProtocol {
@@ -36,9 +37,9 @@ class HomePresenter: HomePresenterProtocol {
         self.favoriteMovieList = [MovieDataManagedObject]()
     }
     
-//    func setMoviesList(movies: [MovieDataManagedObject]) {
-//        self.favoriteMovieList = movies
-//    }
+    //    func setMoviesList(movies: [MovieDataManagedObject]) {
+    //        self.favoriteMovieList = movies
+    //    }
     
     func fetchPopularMovies(page: Int = 1) {
         NetworkManager.shared.fetchMovies(page: page, type: MovieType.popular) {[weak self] (movies: MovieResponse?, error: Error?) in
@@ -89,17 +90,38 @@ class HomePresenter: HomePresenterProtocol {
             guard let movie = topRatedMoviesList?.results?[index] else { return }
             let route = HomeNavigationRoutes.MovieDetails(movie)
             homeView?.navigate(to: route)
-
+            
         case .popular:
             guard let movie = popularMoviesList?.results?[index] else { return }
             let route = HomeNavigationRoutes.MovieDetails(movie)
             homeView?.navigate(to: route)
         case .favorites:
             guard let movie = favoriteMovieList?[index] else { return }
-            //Yet to be implemented
-//            let route = HomeNavigationRoutes.MovieDetails(movie)
-//            homeView?.navigate(to: route)
+            let movieResponsee = convertModelToResponse(model: movie)
+            let route = HomeNavigationRoutes.MovieDetails(movieResponsee)
+            homeView?.navigate(to: route)
         }
+        
+    }
+    
+    func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {
+        guard let topRatedMoviesList = topRatedMoviesList?.results else { return MovieData() }
+        guard let popularMoviesList = popularMoviesList?.results else { return MovieData() }
+        
+        for movie in topRatedMoviesList {
+            if model.id == movie.id ?? 0 {
+                return movie
+            }
+        }
+        
+        //If not found...
+        for movie in popularMoviesList {
+            if model.id == movie.id ?? 0 {
+                return movie
+            }
+        }
+        
+        return MovieData()
         
     }
     

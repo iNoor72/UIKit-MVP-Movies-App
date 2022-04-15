@@ -170,9 +170,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case .favorites:
             homePresenter?.userMoviePreference = .favorites
-//            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
-            print("nothing")
-
+            homePresenter?.navigateToMovie(at: indexPath.row)
         }
     }
     
@@ -194,10 +192,7 @@ extension HomeViewController: UIScrollViewDelegate {
                 self.homePresenter?.fetchPopularMovies(page: self.page)
                 
             case .favorites:
-                print("..")
-                //            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
-                print("nothing")
-                
+                print("No need to fetch, all data are fetched once.")
             }
         }
     }
