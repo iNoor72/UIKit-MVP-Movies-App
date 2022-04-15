@@ -46,8 +46,13 @@ class HomePresenter: HomePresenterProtocol {
                 print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
             }
             
+            if self?.popularMoviesList == nil {
+                self?.popularMoviesList = movies
+            } else {
+                guard let moreMovies = movies?.results else { return }
+                self?.popularMoviesList?.results! += moreMovies
+            }
             
-            self?.popularMoviesList = movies
             
             DispatchQueue.main.async {
                 self?.homeView?.reloadData()
@@ -61,8 +66,12 @@ class HomePresenter: HomePresenterProtocol {
                 print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
             }
             
-            
-            self?.topRatedMoviesList = movies
+            if self?.topRatedMoviesList == nil {
+                self?.topRatedMoviesList = movies
+            } else {
+                guard let moreMovies = movies?.results else { return }
+                self?.topRatedMoviesList?.results! += moreMovies
+            }
             
             DispatchQueue.main.async {
                 self?.homeView?.reloadData()

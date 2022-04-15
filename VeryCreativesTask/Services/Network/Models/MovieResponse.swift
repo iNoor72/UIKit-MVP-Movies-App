@@ -8,8 +8,8 @@
 import Foundation
 
 struct MovieResponse: Codable {
-    let results: [MovieData]?
-    let totalPages, page: Int?
+    var results: [MovieData]?
+    var totalPages, page: Int?
        enum CodingKeys: String, CodingKey {
            case page, results
            case totalPages

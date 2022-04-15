@@ -10,8 +10,8 @@ import Alamofire
 
 
 enum NetworkRouter: URLRequestConvertible {
-    case topRated(page: Int = 1)
-    case popular(page: Int = 1)
+    case topRated(page: Int)
+    case popular(page: Int)
     case movie(id: Int)
 
     var path: String {

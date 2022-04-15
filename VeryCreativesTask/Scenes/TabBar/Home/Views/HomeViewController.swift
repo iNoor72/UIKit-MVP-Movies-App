@@ -126,11 +126,13 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     
 }
 
+//MARK: Extensions
+
+//MARK: CollectionView
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") else { return 0 }
         result = getMovieCountAndType(preference: userPreference as! String)
-        print(result?.0)
         return result?.0 ?? 0
     }
     
@@ -171,28 +173,59 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        switch result?.1 ?? MovieType.topRated {
-        case .topRated:
-            if indexPath.row + 1 == homePresenter?.topRatedMoviesList?.results?.count && homePresenter?.topRatedMoviesList?.results?.count ?? 0 < 20 {
-                page += 1
-                homePresenter?.fetchTopRatedMovies(page: page)
-                }
-        case .popular:
-            if indexPath.row + 1 == homePresenter?.topRatedMoviesList?.results?.count && homePresenter?.topRatedMoviesList?.results?.count ?? 0 < 20 {
-                page += 1
-                homePresenter?.fetchPopularMovies(page: page)
-                }
-            
-        case .favorites:
-            print("..")
-//            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
-            print("nothing")
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//
+//        switch result?.1 ?? MovieType.topRated {
+//        case .topRated:
+//            if indexPath.row - 1 == homePresenter?.topRatedMoviesList?.results?.count ?? 0 && homePresenter?.topRatedMoviesList?.page ?? 0 < homePresenter?.topRatedMoviesList?.totalPages ?? 0 {
+//                page += 1
+//                DispatchQueue.main.async {
+//                    self.homePresenter?.fetchTopRatedMovies(page: self.page)
+//                }
+//
+//            }
+//        case .popular:
+//            if indexPath.row - 1 == homePresenter?.popularMoviesList?.results?.count ?? 0 && homePresenter?.popularMoviesList?.page ?? 0 < homePresenter?.popularMoviesList?.totalPages ?? 0 {
+//                page += 1
+//                DispatchQueue.main.async {
+//                    self.homePresenter?.fetchPopularMovies(page: self.page)
+//                }
+//
+//            }
+//
+//        case .favorites:
+//            print("..")
+////            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
+//            print("nothing")
+//
+//        }
+//
+//    }
+    
+    
+}
 
-        }
+//MARK: ScrollView
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
         
+        if position > (self.collectionView.contentSize.height-30-scrollView.frame.size.height) {
+            switch result?.1 ?? MovieType.topRated {
+            case .topRated:
+                self.page += 1
+                print(page)
+                self.homePresenter?.fetchTopRatedMovies(page: self.page)
+            case .popular:
+                self.page += 1
+                self.homePresenter?.fetchPopularMovies(page: self.page)
+                
+            case .favorites:
+                print("..")
+                //            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
+                print("nothing")
+                
+            }
+        }
     }
-    
-    
 }
