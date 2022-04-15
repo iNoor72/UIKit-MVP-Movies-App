@@ -16,6 +16,11 @@ struct Constants {
     static let dummyURL = URL(string: "https://google.com")!
     static let noImage = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png")!
     
+    struct Colors {
+        static let primaryGreenColor = 0x52B1A9
+        static let primaryYellowColor = 0xF5CD45
+    }
+    
     struct Storyboards {
         static let MainStoryboard = "Main"
     }

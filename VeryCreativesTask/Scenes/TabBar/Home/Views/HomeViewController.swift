@@ -61,6 +61,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
                  UIMenu(title: "Show movies menu", image: nil, identifier: nil, options: [], children: menuItems)
                 let sortButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: demoMenu)
             navigationItem.rightBarButtonItem = sortButton
+            navigationItem.rightBarButtonItem?.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
             
         } else {
             // Fallback on earlier versions

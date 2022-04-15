@@ -8,5 +8,7 @@
 import Foundation
 
 class CoreDataRepository {
-    
+    static let shared = CoreDataRepository()
+    var favoriteMovies = [MovieDataManagedObject]()
+    private init() {}
 }

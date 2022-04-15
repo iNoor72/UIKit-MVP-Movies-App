@@ -30,6 +30,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     }
     
     private func setupViews() {
+        title = "Details"
         guard let imageURL = URL(string: Constants.imagesBaseURL + (detailsPresenter?.movie?.backdrop_path ?? "")) else { return }
         
         movieNameLabel.text = detailsPresenter?.movie?.title ?? ""

@@ -18,25 +18,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello," textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBU-2D-k5V">
-                                <rect key="frame" x="24" y="88" width="374" height="25"/>
+                                <rect key="frame" x="24" y="104" width="374" height="25"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GgL-k4-weo">
-                                <rect key="frame" x="24" y="113" width="374" height="30.5"/>
+                                <rect key="frame" x="24" y="129" width="374" height="30.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checkout these movies!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUw-1x-jlc">
-                                <rect key="frame" x="24" y="151.5" width="374" height="25"/>
+                                <rect key="frame" x="24" y="167.5" width="374" height="25"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bc3-E1-Y9c">
-                                <rect key="frame" x="24" y="208.5" width="366" height="604.5"/>
+                                <rect key="frame" x="24" y="224.5" width="366" height="588.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MyA-gV-oNT">
                                     <size key="itemSize" width="128" height="128"/>
@@ -58,7 +58,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OUw-1x-jlc" secondAttribute="trailing" constant="16" id="Klg-RX-Mfd"/>
                             <constraint firstItem="OUw-1x-jlc" firstAttribute="top" secondItem="GgL-k4-weo" secondAttribute="bottom" constant="8" id="MK4-fJ-eEy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GBU-2D-k5V" secondAttribute="trailing" constant="16" id="UdK-tI-sBF"/>
-                            <constraint firstItem="GBU-2D-k5V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="adL-3v-f89"/>
+                            <constraint firstItem="GBU-2D-k5V" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="adL-3v-f89"/>
                             <constraint firstItem="Bc3-E1-Y9c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="bpg-Ef-1Ds"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GgL-k4-weo" secondAttribute="trailing" constant="16" id="fvR-JQ-tCS"/>
                             <constraint firstItem="OUw-1x-jlc" firstAttribute="leading" secondItem="GgL-k4-weo" secondAttribute="leading" id="r1b-EZ-Rb5"/>
@@ -83,7 +83,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xFl-Rm-yBH">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.32156862745098036" green="0.69411764705882351" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="selectedImageTintColor" red="0.96078431369999995" green="0.80392156859999997" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="Dsc-gn-bxT" kind="relationship" relationship="viewControllers" id="a2D-ai-hVb"/>
@@ -134,6 +135,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LEe-mK-ISs">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.96078431369999995" green="0.80392156859999997" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -153,6 +157,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FFI-8X-avF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.96078431369999995" green="0.80392156859999997" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
