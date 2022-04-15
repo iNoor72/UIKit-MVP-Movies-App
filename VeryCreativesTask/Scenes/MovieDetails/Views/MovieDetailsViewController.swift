@@ -44,16 +44,19 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     }
     
     @objc private func didTapFavButton() {
-        guard let movie = detailsPresenter?.movie, let presenter = detailsPresenter else { return }
+        guard let presenter = detailsPresenter, let movie = detailsPresenter?.movie else { return }
         
         if #available(iOS 13.0, *) {
             
             if presenter.isMovieFavorited(movie: movie) {
-                favButton?.image = UIImage(systemName: "star.fill")
-                //Do logic to put movie in favorites
-            } else {
+                print("in fav")
                 favButton?.image = UIImage(systemName: "star")
-                //Do logic to delete movie in favorites
+                detailsPresenter?.deleteMovieFromFavorites(movie: movie)
+                
+            } else {
+                print("not in fav")
+                favButton?.image = UIImage(systemName: "star.fill")
+                detailsPresenter?.saveMovieAsFavorite(movie: movie)
             }
             
             

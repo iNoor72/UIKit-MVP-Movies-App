@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DatabaseProtocol {
-    func save()
-    func fetch()
-    func delete()
+    func save(movie: MovieData)
+    func fetch() -> [Int] //Returns array of IDs
+    func delete(movie: MovieData)
 }

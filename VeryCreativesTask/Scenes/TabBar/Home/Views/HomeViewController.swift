@@ -173,36 +173,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//
-//        switch result?.1 ?? MovieType.topRated {
-//        case .topRated:
-//            if indexPath.row - 1 == homePresenter?.topRatedMoviesList?.results?.count ?? 0 && homePresenter?.topRatedMoviesList?.page ?? 0 < homePresenter?.topRatedMoviesList?.totalPages ?? 0 {
-//                page += 1
-//                DispatchQueue.main.async {
-//                    self.homePresenter?.fetchTopRatedMovies(page: self.page)
-//                }
-//
-//            }
-//        case .popular:
-//            if indexPath.row - 1 == homePresenter?.popularMoviesList?.results?.count ?? 0 && homePresenter?.popularMoviesList?.page ?? 0 < homePresenter?.popularMoviesList?.totalPages ?? 0 {
-//                page += 1
-//                DispatchQueue.main.async {
-//                    self.homePresenter?.fetchPopularMovies(page: self.page)
-//                }
-//
-//            }
-//
-//        case .favorites:
-//            print("..")
-////            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
-//            print("nothing")
-//
-//        }
-//
-//    }
-    
-    
 }
 
 //MARK: ScrollView

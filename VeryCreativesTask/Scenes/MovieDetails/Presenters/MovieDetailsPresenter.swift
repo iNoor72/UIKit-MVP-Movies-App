@@ -11,6 +11,8 @@ protocol MovieDetailsPresenterProtocol {
     var movie: MovieData? { get }
     
     func isMovieFavorited(movie: MovieData) -> Bool
+    func saveMovieAsFavorite(movie: MovieData)
+    func deleteMovieFromFavorites(movie: MovieData) 
     
 }
 
@@ -18,17 +20,31 @@ class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     
     var movie: MovieData?
     weak var detailsView: MovieDetailsViewControllerProtocol?
+    private let DatabaseManager : DatabaseProtocol
     
-    init(movie: MovieData, detailsView: MovieDetailsViewControllerProtocol) {
+    init(DatabaseManager: DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile), movie: MovieData, detailsView: MovieDetailsViewControllerProtocol) {
         self.movie = movie
         self.detailsView = detailsView
+        self.DatabaseManager = DatabaseManager
+    }
+    
+    func saveMovieAsFavorite(movie: MovieData) {
+        DatabaseManager.save(movie: movie)
+    }
+    
+    func deleteMovieFromFavorites(movie: MovieData) {
+        DatabaseManager.delete(movie: movie)
     }
     
     
-    
-    
     func isMovieFavorited(movie: MovieData) -> Bool {
-     
+        let moviesIDArray = DatabaseManager.fetch()
+        for movieID in moviesIDArray {
+            if movieID == movie.id {
+                return true
+            }
+        }
+        
         return false
     }
     

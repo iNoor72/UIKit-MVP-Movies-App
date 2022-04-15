@@ -10,21 +10,21 @@ import CoreData
 
 class CoreDataManager: DatabaseProtocol {
     private let modelName: String
-
-      init(modelName: String) {
-          self.modelName = modelName
-      }
+    
+    init(modelName: String) {
+        self.modelName = modelName
+    }
     
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-
+        
         let fileManager = FileManager.default
         let storeName = "\(self.modelName).sqlite"
-
+        
         let documentsDirectoryURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-
+        
         let persistentStoreURL = documentsDirectoryURL.appendingPathComponent(storeName)
-
+        
         do {
             try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
                                                               configurationName: nil,
@@ -33,15 +33,15 @@ class CoreDataManager: DatabaseProtocol {
         } catch {
             fatalError("Unable to Load Persistent Store")
         }
-
+        
         return persistentStoreCoordinator
     }()
     
     private(set) lazy var managedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-
+        
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
-
+        
         return managedObjectContext
     }()
     
@@ -49,25 +49,74 @@ class CoreDataManager: DatabaseProtocol {
         guard let modelURL = Bundle.main.url(forResource: self.modelName, withExtension: "momd") else {
             fatalError("Unable to Find Data Model")
         }
-
+        
         guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) else {
             fatalError("Unable to Load Data Model")
         }
-
+        
         return managedObjectModel
     }()
     
-    func save() {
+    private func saveContext() {
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                print("There was a problem saving model to Core Data. Error: \(error)")
+            }
+        }
+    }
+    
+    func save(movie: MovieData) {
+        let managedMovie = MovieDataManagedObject(context: managedObjectContext)
+        guard let movieID = movie.id else { return }
+        
+        managedMovie.id = Int32(movieID)
+        managedMovie.title = movie.title
+        managedMovie.overview = movie.overview
+        managedMovie.imageURL = movie.poster_path
+        
+        saveContext()
         
     }
     
-    func fetch() {
+    func fetch() -> [Int]{
+        var moviesIDArray = [Int]()
+        let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
+        do {
+            let favoriteMovies = try managedObjectContext.fetch(fetchRequest)
+            for movie in favoriteMovies {
+                moviesIDArray.append(Int(movie.id))
+            }
+            
+            return moviesIDArray
+        } catch {
+            print("There was a problem fetching data from Core Data. Error: \(error)")
+        }
         
+        return moviesIDArray
     }
     
-    func delete() {
+    func delete(movie: MovieData) {
+        guard let movieID = movie.id else { return } //ID of movie to be deleted
+        var favoriteMoviesList: [MovieDataManagedObject]
         
+        let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
+        do {
+            favoriteMoviesList = try managedObjectContext.fetch(fetchRequest)
+            
+            for favoriteMovie in favoriteMoviesList {
+                if favoriteMovie.id == Int32(movieID) {
+                    managedObjectContext.delete(favoriteMovie)
+                    break
+                }
+            }
+            
+            
+        } catch {
+            print("There was a problem fetching data from Core Data. Error: \(error)")
+        }
+        
+        saveContext()
     }
-    
-    
 }
