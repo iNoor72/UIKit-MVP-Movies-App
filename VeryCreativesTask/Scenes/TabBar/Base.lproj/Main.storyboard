@@ -65,13 +65,7 @@
                             <constraint firstItem="GgL-k4-weo" firstAttribute="top" secondItem="GBU-2D-k5V" secondAttribute="bottom" id="wix-NH-h6Y"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="mtD-BL-Ufx">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="list.bullet" catalog="system" id="ejM-SW-WIL">
-                            <connections>
-                                <action selector="sortButtonTapped:" destination="BYZ-38-t0r" id="DdF-0T-j0W"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="mtD-BL-Ufx"/>
                     <connections>
                         <outlet property="collectionView" destination="Bc3-E1-Y9c" id="87r-qH-PKk"/>
                         <outlet property="usernameLabel" destination="GgL-k4-weo" id="s9d-5X-m2Y"/>
@@ -172,7 +166,6 @@
     </scenes>
     <resources>
         <image name="house.circle" catalog="system" width="128" height="121"/>
-        <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="star.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

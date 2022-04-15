@@ -21,8 +21,34 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         super.viewDidLoad()
         homePresenter = HomePresenter(homeView: self)
         UserDefaults.standard.set("TopRated", forKey: "UserPreference")
+        setupViews()
         setupCollectionView()
         checkConnectivity()
+    }
+    
+    private func setupViews() {
+        if #available(iOS 14.0, *) {
+            let menuItems: [UIAction] =
+            [
+                UIAction(title: "Top Rated Movies", image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { (_) in
+                }),
+                UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { (_) in
+                }),
+                UIAction(title: "Favorite Movies", image: UIImage(systemName: "star"), handler: { (_) in
+                })
+            ]
+            
+            let demoMenu: UIMenu =
+                 UIMenu(title: "Show movies menu", image: nil, identifier: nil, options: [], children: menuItems)
+            
+            
+                let sortButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: demoMenu)
+            navigationItem.rightBarButtonItem = sortButton
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        
     }
     
     private func checkConnectivity() {
@@ -53,8 +79,6 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         collectionView.reloadData()
     }
     
-    @IBAction private func sortButtonTapped(_ sender: UIBarButtonItem) {
-    }
     
 }
 

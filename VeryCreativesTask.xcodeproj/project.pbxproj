@@ -15,7 +15,6 @@
 		7CBE0B012808B5A00098B205 /* VeryCreativesTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B002808B5A00098B205 /* VeryCreativesTaskTests.swift */; };
 		7CBE0B0B2808B5A00098B205 /* VeryCreativesTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B0A2808B5A00098B205 /* VeryCreativesTaskUITests.swift */; };
 		7CBE0B0D2808B5A00098B205 /* VeryCreativesTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B0C2808B5A00098B205 /* VeryCreativesTaskUITestsLaunchTests.swift */; };
-		7CBE0B1C2808B78E0098B205 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE0B1B2808B78E0098B205 /* Main.storyboard */; };
 		7CBE0B462808B79A0098B205 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B1E2808B79A0098B205 /* Constants.swift */; };
 		7CBE0B472808B79A0098B205 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B1F2808B79A0098B205 /* Reachability.swift */; };
 		7CBE0B482808B79A0098B205 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0B242808B79A0098B205 /* HomePresenter.swift */; };
@@ -80,7 +79,6 @@
 		7CBE0B062808B5A00098B205 /* VeryCreativesTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeryCreativesTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBE0B0A2808B5A00098B205 /* VeryCreativesTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeryCreativesTaskUITests.swift; sourceTree = "<group>"; };
 		7CBE0B0C2808B5A00098B205 /* VeryCreativesTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeryCreativesTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		7CBE0B1B2808B78E0098B205 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7CBE0B1E2808B79A0098B205 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7CBE0B1F2808B79A0098B205 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7CBE0B242808B79A0098B205 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -246,10 +244,9 @@
 		7CBE0B212808B79A0098B205 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				7CBE0B1B2808B78E0098B205 /* Main.storyboard */,
+				7CBE0B322808B79A0098B205 /* Main.storyboard */,
 				7CBE0B222808B79A0098B205 /* Home */,
 				7CBE0B2A2808B79A0098B205 /* Favorites */,
-				7CBE0B322808B79A0098B205 /* Main.storyboard */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -529,7 +526,6 @@
 			files = (
 				7CBE0AF62808B5A00098B205 /* LaunchScreen.storyboard in Resources */,
 				7CBE0AF32808B5A00098B205 /* Assets.xcassets in Resources */,
-				7CBE0B1C2808B78E0098B205 /* Main.storyboard in Resources */,
 				7CBE0B502808B79A0098B205 /* Main.storyboard in Resources */,
 				7CBE0B662808C7160098B205 /* MovieDetailsViewController.xib in Resources */,
 				7CBE0B4B2808B79A0098B205 /* MovieCollectionViewCell.xib in Resources */,
