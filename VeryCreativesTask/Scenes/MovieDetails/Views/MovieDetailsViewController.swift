@@ -26,8 +26,10 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     }
     
     private func setupViews() {
+        guard let imageURL = URL(string: Constants.imagesBaseURL + (detailsPresenter?.movie?.poster_path ?? "")) else { return }
+        
         movieNameLabel.text = detailsPresenter?.movie?.title ?? ""
-        movieImage.kf.setImage(with: Constants.noImage)
+        movieImage.kf.setImage(with: imageURL)
         movieOverviewLabel.text = detailsPresenter?.movie?.overview ?? ""
     }
     

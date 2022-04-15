@@ -13,8 +13,8 @@ protocol HomePresenterProtocol {
     var topRatedMoviesList: MovieResponse? { get }
     var userMoviePreference: MovieType { get set }
     
-    func fetchPopularMovies()
-    func fetchTopRatedMovies()
+    func fetchPopularMovies(page: Int)
+    func fetchTopRatedMovies(page: Int)
     func fetchFavoriteMovies()
     func navigateToMovie(at index: Int)
 }
@@ -40,8 +40,8 @@ class HomePresenter: HomePresenterProtocol {
 //        self.favoriteMovieList = movies
 //    }
     
-    func fetchPopularMovies() {
-        NetworkManager.shared.fetchMovies(type: MovieType.popular) {[weak self] (movies: MovieResponse?, error: Error?) in
+    func fetchPopularMovies(page: Int = 1) {
+        NetworkManager.shared.fetchMovies(page: page, type: MovieType.popular) {[weak self] (movies: MovieResponse?, error: Error?) in
             if error != nil {
                 print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
             }
@@ -55,8 +55,8 @@ class HomePresenter: HomePresenterProtocol {
         }
     }
     
-    func fetchTopRatedMovies() {
-        NetworkManager.shared.fetchMovies(type: MovieType.topRated) {[weak self] (movies: MovieResponse?, error: Error?) in
+    func fetchTopRatedMovies(page: Int = 1) {
+        NetworkManager.shared.fetchMovies(page: page, type: MovieType.topRated) {[weak self] (movies: MovieResponse?, error: Error?) in
             if error != nil {
                 print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
             }

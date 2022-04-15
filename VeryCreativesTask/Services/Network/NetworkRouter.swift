@@ -10,10 +10,9 @@ import Alamofire
 
 
 enum NetworkRouter: URLRequestConvertible {
-    case topRated
-    case popular
+    case topRated(page: Int = 1)
+    case popular(page: Int = 1)
     case movie(id: Int)
-    case image(path: String)
 
     var path: String {
         switch self {
@@ -23,8 +22,6 @@ enum NetworkRouter: URLRequestConvertible {
             return "/movie/popular"
         case .movie(let movieID):
             return "/movie/\(movieID)"
-        case .image(let path):
-            return "/\(path)"
         }
     }
     
@@ -35,8 +32,6 @@ enum NetworkRouter: URLRequestConvertible {
         case .popular:
             return .get
         case .movie(_):
-            return .get
-        case .image(_):
             return .get
         }
     }
@@ -57,15 +52,13 @@ enum NetworkRouter: URLRequestConvertible {
     
     var parameters: [String: Any] {
         switch self {
-        case .topRated:
-            return ["api_key":"\(Constants.APIKey)"]
-        case .popular:
-            return ["api_key":"\(Constants.APIKey)"]
+        case .topRated(let page):
+            return ["api_key":"\(Constants.APIKey)", "page":page]
+        case .popular(let page):
+            return ["api_key":"\(Constants.APIKey)", "page":page]
         case .movie(let movieID):
             return ["movie_id":movieID,
                     "api_key":"\(Constants.APIKey)"]
-        case .image(_):
-            return ["":""]
         }
     }
     

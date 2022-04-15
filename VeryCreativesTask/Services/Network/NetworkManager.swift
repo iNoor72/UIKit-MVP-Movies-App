@@ -16,17 +16,17 @@ class NetworkManager {
     private func getURL(type: MovieType) -> NetworkRouter {
         switch type {
         case .popular:
-            return NetworkRouter.popular
+            return NetworkRouter.popular()
         case .topRated:
-            return NetworkRouter.topRated
+            return NetworkRouter.topRated()
         case .favorites:
             break
         }
         
-        return NetworkRouter.topRated
+        return NetworkRouter.topRated()
     }
     
-    func fetchMovies<T:Decodable>(type: MovieType, completion: @escaping (T?, Error?) -> ()) {
+    func fetchMovies<T:Decodable>(page: Int = 1, type: MovieType, completion: @escaping (T?, Error?) -> ()) {
         let url = getURL(type: type)
         
         AF.request(url).responseDecodable { (response: DataResponse<T, AFError>) in

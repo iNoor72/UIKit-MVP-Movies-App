@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     
     private var homePresenter: HomePresenterProtocol?
     private var result : (Int, MovieType)?
+    private var page = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,19 +37,22 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
             let menuItems: [UIAction] =
             [
                 UIAction(title: "Top Rated Movies", image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { [weak self] _ in
+                    guard let self = self else { return }
                     UserDefaults.standard.set(MovieType.topRated.rawValue, forKey: "UserPreference")
-                    self?.homePresenter?.fetchTopRatedMovies()
-                    self?.result = self?.getMovieCountAndType(preference: MovieType.topRated.rawValue)
+                    self.homePresenter?.fetchTopRatedMovies(page: self.page)
+                    self.result = self.getMovieCountAndType(preference: MovieType.topRated.rawValue)
                 }),
                 UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { [weak self] _ in
+                    guard let self = self else { return }
                     UserDefaults.standard.set(MovieType.popular.rawValue, forKey: "UserPreference")
-                    self?.homePresenter?.fetchPopularMovies()
-                    self?.result = self?.getMovieCountAndType(preference: MovieType.popular.rawValue)
+                    self.homePresenter?.fetchPopularMovies(page: self.page)
+                    self.result = self.getMovieCountAndType(preference: MovieType.popular.rawValue)
                 }),
                 UIAction(title: "Favorite Movies", image: UIImage(systemName: "star"), handler: { [weak self] _ in
+                    guard let self = self else { return }
                     UserDefaults.standard.set(MovieType.favorites.rawValue, forKey: "UserPreference")
-                    self?.homePresenter?.fetchFavoriteMovies()
-                    self?.result = self?.getMovieCountAndType(preference: MovieType.favorites.rawValue)
+                    self.homePresenter?.fetchFavoriteMovies()
+                    self.result = self.getMovieCountAndType(preference: MovieType.favorites.rawValue)
                 })
             ]
             
@@ -70,8 +74,8 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     private func checkConnectivity() {
         if Reachability.isConnectedToNetwork() {
             //Get data from Internet
-            homePresenter?.fetchPopularMovies()
-            homePresenter?.fetchTopRatedMovies()
+            homePresenter?.fetchPopularMovies(page: page)
+            homePresenter?.fetchTopRatedMovies(page: page)
         } else {
             //Get data from Database
         }
@@ -126,6 +130,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let userPreference = UserDefaults.standard.value(forKey: "UserPreference") else { return 0 }
         result = getMovieCountAndType(preference: userPreference as! String)
+        print(result?.0)
         return result?.0 ?? 0
     }
     
@@ -164,6 +169,29 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             print("nothing")
 
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        switch result?.1 ?? MovieType.topRated {
+        case .topRated:
+            if indexPath.row + 1 == homePresenter?.topRatedMoviesList?.results?.count && homePresenter?.topRatedMoviesList?.results?.count ?? 0 < 20 {
+                page += 1
+                homePresenter?.fetchTopRatedMovies(page: page)
+                }
+        case .popular:
+            if indexPath.row + 1 == homePresenter?.topRatedMoviesList?.results?.count && homePresenter?.topRatedMoviesList?.results?.count ?? 0 < 20 {
+                page += 1
+                homePresenter?.fetchPopularMovies(page: page)
+                }
+            
+        case .favorites:
+            print("..")
+//            vc.detailsPresenter = MovieDetailsPresenter(movie: (homePresenter?.favoriteMovieList[indexPath.row]), detailsView: vc)
+            print("nothing")
+
+        }
+        
     }
     
     
