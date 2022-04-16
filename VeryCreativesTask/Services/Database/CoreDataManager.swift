@@ -79,45 +79,25 @@ final class CoreDataManager: DatabaseProtocol {
         
         CoreDataRepository.shared.favoriteMovies.append(managedMovie)
         saveContext()
-        
-        
-    }
-    
-    
-    func fetch() -> [Int]{
-        var moviesIDArray = [Int]()
-        let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
-        do {
-            let favoriteMovies = try managedObjectContext.fetch(fetchRequest)
-            for movie in favoriteMovies {
-                moviesIDArray.append(Int(movie.id))
-            }
-            
-            return moviesIDArray
-        } catch {
-            print("There was a problem fetching data from Core Data. Error: \(error)")
-        }
-        
-        return moviesIDArray
     }
     
     func fetch() -> [MovieDataManagedObject] {
         //Fetch from Repository?
         
-        var moviesArray = [MovieDataManagedObject]()
-        let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
-        do {
-            let favoriteMovies = try managedObjectContext.fetch(fetchRequest)
-            for movie in favoriteMovies {
-                moviesArray.append(movie)
-            }
-            
-            return moviesArray
-        } catch {
-            print("There was a problem fetching data from Core Data. Error: \(error)")
-        }
-        
-        return moviesArray
+//        var moviesArray = [MovieDataManagedObject]()
+//        let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
+//        do {
+//            let favoriteMovies = try managedObjectContext.fetch(fetchRequest)
+//            for movie in favoriteMovies {
+//                moviesArray.append(movie)
+//            }
+//            CoreDataRepository.shared.favoriteMovies = moviesArray
+//            return moviesArray
+//        } catch {
+//            print("There was a problem fetching data from Core Data. Error: \(error)")
+//        }
+//
+        return CoreDataRepository.shared.favoriteMovies
     }
     
     func delete(movie: MovieData) {
@@ -130,19 +110,20 @@ final class CoreDataManager: DatabaseProtocol {
             
             for favoriteMovie in favoriteMoviesList {
                 if favoriteMovie.id == Int32(movieID) {
+                    //Delete from Core Data stack
                     managedObjectContext.delete(favoriteMovie)
+                    saveContext()
+                    
+                    //Delete from Core Data Repository
                     let index = CoreDataRepository.shared.favoriteMovies.firstIndex(of: favoriteMovie)
                     if let safeIndex = index {
                         CoreDataRepository.shared.favoriteMovies.remove(at: safeIndex)
-                        break
                     } else {
                         
                     }
-                    
+                    break
                 }
             }
-            
-            saveContext()
             
         } catch {
             print("There was a problem fetching data from Core Data. Error: \(error)")

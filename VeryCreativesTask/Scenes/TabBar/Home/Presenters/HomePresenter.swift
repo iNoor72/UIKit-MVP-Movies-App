@@ -97,8 +97,8 @@ class HomePresenter: HomePresenterProtocol {
             
         case .favorites:
             guard let movie = favoriteMovieList?[index] else { return }
-            let movieResponsee = convertModelToResponse(model: movie)
-            let route = HomeNavigationRoutes.MovieDetails(movieResponsee)
+            let movieResponse = convertModelToResponse(model: movie)
+            let route = HomeNavigationRoutes.MovieDetails(movieResponse)
             homeView?.navigate(to: route)
         }
         
