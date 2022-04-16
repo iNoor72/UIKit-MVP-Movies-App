@@ -8,23 +8,20 @@
 import Foundation
 
 protocol HomePresenterProtocol {
-    //    var favoriteMovieList: [MovieDataManagedObject]? { get }
     var popularMoviesList: MovieResponse? { get }
     var topRatedMoviesList: MovieResponse? { get }
     var userMoviePreference: MovieType { get set }
     
     func fetchPopularMovies(page: Int)
     func fetchTopRatedMovies(page: Int)
-    //    func fetchFavoriteMovies()
     func navigateToMovie(at index: Int)
 }
 
 class HomePresenter: HomePresenterProtocol {
-    
-    //    var favoriteMovieList : [MovieDataManagedObject]?
     var popularMoviesList: MovieResponse?
     var topRatedMoviesList: MovieResponse?
     var userMoviePreference: MovieType = .topRated
+    
     private let DatabaseManager : DatabaseProtocol
     weak var homeView: HomeViewControllerProtocol?
     
@@ -77,10 +74,6 @@ class HomePresenter: HomePresenterProtocol {
             }
         }
     }
-    
-    //    func fetchFavoriteMovies() {
-    //        favoriteMovieList = DatabaseManager.fetch()
-    //    }
     
     func navigateToMovie(at index: Int) {
         switch userMoviePreference {

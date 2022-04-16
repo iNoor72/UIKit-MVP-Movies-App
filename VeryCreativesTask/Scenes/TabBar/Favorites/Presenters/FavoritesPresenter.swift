@@ -33,7 +33,6 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func navigateToMovie(at index: Int) {
-        //Need to change to reponse data movie
         guard let model = favoritedMovies?[index] else { return }
         let movie = convertModelToResponse(model: model)
         let route = FavoritesNavigationRoutes.MovieDetails(movie)

@@ -182,11 +182,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             homePresenter?.navigateToMovie(at: indexPath.row)
         }
     }
-}
-
-//MARK: ScrollView
-@available(iOS 13.0, *)
-extension HomeViewController: UIScrollViewDelegate {
+    
+    //MARK: Pagination
+    //UICollectionView extends UIScrollView, so we can access its functions
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         
