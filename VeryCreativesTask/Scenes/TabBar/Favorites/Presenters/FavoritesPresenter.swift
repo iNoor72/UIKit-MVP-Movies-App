@@ -51,13 +51,25 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
         favoritesView?.reloadData()
     }
     
-    func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {
+    private func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {
         for movie in NetworkRepository.shared.fetchedMovies {
             if model.id == movie.id ?? 0 {
                 return movie
             }
         }
         return MovieData()
+    }
+    
+    private func convertResponseToModel(movie: MovieData) -> MovieDataManagedObject? {
+        let favMovieModels = DatabaseManager.fetch()
+        guard let movieID = movie.id else { return nil }
+        for movieModel in favMovieModels {
+            if movieModel.id == Int32(movieID) {
+                return movieModel
+            }
+        }
+        
+        return nil
     }
     
     

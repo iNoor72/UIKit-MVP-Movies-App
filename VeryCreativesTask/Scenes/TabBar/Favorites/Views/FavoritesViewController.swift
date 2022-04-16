@@ -84,7 +84,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Gives an error + can't unfavorite the movie
-        //        favoritesPresenter?.navigateToMovie(at: indexPath.row)
+                favoritesPresenter?.navigateToMovie(at: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
