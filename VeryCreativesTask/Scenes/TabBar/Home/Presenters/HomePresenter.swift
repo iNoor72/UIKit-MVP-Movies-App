@@ -32,14 +32,7 @@ class HomePresenter: HomePresenterProtocol {
     init(DatabaseManager: DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile), homeView: HomeViewControllerProtocol) {
         self.DatabaseManager = DatabaseManager
         self.homeView = homeView
-        
-        //For now only
-        self.favoriteMovieList = [MovieDataManagedObject]()
     }
-    
-    //    func setMoviesList(movies: [MovieDataManagedObject]) {
-    //        self.favoriteMovieList = movies
-    //    }
     
     func fetchPopularMovies(page: Int = 1) {
         NetworkManager.shared.fetchMovies(page: page, type: MovieType.popular) {[weak self] (movies: MovieResponse?, error: Error?) in
