@@ -18,6 +18,12 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.borderColor = UIColor(rgb: Constants.Colors.primaryYellowColor).cgColor
+        self.layer.borderWidth = 0.7
+    }
+    
     func configure(name: String, movieImageURL: String) {
         guard let imageURL = URL(string: (Constants.imagesBaseURL + movieImageURL)) else { return }
         
