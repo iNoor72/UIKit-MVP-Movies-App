@@ -37,7 +37,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     }
     
     private func setupViews() {
-        title = "Movies"
+        title = "Top Rated Movies"
         if #available(iOS 14.0, *) {
             
             topRatedItem = UIAction(title: "Top Rated Movies", image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { [weak self] _ in
@@ -45,6 +45,9 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
                 UserDefaults.standard.set(MovieType.topRated.rawValue, forKey: "UserPreference")
                 self.homePresenter?.fetchTopRatedMovies(page: self.page)
                 self.result = self.getMovieCountAndType(preference: MovieType.topRated.rawValue)
+                self.title = "Top Rated Movies"
+                self.toggleTopRatedItem(state: .on)
+                self.togglePopularItem(state: .off)
             })
             
             popularItem = UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { [weak self] _ in
@@ -52,10 +55,14 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
                 UserDefaults.standard.set(MovieType.popular.rawValue, forKey: "UserPreference")
                 self.homePresenter?.fetchPopularMovies(page: self.page)
                 self.result = self.getMovieCountAndType(preference: MovieType.popular.rawValue)
+                self.title = "Popular Movies"
+                self.toggleTopRatedItem(state: .off)
+                self.togglePopularItem(state: .on)
             })
             
-            topRatedItem.state = .on
-            popularItem.state = .off
+            self.topRatedItem.state = .on
+            self.popularItem.state = .off
+            
             
             let menuItems: [UIAction] = [topRatedItem, popularItem]
             
@@ -73,12 +80,22 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         
     }
     
-    @objc func toggleTopRatedItem() {
-        topRatedItem.state = topRatedItem.state == UIMenuElement.State.on ? UIMenuElement.State.off : UIMenuElement.State.on
+    
+    
+    func toggleTopRatedItem(state: UIMenuElement.State) {
+        if topRatedItem.state == .on {
+            topRatedItem.state = .off
+        } else {
+            topRatedItem.state = .on
+        }
     }
     
-    @objc func togglePopularItem() {
-        popularItem.state = popularItem.state == UIMenuElement.State.on ? UIMenuElement.State.off : UIMenuElement.State.on
+    func togglePopularItem(state: UIMenuElement.State) {
+        if popularItem.state == .on {
+            popularItem.state = .off
+        } else {
+            popularItem.state = .on
+        }
     }
     
     private func checkConnectivity() {

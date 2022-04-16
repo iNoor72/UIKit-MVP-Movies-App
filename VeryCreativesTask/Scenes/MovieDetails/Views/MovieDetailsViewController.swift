@@ -31,7 +31,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     
     private func setupViews() {
         title = "Details"
-        guard let imageURL = URL(string: Constants.imagesBaseURL + (detailsPresenter?.movie?.backdrop_path ?? "")) else { return }
+        guard let imageURL = URL(string: Constants.imagesBaseURL + (detailsPresenter?.movie?.backdrop_path ?? Constants.noImageURL)) else { return }
         
         movieNameLabel.text = detailsPresenter?.movie?.title ?? ""
         movieImage.kf.setImage(with: imageURL)
@@ -66,7 +66,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
             if presenter.isMovieFavorited(movie: movie) {
                 favButton?.image = UIImage(systemName: "star")
                 detailsPresenter?.movie?.movieState = .normal
-                NetworkRepository.shared.fetchedMovies.map { movieToBeUnsaved in
+                let _ = NetworkRepository.shared.fetchedMovies.map { movieToBeUnsaved in
                     if movieToBeUnsaved.id == movie.id {
                         movieToBeUnsaved.movieState = .normal
                     }
@@ -76,16 +76,16 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
             } else {
                 favButton?.image = UIImage(systemName: "star.fill")
                 detailsPresenter?.movie?.movieState = .favorited
-                NetworkRepository.shared.fetchedMovies.map { movieToBeUnsaved in
+                let _ = NetworkRepository.shared.fetchedMovies.map { movieToBeUnsaved in
                     if movieToBeUnsaved.id == movie.id {
                         movieToBeUnsaved.movieState = .favorited
                     }
                 }
                 detailsPresenter?.saveMovieAsFavorite(movie: movie)
             }
-            
-            
-        } else {
+        }
+        
+        else {
             // Fallback on earlier versions
         }
     }

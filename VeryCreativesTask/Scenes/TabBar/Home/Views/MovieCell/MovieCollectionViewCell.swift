@@ -22,6 +22,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         self.layer.borderColor = UIColor(rgb: Constants.Colors.primaryYellowColor).cgColor
         self.layer.borderWidth = 0.7
+        self.layer.cornerRadius = 8.0
     }
     
     func configure(name: String, movieImageURL: String) {

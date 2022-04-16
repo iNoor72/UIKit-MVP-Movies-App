@@ -38,7 +38,7 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
     private func setupViews() {
         title = "Favorites"
         editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
-        editButton.tintColor = UIColor.systemYellow
+        editButton.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
         self.navigationItem.rightBarButtonItem  = editButton
     }
     
@@ -83,8 +83,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Gives an error + can't unfavorite the movie
-                favoritesPresenter?.navigateToMovie(at: indexPath.row)
+        favoritesPresenter?.navigateToMovie(at: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -100,6 +99,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
             favoritesPresenter?.deleteMovieFromFavorites(movie: (favoritesPresenter?.favoritedMovies?[indexPath.row])!)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.reloadData()
-           }
+        }
     }
 }

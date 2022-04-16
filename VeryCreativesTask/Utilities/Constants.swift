@@ -14,11 +14,11 @@ struct Constants {
     static let CoreDataModelFile = "Model"
     static let APIKey = "8d61230b01928fe55a53a48a41dc839b"
     static let dummyURL = URL(string: "https://google.com")!
-    static let noImage = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png")!
+    static let noImageURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
     
     struct Colors {
         static let primaryGreenColor = 0x52B1A9
-        static let primaryYellowColor = 0xF5CD45
+        static let primaryYellowColor = 0xF5AC00
     }
     
     struct Storyboards {
