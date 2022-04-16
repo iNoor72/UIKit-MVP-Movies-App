@@ -2,7 +2,7 @@
 //  MovieDataManagedObject+CoreDataProperties.swift
 //  VeryCreativesTask
 //
-//  Created by Noor Walid on 15/04/2022.
+//  Created by Noor Walid on 16/04/2022.
 //
 //
 
@@ -19,7 +19,8 @@ extension MovieDataManagedObject {
     @NSManaged public var id: Int32
     @NSManaged public var imageURL: String?
     @NSManaged public var overview: String?
-    @NSManaged public var title: String?
     @NSManaged public var rating: Double
+    @NSManaged public var title: String?
+    @NSManaged public var state: String?
 
 }

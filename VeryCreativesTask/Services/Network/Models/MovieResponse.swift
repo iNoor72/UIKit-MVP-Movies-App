@@ -36,8 +36,8 @@ class MovieData: Codable {
 }
 
 
-enum MovieState {
-    case favorited
-    case normal
+enum MovieState: String {
+    case favorited = "fav"
+    case normal = "norm"
 }
 
