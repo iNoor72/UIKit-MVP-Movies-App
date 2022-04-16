@@ -76,6 +76,7 @@ final class CoreDataManager: DatabaseProtocol {
         managedMovie.overview = movie.overview
         managedMovie.imageURL = movie.poster_path
         managedMovie.rating = movie.vote_average ?? 0
+        managedMovie.state = movie.movieState.rawValue
         
         saveContext()
     }

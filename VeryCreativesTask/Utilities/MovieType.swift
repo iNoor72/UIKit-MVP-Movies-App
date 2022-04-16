@@ -10,5 +10,5 @@ import Foundation
 enum MovieType: String {
     case topRated = "TopRated"
     case popular = "Popular"
-    case favorites = "Favorites"
+//    case favorites = "Favorites"
 }

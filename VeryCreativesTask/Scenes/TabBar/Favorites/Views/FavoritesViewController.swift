@@ -29,7 +29,7 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        reloadData()
+        favoritesPresenter?.fetchFavoriteMovies()
     }
     
     private func setupTableView() {

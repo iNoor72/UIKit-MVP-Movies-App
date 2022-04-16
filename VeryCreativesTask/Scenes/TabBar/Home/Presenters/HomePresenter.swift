@@ -8,21 +8,21 @@
 import Foundation
 
 protocol HomePresenterProtocol {
-    var favoriteMovieList: [MovieDataManagedObject]? { get }
+//    var favoriteMovieList: [MovieDataManagedObject]? { get }
     var popularMoviesList: MovieResponse? { get }
     var topRatedMoviesList: MovieResponse? { get }
     var userMoviePreference: MovieType { get set }
     
     func fetchPopularMovies(page: Int)
     func fetchTopRatedMovies(page: Int)
-    func fetchFavoriteMovies()
+//    func fetchFavoriteMovies()
     func navigateToMovie(at index: Int)
     func convertModelToResponse(model: MovieDataManagedObject) -> MovieData
 }
 
 class HomePresenter: HomePresenterProtocol {
     
-    var favoriteMovieList : [MovieDataManagedObject]?
+//    var favoriteMovieList : [MovieDataManagedObject]?
     var popularMoviesList: MovieResponse?
     var topRatedMoviesList: MovieResponse?
     var userMoviePreference: MovieType = .topRated
@@ -79,9 +79,9 @@ class HomePresenter: HomePresenterProtocol {
         }
     }
     
-    func fetchFavoriteMovies() {
-        favoriteMovieList = DatabaseManager.fetch()
-    }
+//    func fetchFavoriteMovies() {
+//        favoriteMovieList = DatabaseManager.fetch()
+//    }
     
     func navigateToMovie(at index: Int) {
         switch userMoviePreference {
@@ -93,12 +93,6 @@ class HomePresenter: HomePresenterProtocol {
         case .popular:
             guard let movie = popularMoviesList?.results?[index] else { return }
             let route = HomeNavigationRoutes.MovieDetails(movie)
-            homeView?.navigate(to: route)
-            
-        case .favorites:
-            guard let movie = favoriteMovieList?[index] else { return }
-            let movieResponse = convertModelToResponse(model: movie)
-            let route = HomeNavigationRoutes.MovieDetails(movieResponse)
             homeView?.navigate(to: route)
         }
         

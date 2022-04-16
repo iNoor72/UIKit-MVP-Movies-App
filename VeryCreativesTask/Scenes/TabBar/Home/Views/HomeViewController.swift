@@ -86,10 +86,14 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
             //Get data from Internet
             homePresenter?.fetchPopularMovies(page: page)
             homePresenter?.fetchTopRatedMovies(page: page)
-            homePresenter?.fetchFavoriteMovies()
+//            homePresenter?.fetchFavoriteMovies()
         } else {
-            //Get data from Database
-            homePresenter?.fetchFavoriteMovies()
+            //Switch to Favorites Tab
+            let alert = UIAlertController(title: "You're disconnected to Internet.", message: "Your phone is not connected to internet. You have been switched to Favorites movies.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            alert.addAction(action)
+            present(alert, animated: true)
+            self.tabBarController?.selectedIndex = 1
         }
     }
     
@@ -108,11 +112,14 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     }
     
     func reloadData() {
-        collectionView.reloadData()
+        DispatchQueue.main.async {[weak self] in
+            self?.collectionView.reloadData()
+        }
+        
     }
     
     private func getMovieCountAndType(preference: String) -> (Int, MovieType) {
-        guard let topRatedMoviesCount = homePresenter?.topRatedMoviesList?.results?.count, let popularMoviesCount = homePresenter?.popularMoviesList?.results?.count, let favoriteMoviesCount = homePresenter?.favoriteMovieList?.count  else { return (0, MovieType.topRated) }
+        guard let topRatedMoviesCount = homePresenter?.topRatedMoviesList?.results?.count, let popularMoviesCount = homePresenter?.popularMoviesList?.results?.count else { return (0, MovieType.topRated) }
         
         switch MovieType(rawValue: preference) {
         case .topRated:
@@ -123,11 +130,11 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
             if MovieType.popular.rawValue == preference {
                 return (popularMoviesCount, MovieType.popular)
             }
-            
-        case .favorites:
-            if MovieType.favorites.rawValue == preference {
-                return (favoriteMoviesCount, MovieType.favorites)
-            }
+            //
+            //        case .favorites:
+            //            if MovieType.favorites.rawValue == preference {
+            //                return (favoriteMoviesCount, MovieType.favorites)
+            //            }
         case .none:
             return (0, MovieType.topRated)
         }
@@ -161,11 +168,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case .popular:
             cell.configure(name: homePresenter?.popularMoviesList?.results?[indexPath.row].title ?? "", movieImageURL: homePresenter?.popularMoviesList?.results?[indexPath.row].poster_path ?? "")
-            
-        case .favorites:
-            cell.configure(name: homePresenter?.favoriteMovieList?[indexPath.row].title ?? "", movieImageURL: homePresenter?.favoriteMovieList?[indexPath.row].imageURL ?? "")
         }
-
+        
         return cell
     }
     
@@ -177,13 +181,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .popular:
             homePresenter?.userMoviePreference = .popular
             homePresenter?.navigateToMovie(at: indexPath.row)
-            
-        case .favorites:
-            homePresenter?.userMoviePreference = .favorites
-            homePresenter?.navigateToMovie(at: indexPath.row)
         }
     }
-    
 }
 
 //MARK: ScrollView
@@ -201,9 +200,6 @@ extension HomeViewController: UIScrollViewDelegate {
             case .popular:
                 self.page += 1
                 self.homePresenter?.fetchPopularMovies(page: self.page)
-                
-            case .favorites:
-                print("No need to fetch, all data are fetched once.")
             }
         }
     }

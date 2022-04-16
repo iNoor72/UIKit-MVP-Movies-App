@@ -19,11 +19,7 @@ class NetworkManager {
             return NetworkRouter.popular(page: page)
         case .topRated:
             return NetworkRouter.topRated(page: page)
-        case .favorites:
-            break
         }
-        
-        return NetworkRouter.topRated(page: page)
     }
     
     func fetchMovies<T:Decodable>(page: Int, type: MovieType, completion: @escaping (T?, Error?) -> ()) {
