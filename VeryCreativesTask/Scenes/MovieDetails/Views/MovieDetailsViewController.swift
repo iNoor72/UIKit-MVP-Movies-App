@@ -41,19 +41,21 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     private func setupFavoriteButton() {
         if #available(iOS 13.0, *) {
             //Set the button based on the movie state
-            guard let movie = detailsPresenter?.movie, let result = detailsPresenter?.isMovieFavorited(movie: movie) else { return }
-            let buttonImage = result ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+            guard let movie = detailsPresenter?.movie else { return }
+            let isMovieFavorited = CoreDataRepository.shared.favoriteMovies.contains(where: { object in
+                if object.id == Int32(movie.id!) {
+                    return true
+                }
+                return false
+            })
+            
+            let buttonImage = isMovieFavorited ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
             
             favButton = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(didTapFavButton))
             favButton?.tintColor = UIColor.systemYellow
             self.navigationItem.rightBarButtonItem  = favButton
             
-//            let isMovieFavorited = CoreDataRepository.shared.favoriteMovies.contains(where: { object in
-//                if object.id == Int32(movie.id!) {
-//                    return true
-//                }
-//                return false
-//            })
+
         }
         
         

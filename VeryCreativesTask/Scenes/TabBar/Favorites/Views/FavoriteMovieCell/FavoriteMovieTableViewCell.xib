@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,15 +30,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BO-lb-NY8">
-                        <rect key="frame" x="305" y="64.5" width="47" height="31"/>
-                        <color key="tintColor" systemColor="systemYellowColor"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
-                        <connections>
-                            <action selector="favoriteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="h3g-I5-Gqd"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwE-DK-PWb">
                         <rect key="frame" x="148" y="71.5" width="63" height="27.5"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
@@ -53,8 +43,6 @@
                     <constraint firstItem="g5z-do-SnF" firstAttribute="top" secondItem="ZlP-gn-NUW" secondAttribute="top" constant="16" id="M71-u8-hGh"/>
                     <constraint firstItem="bwE-DK-PWb" firstAttribute="top" secondItem="g5z-do-SnF" secondAttribute="bottom" constant="8" id="UZo-eL-auk"/>
                     <constraint firstItem="bwE-DK-PWb" firstAttribute="leading" secondItem="g5z-do-SnF" secondAttribute="leading" id="Ubx-EU-5Dk"/>
-                    <constraint firstAttribute="trailing" secondItem="6BO-lb-NY8" secondAttribute="trailing" constant="16" id="UlK-09-Pv6"/>
-                    <constraint firstItem="6BO-lb-NY8" firstAttribute="centerY" secondItem="ZlP-gn-NUW" secondAttribute="centerY" id="WSA-4l-aam"/>
                     <constraint firstAttribute="bottom" secondItem="ZlP-gn-NUW" secondAttribute="bottom" constant="20" symbolic="YES" id="Zp2-Z9-EEM"/>
                     <constraint firstItem="g5z-do-SnF" firstAttribute="leading" secondItem="ZlP-gn-NUW" secondAttribute="trailing" constant="8" symbolic="YES" id="yrw-Cl-rLG"/>
                 </constraints>
@@ -64,15 +52,8 @@
                 <outlet property="movieImage" destination="ZlP-gn-NUW" id="wQG-vh-fj9"/>
                 <outlet property="movieNameLabel" destination="g5z-do-SnF" id="lQN-Fm-l4c"/>
                 <outlet property="movieRatingLabel" destination="bwE-DK-PWb" id="c3j-Uy-LMX"/>
-                <outlet property="unfavoriteButton" destination="6BO-lb-NY8" id="C8R-CK-0LB"/>
             </connections>
             <point key="canvasLocation" x="169.56521739130437" y="189.84375"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

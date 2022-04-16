@@ -11,12 +11,7 @@ protocol FavoritesViewControllerProtocol: AnyObject, NavigationRoute {
     func reloadData()
 }
 
-protocol FavoritesViewControllerDelegate {
-    func userUnfavoritedMovie(movie: MovieDataManagedObject)
-    func userRefavoritedMovie(movie: MovieDataManagedObject)
-}
-
-class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol, FavoritesViewControllerDelegate {
+class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol {
     @IBOutlet private weak var tableView: UITableView!
     private var favoritesPresenter: FavoritesPresenterProtocol?
 
@@ -48,14 +43,6 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
             self?.tableView.reloadData()
         }
     }
-    
-    func userUnfavoritedMovie(movie: MovieDataManagedObject) {
-        
-    }
-    
-    func userRefavoritedMovie(movie: MovieDataManagedObject) {
-        
-    }
 
 }
 
@@ -69,7 +56,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableViewCells.FavoriteMovieCell, for: indexPath) as? FavoriteMovieTableViewCell else { return UITableViewCell() }
         guard let movie = favoritesPresenter?.favoritedMovies?[indexPath.row] else { return UITableViewCell() }
                                                                
-        cell.configure(movie: movie, delegate: self)
+        cell.configure(movie: movie)
         
         return cell
     }

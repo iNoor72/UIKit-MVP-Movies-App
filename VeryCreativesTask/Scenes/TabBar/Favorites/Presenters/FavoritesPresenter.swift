@@ -15,6 +15,8 @@ protocol FavoritesPresenterProtocol {
     func fetchFavoriteMovies()
     func navigateToMovie(at index: Int)
     func deleteMovies(movies: [MovieDataManagedObject])
+    func saveMovieAsFavorite(movie: MovieDataManagedObject)
+    func deleteMovieFromFavorites(movie: MovieDataManagedObject)
 }
 
 class FavoritesPresenter: FavoritesPresenterProtocol {
@@ -48,6 +50,16 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
             let movie = convertModelToResponse(model: movieModel)
             DatabaseManager.delete(movie: movie)
         }
+    }
+    
+    func saveMovieAsFavorite(movie: MovieDataManagedObject) {
+        let movie = convertModelToResponse(model: movie)
+        DatabaseManager.save(movie: movie)
+    }
+    
+    func deleteMovieFromFavorites(movie: MovieDataManagedObject) {
+        let movie = convertModelToResponse(model: movie)
+        DatabaseManager.delete(movie: movie)
     }
     
     func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {

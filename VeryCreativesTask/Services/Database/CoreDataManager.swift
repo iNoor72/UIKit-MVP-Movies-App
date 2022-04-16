@@ -77,7 +77,9 @@ final class CoreDataManager: DatabaseProtocol {
         managedMovie.imageURL = movie.poster_path
         managedMovie.rating = movie.vote_average ?? 0
         
+        CoreDataRepository.shared.favoriteMovies.append(managedMovie)
         saveContext()
+        
         
     }
     
@@ -100,6 +102,8 @@ final class CoreDataManager: DatabaseProtocol {
     }
     
     func fetch() -> [MovieDataManagedObject] {
+        //Fetch from Repository?
+        
         var moviesArray = [MovieDataManagedObject]()
         let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
         do {
@@ -127,14 +131,23 @@ final class CoreDataManager: DatabaseProtocol {
             for favoriteMovie in favoriteMoviesList {
                 if favoriteMovie.id == Int32(movieID) {
                     managedObjectContext.delete(favoriteMovie)
-                    break
+                    let index = CoreDataRepository.shared.favoriteMovies.firstIndex(of: favoriteMovie)
+                    if let safeIndex = index {
+                        CoreDataRepository.shared.favoriteMovies.remove(at: safeIndex)
+                        break
+                    } else {
+                        
+                    }
+                    
                 }
             }
+            
+            saveContext()
             
         } catch {
             print("There was a problem fetching data from Core Data. Error: \(error)")
         }
         
-        saveContext()
+        
     }
 }
