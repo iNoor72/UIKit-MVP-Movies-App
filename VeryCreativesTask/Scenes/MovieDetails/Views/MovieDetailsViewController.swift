@@ -42,12 +42,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
         if #available(iOS 13.0, *) {
             //Set the button based on the movie state
             guard let movie = detailsPresenter?.movie else { return }
-            let isMovieFavorited = CoreDataRepository.shared.favoriteMovies.contains(where: { object in
-                if object.id == Int32(movie.id!) {
-                    return true
-                }
-                return false
-            })
+            let isMovieFavorited = detailsPresenter?.isMovieFavorited(movie: movie) ?? false
             
             let buttonImage = isMovieFavorited ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
             

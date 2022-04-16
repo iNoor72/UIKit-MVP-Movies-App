@@ -77,27 +77,24 @@ final class CoreDataManager: DatabaseProtocol {
         managedMovie.imageURL = movie.poster_path
         managedMovie.rating = movie.vote_average ?? 0
         
-        CoreDataRepository.shared.favoriteMovies.append(managedMovie)
         saveContext()
     }
     
     func fetch() -> [MovieDataManagedObject] {
-        //Fetch from Repository?
-        
-//        var moviesArray = [MovieDataManagedObject]()
-//        let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
-//        do {
-//            let favoriteMovies = try managedObjectContext.fetch(fetchRequest)
-//            for movie in favoriteMovies {
-//                moviesArray.append(movie)
-//            }
-//            CoreDataRepository.shared.favoriteMovies = moviesArray
-//            return moviesArray
-//        } catch {
-//            print("There was a problem fetching data from Core Data. Error: \(error)")
-//        }
-//
-        return CoreDataRepository.shared.favoriteMovies
+        var moviesArray = [MovieDataManagedObject]()
+        let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
+        do {
+            let favoriteMovies = try managedObjectContext.fetch(fetchRequest)
+            for movie in favoriteMovies {
+                moviesArray.append(movie)
+            }
+            CoreDataRepository.shared.favoriteMovies = moviesArray
+            return moviesArray
+        } catch {
+            print("There was a problem fetching data from Core Data. Error: \(error)")
+        }
+
+        return moviesArray
     }
     
     func delete(movie: MovieData) {
@@ -113,14 +110,6 @@ final class CoreDataManager: DatabaseProtocol {
                     //Delete from Core Data stack
                     managedObjectContext.delete(favoriteMovie)
                     saveContext()
-                    
-                    //Delete from Core Data Repository
-                    let index = CoreDataRepository.shared.favoriteMovies.firstIndex(of: favoriteMovie)
-                    if let safeIndex = index {
-                        CoreDataRepository.shared.favoriteMovies.remove(at: safeIndex)
-                    } else {
-                        
-                    }
                     break
                 }
             }
