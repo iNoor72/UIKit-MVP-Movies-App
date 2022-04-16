@@ -16,7 +16,7 @@ struct MovieResponse: Codable {
        }
    }
 
-struct MovieData: Codable {
+class MovieData: Codable {
     var id: Int?
     var title: String?
     var overview: String?
@@ -24,7 +24,8 @@ struct MovieData: Codable {
     var backdrop_path: String?
     var vote_average: Double?
     
-    var movieState: MovieState?
+    var movieState: MovieState = .normal
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -33,3 +34,10 @@ struct MovieData: Codable {
         case vote_average
     }
 }
+
+
+enum MovieState {
+    case favorited
+    case normal
+}
+

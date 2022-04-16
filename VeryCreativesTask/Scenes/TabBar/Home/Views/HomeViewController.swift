@@ -35,34 +35,61 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     private func setupViews() {
         title = "Movies"
         if #available(iOS 14.0, *) {
-            let menuItems: [UIAction] =
-            [
-                UIAction(title: "Top Rated Movies", image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { [weak self] _ in
-                    guard let self = self else { return }
-                    UserDefaults.standard.set(MovieType.topRated.rawValue, forKey: "UserPreference")
-                    self.homePresenter?.fetchTopRatedMovies(page: self.page)
-                    self.result = self.getMovieCountAndType(preference: MovieType.topRated.rawValue)
-                }),
-                UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { [weak self] _ in
-                    guard let self = self else { return }
-                    UserDefaults.standard.set(MovieType.popular.rawValue, forKey: "UserPreference")
-                    self.homePresenter?.fetchPopularMovies(page: self.page)
-                    self.result = self.getMovieCountAndType(preference: MovieType.popular.rawValue)
-                }),
-                UIAction(title: "Favorite Movies", image: UIImage(systemName: "star"), handler: { [weak self] _ in
-                    guard let self = self else { return }
-                    UserDefaults.standard.set(MovieType.favorites.rawValue, forKey: "UserPreference")
-                    self.homePresenter?.fetchFavoriteMovies()
-                    self.result = self.getMovieCountAndType(preference: MovieType.favorites.rawValue)
-                })
-            ]
             
-            let demoMenu: UIMenu =
-                 UIMenu(title: "Show movies menu", image: nil, identifier: nil, options: [], children: menuItems)
-                let sortButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: demoMenu)
+            let topRatedItem = UIAction(title: "Top Rated Movies", image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { [weak self] _ in
+                guard let self = self else { return }
+                UserDefaults.standard.set(MovieType.topRated.rawValue, forKey: "UserPreference")
+                self.homePresenter?.fetchTopRatedMovies(page: self.page)
+                self.result = self.getMovieCountAndType(preference: MovieType.topRated.rawValue)
+            })
+            
+            let popularItem = UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { [weak self] _ in
+                guard let self = self else { return }
+                UserDefaults.standard.set(MovieType.popular.rawValue, forKey: "UserPreference")
+                self.homePresenter?.fetchPopularMovies(page: self.page)
+                self.result = self.getMovieCountAndType(preference: MovieType.popular.rawValue)
+            })
+            
+            let favoritesItem = UIAction(title: "Favorite Movies", image: UIImage(systemName: "star"), handler: { [weak self] _ in
+                guard let self = self else { return }
+                UserDefaults.standard.set(MovieType.favorites.rawValue, forKey: "UserPreference")
+                self.homePresenter?.fetchFavoriteMovies()
+                self.result = self.getMovieCountAndType(preference: MovieType.favorites.rawValue)
+            })
+            
+            let menuItems: [UIAction] = [topRatedItem, popularItem , favoritesItem]
+            
+            topRatedItem.state = .on
+            popularItem.state = .off
+            favoritesItem.state = .off
+            
+            let menu =
+            UIMenu(title: "Show movies menu", image: nil, identifier: nil, options: [], children: menuItems)
+            let sortButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: menu)
+            
             navigationItem.rightBarButtonItem = sortButton
             navigationItem.rightBarButtonItem?.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
             
+            
+            //
+            //            let preference = UserDefaults.value(forKey: "UserPreference") as! String
+//            switch preference {
+//            case "TopRated":
+//                topRatedItem.state = .on
+//                popularItem.state = .off
+//                favoritesItem.state = .ofż
+//            case "Popular":
+//                topRatedItem.state = .off
+//                popularItem.state = .on
+//                favoritesItem.state = .off
+//            case "Favorites":
+//                topRatedItem.state = .off
+//                popularItem.state = .off
+//                favoritesItem.state = .on
+//            default:
+//                print("Nothing")
+//            }
+//
         } else {
             // Fallback on earlier versions
         }
@@ -174,6 +201,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 //MARK: ScrollView
+@available(iOS 13.0, *)
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y

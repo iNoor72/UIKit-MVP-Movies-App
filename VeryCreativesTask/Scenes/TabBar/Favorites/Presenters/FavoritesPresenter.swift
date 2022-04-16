@@ -7,11 +7,6 @@
 
 import Foundation
 
-enum MovieState {
-    case favorited
-    case normal
-}
-
 protocol FavoritesPresenterProtocol {
     var favoritedMovies: [MovieDataManagedObject]? { get }
     var moviesToBeDeleted: [MovieDataManagedObject]? { get }
