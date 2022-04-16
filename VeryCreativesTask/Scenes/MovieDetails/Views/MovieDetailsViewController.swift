@@ -49,8 +49,6 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
             favButton = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(didTapFavButton))
             favButton?.tintColor = UIColor.systemYellow
             self.navigationItem.rightBarButtonItem  = favButton
-            
-
         }
         
         

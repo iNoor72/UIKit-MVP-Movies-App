@@ -9,12 +9,10 @@ import Foundation
 
 protocol FavoritesPresenterProtocol {
     var favoritedMovies: [MovieDataManagedObject]? { get }
-    var moviesToBeDeleted: [MovieDataManagedObject]? { get }
     var movieState: MovieState? { get }
     
     func fetchFavoriteMovies()
     func navigateToMovie(at index: Int)
-    func deleteMovies(movies: [MovieDataManagedObject])
     func saveMovieAsFavorite(movie: MovieDataManagedObject)
     func deleteMovieFromFavorites(movie: MovieDataManagedObject)
 }
@@ -22,7 +20,6 @@ protocol FavoritesPresenterProtocol {
 class FavoritesPresenter: FavoritesPresenterProtocol {
     
     var favoritedMovies: [MovieDataManagedObject]?
-    var moviesToBeDeleted: [MovieDataManagedObject]?
     var movieState: MovieState?
     weak var favoritesView: FavoritesViewControllerProtocol?
     private var DatabaseManager : DatabaseProtocol
@@ -45,13 +42,6 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
         favoritesView?.navigate(to: route)
     }
     
-    func deleteMovies(movies: [MovieDataManagedObject]) {
-        for movieModel in movies {
-            let movie = convertModelToResponse(model: movieModel)
-            DatabaseManager.delete(movie: movie)
-        }
-    }
-    
     func saveMovieAsFavorite(movie: MovieDataManagedObject) {
         let movie = convertModelToResponse(model: movie)
         DatabaseManager.save(movie: movie)
@@ -60,6 +50,7 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     func deleteMovieFromFavorites(movie: MovieDataManagedObject) {
         let movie = convertModelToResponse(model: movie)
         DatabaseManager.delete(movie: movie)
+        favoritesView?.reloadData()
     }
     
     func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {
