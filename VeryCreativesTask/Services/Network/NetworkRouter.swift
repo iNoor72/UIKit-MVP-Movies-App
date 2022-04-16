@@ -12,7 +12,6 @@ import Alamofire
 enum NetworkRouter: URLRequestConvertible {
     case topRated(page: Int)
     case popular(page: Int)
-    case movie(id: Int)
 
     var path: String {
         switch self {
@@ -20,22 +19,19 @@ enum NetworkRouter: URLRequestConvertible {
             return "/movie/top_rated"
         case .popular:
             return "/movie/popular"
-        case .movie(let movieID):
-            return "/movie/\(movieID)"
         }
     }
+    
     
     var method: HTTPMethod {
-        switch self {
-        case .topRated:
-            return .get
-        case .popular:
-            return .get
-        case .movie(_):
-            return .get
+            switch self {
+            case .topRated:
+                return .get
+            case .popular:
+                return .get
+            }
         }
-    }
-    
+        
     //We don't need headers but if needed, uncomment the code and write the headers
     
 //    var headers: [String:String] {
@@ -50,18 +46,15 @@ enum NetworkRouter: URLRequestConvertible {
 //    }
 
     
-    var parameters: [String: Any] {
-        switch self {
-        case .topRated(let page):
-            return ["api_key":"\(Constants.APIKey)", "page":page]
-        case .popular(let page):
-            return ["api_key":"\(Constants.APIKey)", "page":page]
-        case .movie(let movieID):
-            return ["movie_id":movieID,
-                    "api_key":"\(Constants.APIKey)"]
+        var parameters: [String: Any] {
+            switch self {
+            case .topRated(let page):
+                return ["api_key":"\(Constants.APIKey)", "page":page]
+            case .popular(let page):
+                return ["api_key":"\(Constants.APIKey)", "page":page]
+            }
         }
-    }
-    
+        
     
     
     
