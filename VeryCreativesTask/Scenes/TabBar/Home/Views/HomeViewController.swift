@@ -115,7 +115,6 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         DispatchQueue.main.async {[weak self] in
             self?.collectionView.reloadData()
         }
-        
     }
     
     private func getMovieCountAndType(preference: String) -> (Int, MovieType) {

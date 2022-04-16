@@ -17,8 +17,8 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Favorites"
         favoritesPresenter = FavoritesPresenter(favoritesView: self)
+        setupViews()
         setupTableView()
     }
     
@@ -30,6 +30,17 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         favoritesPresenter?.fetchFavoriteMovies()
+    }
+    
+    private func setupViews() {
+        title = "Favorites"
+        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
+        editButton.tintColor = UIColor.systemYellow
+        self.navigationItem.rightBarButtonItem  = editButton
+    }
+    
+    @objc private func editButtonTapped() {
+        
     }
     
     private func setupTableView() {
