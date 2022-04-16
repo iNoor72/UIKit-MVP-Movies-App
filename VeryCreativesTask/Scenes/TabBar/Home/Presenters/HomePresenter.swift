@@ -8,21 +8,20 @@
 import Foundation
 
 protocol HomePresenterProtocol {
-//    var favoriteMovieList: [MovieDataManagedObject]? { get }
+    //    var favoriteMovieList: [MovieDataManagedObject]? { get }
     var popularMoviesList: MovieResponse? { get }
     var topRatedMoviesList: MovieResponse? { get }
     var userMoviePreference: MovieType { get set }
     
     func fetchPopularMovies(page: Int)
     func fetchTopRatedMovies(page: Int)
-//    func fetchFavoriteMovies()
+    //    func fetchFavoriteMovies()
     func navigateToMovie(at index: Int)
-    func convertModelToResponse(model: MovieDataManagedObject) -> MovieData
 }
 
 class HomePresenter: HomePresenterProtocol {
     
-//    var favoriteMovieList : [MovieDataManagedObject]?
+    //    var favoriteMovieList : [MovieDataManagedObject]?
     var popularMoviesList: MovieResponse?
     var topRatedMoviesList: MovieResponse?
     var userMoviePreference: MovieType = .topRated
@@ -79,34 +78,60 @@ class HomePresenter: HomePresenterProtocol {
         }
     }
     
-//    func fetchFavoriteMovies() {
-//        favoriteMovieList = DatabaseManager.fetch()
-//    }
+    //    func fetchFavoriteMovies() {
+    //        favoriteMovieList = DatabaseManager.fetch()
+    //    }
     
     func navigateToMovie(at index: Int) {
         switch userMoviePreference {
         case .topRated:
             guard let movie = topRatedMoviesList?.results?[index] else { return }
-            let route = HomeNavigationRoutes.MovieDetails(movie)
-            homeView?.navigate(to: route)
+            let movieModel = convertResponseToModel(movie: movie)
+            if let _ = movieModel {
+                movie.movieState = .favorited
+                let route = HomeNavigationRoutes.MovieDetails(movie)
+                homeView?.navigate(to: route)
+            } else {
+                let route = HomeNavigationRoutes.MovieDetails(movie)
+                homeView?.navigate(to: route)
+            }
             
         case .popular:
             guard let movie = popularMoviesList?.results?[index] else { return }
-            let route = HomeNavigationRoutes.MovieDetails(movie)
-            homeView?.navigate(to: route)
+            let movieModel = convertResponseToModel(movie: movie)
+            if let _ = movieModel {
+                movie.movieState = .favorited
+                let route = HomeNavigationRoutes.MovieDetails(movie)
+                homeView?.navigate(to: route)
+            } else {
+                let route = HomeNavigationRoutes.MovieDetails(movie)
+                homeView?.navigate(to: route)
+            }
         }
         
     }
     
-    func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {
+    private func convertModelToResponse(model: MovieDataManagedObject) -> MovieData? {
         for movie in NetworkRepository.shared.fetchedMovies {
             if model.id == movie.id ?? 0 {
                 return movie
             }
         }
         
-        return MovieData()
+        return nil
         
+    }
+    
+    private func convertResponseToModel(movie: MovieData) -> MovieDataManagedObject? {
+        let favMovieModels = DatabaseManager.fetch()
+        guard let movieID = movie.id else { return nil }
+        for movieModel in favMovieModels {
+            if movieModel.id == Int32(movieID) {
+                return movieModel
+            }
+        }
+        
+        return nil
     }
     
     

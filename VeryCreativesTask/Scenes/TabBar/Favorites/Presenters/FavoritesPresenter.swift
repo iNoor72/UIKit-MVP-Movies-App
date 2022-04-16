@@ -9,18 +9,16 @@ import Foundation
 
 protocol FavoritesPresenterProtocol {
     var favoritedMovies: [MovieDataManagedObject]? { get }
-    var movieState: MovieState? { get }
     
     func fetchFavoriteMovies()
-    func navigateToMovie(at index: Int)
     func saveMovieAsFavorite(movie: MovieDataManagedObject)
     func deleteMovieFromFavorites(movie: MovieDataManagedObject)
+    func navigateToMovie(at index: Int)
 }
 
 class FavoritesPresenter: FavoritesPresenterProtocol {
     
     var favoritedMovies: [MovieDataManagedObject]?
-    var movieState: MovieState?
     weak var favoritesView: FavoritesViewControllerProtocol?
     private var DatabaseManager : DatabaseProtocol
     

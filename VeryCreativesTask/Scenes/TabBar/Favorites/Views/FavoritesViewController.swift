@@ -20,6 +20,7 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         favoritesPresenter = FavoritesPresenter(favoritesView: self)
+        favoritesPresenter?.fetchFavoriteMovies()
         setupViews()
         setupTableView()
     }
