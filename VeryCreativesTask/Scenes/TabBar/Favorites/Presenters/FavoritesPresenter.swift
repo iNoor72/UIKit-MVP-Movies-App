@@ -35,7 +35,6 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     func saveMovieAsFavorite(movie: MovieDataManagedObject) {
         let movie = convertModelToResponse(model: movie)
         DatabaseManager.save(movie: movie)
-        favoritesView?.reloadData()
     }
     
     func deleteMovieFromFavorites(movie: MovieDataManagedObject) {
