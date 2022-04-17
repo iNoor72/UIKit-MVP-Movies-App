@@ -46,8 +46,6 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
                 self.homePresenter?.fetchTopRatedMovies(page: self.page)
                 self.result = self.getMovieCountAndType(preference: MovieType.topRated.rawValue)
                 self.title = "Top Rated Movies"
-                self.toggleTopRatedItem(state: .on)
-                self.togglePopularItem(state: .off)
             })
             
             popularItem = UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { [weak self] _ in
@@ -56,13 +54,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
                 self.homePresenter?.fetchPopularMovies(page: self.page)
                 self.result = self.getMovieCountAndType(preference: MovieType.popular.rawValue)
                 self.title = "Popular Movies"
-                self.toggleTopRatedItem(state: .off)
-                self.togglePopularItem(state: .on)
             })
-            
-            self.topRatedItem.state = .on
-            self.popularItem.state = .off
-            
             
             let menuItems: [UIAction] = [topRatedItem, popularItem]
             
@@ -80,30 +72,11 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         
     }
     
-    
-    
-    func toggleTopRatedItem(state: UIMenuElement.State) {
-        if topRatedItem.state == .on {
-            topRatedItem.state = .off
-        } else {
-            topRatedItem.state = .on
-        }
-    }
-    
-    func togglePopularItem(state: UIMenuElement.State) {
-        if popularItem.state == .on {
-            popularItem.state = .off
-        } else {
-            popularItem.state = .on
-        }
-    }
-    
     private func checkConnectivity() {
         if Reachability.isConnectedToNetwork() {
             //Get data from Internet
             homePresenter?.fetchPopularMovies(page: page)
             homePresenter?.fetchTopRatedMovies(page: page)
-//            homePresenter?.fetchFavoriteMovies()
         } else {
             //Switch to Favorites Tab
             let alert = UIAlertController(title: "You're disconnected to Internet.", message: "Your phone is not connected to internet. You have been switched to Favorites movies.", preferredStyle: .alert)
@@ -146,11 +119,6 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
             if MovieType.popular.rawValue == preference {
                 return (popularMoviesCount, MovieType.popular)
             }
-            //
-            //        case .favorites:
-            //            if MovieType.favorites.rawValue == preference {
-            //                return (favoriteMoviesCount, MovieType.favorites)
-            //            }
         case .none:
             return (0, MovieType.topRated)
         }
