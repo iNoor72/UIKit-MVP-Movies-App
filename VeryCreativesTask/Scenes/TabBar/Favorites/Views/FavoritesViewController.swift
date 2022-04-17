@@ -63,7 +63,7 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.setEditing(false, animated: true)
+        tableView.setEditing(false, animated: true)
         tableView.register(UINib(nibName: Constants.XIBs.FavoriteMovieTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.TableViewCells.FavoriteMovieCell)
     }
     
@@ -97,14 +97,10 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     //Allowing both swipe to right to delete & use of "Edit" bar button.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let dispatchGroup = DispatchGroup()
-            dispatchGroup.enter()
             guard let movie = favoritesPresenter?.favoritedMovies?[indexPath.row] else { return }
             favoritesPresenter?.deleteMovieFromFavorites(movie: movie)
-            dispatchGroup.leave()
             
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            reloadData()
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 }

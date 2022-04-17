@@ -40,7 +40,7 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     func deleteMovieFromFavorites(movie: MovieDataManagedObject) {
         guard let movie = convertModelToResponse(model: movie) else { return }
         DatabaseManager.delete(movie: movie)
-        favoritesView?.reloadData()
+        fetchFavoriteMovies()
     }
     
     
