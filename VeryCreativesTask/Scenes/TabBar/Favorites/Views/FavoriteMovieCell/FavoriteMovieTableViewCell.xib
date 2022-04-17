@@ -24,14 +24,17 @@
                             <constraint firstAttribute="height" constant="120" id="EwW-cg-t6y"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5z-do-SnF">
-                        <rect key="frame" x="148" y="36" width="54.5" height="27.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5z-do-SnF">
+                        <rect key="frame" x="148" y="36" width="204" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="BlC-WM-L2J"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwE-DK-PWb">
-                        <rect key="frame" x="148" y="71.5" width="63" height="27.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwE-DK-PWb">
+                        <rect key="frame" x="148" y="74" width="184" height="27.5"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -39,11 +42,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ZlP-gn-NUW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="0mA-ep-gF2"/>
+                    <constraint firstAttribute="trailing" secondItem="g5z-do-SnF" secondAttribute="trailing" constant="16" id="Cyc-Xx-Bro"/>
                     <constraint firstItem="ZlP-gn-NUW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="Igc-f2-yQT"/>
                     <constraint firstItem="g5z-do-SnF" firstAttribute="top" secondItem="ZlP-gn-NUW" secondAttribute="top" constant="16" id="M71-u8-hGh"/>
-                    <constraint firstItem="bwE-DK-PWb" firstAttribute="top" secondItem="g5z-do-SnF" secondAttribute="bottom" constant="8" id="UZo-eL-auk"/>
                     <constraint firstItem="bwE-DK-PWb" firstAttribute="leading" secondItem="g5z-do-SnF" secondAttribute="leading" id="Ubx-EU-5Dk"/>
+                    <constraint firstItem="bwE-DK-PWb" firstAttribute="top" secondItem="g5z-do-SnF" secondAttribute="bottom" constant="8" id="Zan-S7-WKa"/>
                     <constraint firstAttribute="bottom" secondItem="ZlP-gn-NUW" secondAttribute="bottom" constant="20" symbolic="YES" id="Zp2-Z9-EEM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bwE-DK-PWb" secondAttribute="trailing" constant="16" id="cFp-kZ-Kzk"/>
                     <constraint firstItem="g5z-do-SnF" firstAttribute="leading" secondItem="ZlP-gn-NUW" secondAttribute="trailing" constant="8" symbolic="YES" id="yrw-Cl-rLG"/>
                 </constraints>
             </tableViewCellContentView>
