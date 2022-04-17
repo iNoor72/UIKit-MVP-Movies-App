@@ -33,12 +33,12 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func saveMovieAsFavorite(movie: MovieDataManagedObject) {
-        let movie = convertModelToResponse(model: movie)
+        guard let movie = convertModelToResponse(model: movie) else { return }
         DatabaseManager.save(movie: movie)
     }
     
     func deleteMovieFromFavorites(movie: MovieDataManagedObject) {
-        let movie = convertModelToResponse(model: movie)
+        guard let movie = convertModelToResponse(model: movie) else { return }
         DatabaseManager.delete(movie: movie)
         favoritesView?.reloadData()
     }
@@ -46,18 +46,18 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     
     func navigateToMovie(at index: Int) {
         guard let model = favoritedMovies?[index] else { return }
-        let movie = convertModelToResponse(model: model)
+        guard let movie = convertModelToResponse(model: model) else { return }
         let route = FavoritesNavigationRoutes.MovieDetails(movie)
         favoritesView?.navigate(to: route)
     }
     
-    private func convertModelToResponse(model: MovieDataManagedObject) -> MovieData {
+    private func convertModelToResponse(model: MovieDataManagedObject) -> MovieData? {
         for movie in NetworkRepository.shared.fetchedMovies {
             if model.id == movie.id ?? 0 {
                 return movie
             }
         }
-        return MovieData()
+        return nil
     }
     
     private func convertResponseToModel(movie: MovieData) -> MovieDataManagedObject? {
