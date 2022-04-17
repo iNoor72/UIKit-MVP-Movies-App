@@ -79,7 +79,7 @@ class HomePresenter: HomePresenterProtocol {
         switch userMoviePreference {
         case .topRated:
             guard let movie = topRatedMoviesList?.results?[index] else { return }
-            let movieModel = convertResponseToModel(movie: movie)
+            let movieModel = DatabaseManager.convertResponseToModel(movie: movie)
             if let _ = movieModel {
                 movie.movieState = .favorited
                 let route = HomeNavigationRoutes.MovieDetails(movie)
@@ -91,7 +91,7 @@ class HomePresenter: HomePresenterProtocol {
             
         case .popular:
             guard let movie = popularMoviesList?.results?[index] else { return }
-            let movieModel = convertResponseToModel(movie: movie)
+            let movieModel = DatabaseManager.convertResponseToModel(movie: movie)
             if let _ = movieModel {
                 movie.movieState = .favorited
                 let route = HomeNavigationRoutes.MovieDetails(movie)
@@ -103,29 +103,5 @@ class HomePresenter: HomePresenterProtocol {
         }
         
     }
-    
-    private func convertModelToResponse(model: MovieDataManagedObject) -> MovieData? {
-        for movie in NetworkRepository.shared.fetchedMovies {
-            if model.id == movie.id ?? 0 {
-                return movie
-            }
-        }
-        
-        return nil
-        
-    }
-    
-    private func convertResponseToModel(movie: MovieData) -> MovieDataManagedObject? {
-        let favMovieModels = DatabaseManager.fetch()
-        guard let movieID = movie.id else { return nil }
-        for movieModel in favMovieModels {
-            if movieModel.id == Int32(movieID) {
-                return movieModel
-            }
-        }
-        
-        return nil
-    }
-    
     
 }

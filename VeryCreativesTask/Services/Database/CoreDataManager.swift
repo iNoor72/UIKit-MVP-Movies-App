@@ -119,5 +119,29 @@ final class CoreDataManager: DatabaseProtocol {
         }
     }
     
+    func convertModelToResponse(model: MovieDataManagedObject) -> MovieData? {
+        for movie in NetworkRepository.shared.fetchedMovies {
+            if model.id == movie.id ?? 0 {
+                return movie
+            }
+        }
+        
+        return nil
+        
+    }
+    
+    func convertResponseToModel(movie: MovieData) -> MovieDataManagedObject? {
+        let favMovieModels = fetch()
+        guard let movieID = movie.id else { return nil }
+        for movieModel in favMovieModels {
+            if movieModel.id == Int32(movieID) {
+                return movieModel
+            }
+        }
+        
+        return nil
+    }
+    
+    
     
 }

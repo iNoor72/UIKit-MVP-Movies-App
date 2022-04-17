@@ -11,4 +11,6 @@ protocol DatabaseProtocol {
     func save(movie: MovieData)
     func delete(movie: MovieData)
     func fetch() -> [MovieDataManagedObject]
+    func convertModelToResponse(model: MovieDataManagedObject) -> MovieData?
+    func convertResponseToModel(movie: MovieData) -> MovieDataManagedObject? 
 }
