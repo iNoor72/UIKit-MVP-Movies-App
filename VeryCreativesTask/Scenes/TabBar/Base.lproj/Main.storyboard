@@ -107,18 +107,39 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhn-TB-FaH">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No favorited movies yet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJF-g7-5NZ">
+                                        <rect key="frame" x="89.666666666666686" y="448" width="249" height="30.333333333333314"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
+                                        <color key="textColor" red="0.96078431369999995" green="0.67450980390000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="NJF-g7-5NZ" firstAttribute="centerY" secondItem="hhn-TB-FaH" secondAttribute="centerY" id="A41-Cp-nqW"/>
+                                    <constraint firstItem="NJF-g7-5NZ" firstAttribute="centerX" secondItem="hhn-TB-FaH" secondAttribute="centerX" id="muY-dN-SgX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YSg-3U-c8S"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="hhn-TB-FaH" firstAttribute="top" secondItem="uG2-4P-1eT" secondAttribute="top" id="6Py-dW-cW8"/>
+                            <constraint firstItem="hhn-TB-FaH" firstAttribute="leading" secondItem="YSg-3U-c8S" secondAttribute="leading" id="IaL-lB-e5f"/>
                             <constraint firstItem="QEP-JO-dlA" firstAttribute="leading" secondItem="YSg-3U-c8S" secondAttribute="leading" id="MEC-gg-WtD"/>
+                            <constraint firstAttribute="bottom" secondItem="hhn-TB-FaH" secondAttribute="bottom" id="bdI-il-3Mb"/>
                             <constraint firstItem="YSg-3U-c8S" firstAttribute="bottom" secondItem="QEP-JO-dlA" secondAttribute="bottom" id="oGf-zX-8DN"/>
                             <constraint firstItem="YSg-3U-c8S" firstAttribute="trailing" secondItem="QEP-JO-dlA" secondAttribute="trailing" id="yvY-qY-apP"/>
+                            <constraint firstItem="YSg-3U-c8S" firstAttribute="trailing" secondItem="hhn-TB-FaH" secondAttribute="trailing" id="zVQ-w6-FtQ"/>
                             <constraint firstItem="QEP-JO-dlA" firstAttribute="top" secondItem="YSg-3U-c8S" secondAttribute="top" id="zvo-er-RXN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VIo-VF-CP7"/>
                     <connections>
+                        <outlet property="noMoviesView" destination="hhn-TB-FaH" id="y1U-WN-dA6"/>
                         <outlet property="tableView" destination="QEP-JO-dlA" id="t0b-H2-KOP"/>
                     </connections>
                 </viewController>

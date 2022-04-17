@@ -13,6 +13,8 @@ protocol FavoritesViewControllerProtocol: AnyObject, NavigationRoute {
 
 class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol {
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var noMoviesView: UIView!
+    
     private var favoritesPresenter: FavoritesPresenterProtocol?
     private var isTableViewEditable = false
     private var editButton: UIBarButtonItem!
@@ -28,15 +30,21 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoritesPresenter?.fetchFavoriteMovies()
+        updateView()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        favoritesPresenter?.fetchFavoriteMovies()
+    private func updateView() {
+        guard let movies = favoritesPresenter?.favoritedMovies else { return }
+        if movies.isEmpty {
+            noMoviesView.isHidden = false
+        } else {
+            noMoviesView.isHidden = true
+        }
     }
     
     private func setupViews() {
         title = "Favorites"
+        updateView()
         editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
         editButton.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
         self.navigationItem.rightBarButtonItem  = editButton
@@ -95,10 +103,13 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //This line gives an error, but deletes data correctly from Core Data
+            let dispatchGroup = DispatchGroup()
+            dispatchGroup.enter()
             favoritesPresenter?.deleteMovieFromFavorites(movie: (favoritesPresenter?.favoritedMovies?[indexPath.row])!)
+            dispatchGroup.leave()
+            
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.reloadData()
+            reloadData()
         }
     }
 }
