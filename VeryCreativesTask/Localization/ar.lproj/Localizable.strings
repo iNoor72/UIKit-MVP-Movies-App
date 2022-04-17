@@ -14,8 +14,10 @@
 
 //Note: "اسم المستخدم" means "Username" in English, I just put VeryCreatives in Storyboard as the Company name/Username.
 "VeryCreatives!" = "اسم المستخدم!";
+
+
 "Checkout these movies!" = "تصفح الأفلام التالية!";
-"Top Rated Movies" = "الأفلام الأعلى تقييماً"
+"Top Rated Movies" = "الأفلام الأعلى تقييماً";
 "Popular Movies" = "الأفلام الأكثر شهرة";
 "No favorited movies yet" = "لا يوجد أفلام مفضلة الآن";
 "Edit" = "تعديل";
