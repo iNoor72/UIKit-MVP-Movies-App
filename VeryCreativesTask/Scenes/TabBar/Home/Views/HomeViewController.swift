@@ -45,15 +45,18 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
     @objc private func languageButtonTapped() {
         //Do some logic here to change language, I've written some code but it requires the app to be forced to exit, the code is commented here (This code doesn't require any pods)
         
-        if Locale.current.languageCode == "ar" {
-            LocalizationSystem.shared.setLanguage(language: .English)
-//            exit(0)
-        } else {
-            LocalizationSystem.shared.setLanguage(language: .Arabic)
-//            exit(0)
-        }
+        //You can run: command+option+R and specify the device language from: Run -> Options -> App Language
+        //Change it to Arabic or English to see the difference
         
-        //Another way is using the MOLH pod, activiting it in the AppDelegate file
+//        if Locale.current.languageCode == "ar" {
+//            LocalizationSystem.sharedInstance.setLanguage(languageCode: "en")
+//            exit(0)
+//        } else {
+//            LocalizationSystem.sharedInstance.setLanguage(languageCode: "ar")
+//            exit(0)
+//        }
+        
+        //Another way is using the MOLH pod, activiting it in the AppDelegate file and conforming to MOLHResetable protocol
 //        MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
 //        MOLH.reset()
     }
@@ -63,21 +66,20 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         helloLabel.text = NSLocalizedString("Hello,", comment: "")
         moviesLabel.text = NSLocalizedString("Checkout these movies!", comment: "")
         
-        if Locale.current.languageCode == "en" {
-            let languageButton = UIBarButtonItem(image: UIImage(systemName: "textformat.size.smaller.ar"), style: .plain, target: self, action: #selector(languageButtonTapped))
-            languageButton.tintColor = UIColor.systemYellow
-            self.navigationItem.leftBarButtonItem  = languageButton
-        } else if Locale.current.languageCode == "ar" {
-            let languageButton = UIBarButtonItem(image: UIImage(systemName: "textformat.size.smaller"), style: .plain, target: self, action: #selector(languageButtonTapped))
-            languageButton.tintColor = UIColor.systemYellow
-            self.navigationItem.leftBarButtonItem  = languageButton
-        }
-        
         self.tabBarController?.viewControllers?[0].title = NSLocalizedString("Top Rated Movies", comment: "")
         self.tabBarController?.viewControllers![1].title = NSLocalizedString("Favorites", comment: "")
     }
     
     private func setupViews() {
+        if Locale.current.languageCode == "en" {
+            let languageButton = UIBarButtonItem(image: UIImage(systemName: "textformat.size.smaller.ar"), style: .plain, target: self, action: #selector(languageButtonTapped))
+            languageButton.tintColor = UIColor.systemYellow
+            self.navigationItem.leftBarButtonItem  = languageButton
+        } else if Locale.current.languageCode == "ar" {
+            let languageButton = UIBarButtonItem(title: "A", style: .plain, target: self, action: #selector(languageButtonTapped))
+            languageButton.tintColor = UIColor.systemYellow
+            self.navigationItem.leftBarButtonItem  = languageButton
+        }
         localization()
         navigationController?.navigationBar.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
         title = NSLocalizedString("Top Rated Movies", comment: "")

@@ -65,7 +65,11 @@
                             <constraint firstItem="GgL-k4-weo" firstAttribute="top" secondItem="GBU-2D-k5V" secondAttribute="bottom" id="wix-NH-h6Y"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="mtD-BL-Ufx"/>
+                    <navigationItem key="navigationItem" id="mtD-BL-Ufx">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="textformat.size.smaller.hi" catalog="system" id="7fd-0e-1eY">
+                            <color key="tintColor" red="0.96078431369999995" green="0.67450980390000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Bc3-E1-Y9c" id="87r-qH-PKk"/>
                         <outlet property="helloLabel" destination="GBU-2D-k5V" id="1wJ-EQ-wCG"/>
@@ -198,6 +202,7 @@
     <resources>
         <image name="house.circle" catalog="system" width="128" height="121"/>
         <image name="star.circle" catalog="system" width="128" height="121"/>
+        <image name="textformat.size.smaller.hi" catalog="system" width="128" height="105"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

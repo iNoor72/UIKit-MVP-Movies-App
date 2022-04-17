@@ -11,14 +11,7 @@ import MOLH
 
 @available(iOS 13.0, *)
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, MOLHResetable {
-    func reset() {
-        let rootViewController: UIWindow = ((UIApplication.shared.delegate?.window)!)!
-        let story = UIStoryboard(name: "Main", bundle: nil)
-        rootViewController.rootViewController = story.instantiateViewController(withIdentifier: Constants.ViewControllers.HomeViewController)
-    }
-    
-
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -44,11 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MOLHResetable {
 
 }
 
-@available(iOS 13.0, *)
-extension AppDelegate: LocalizationDelegate {
-    func resetApp() {
-        let rootViewController: UIWindow = ((UIApplication.shared.delegate?.window)!)!
-        let story = UIStoryboard(name: "Main", bundle: nil)
-        rootViewController.rootViewController = story.instantiateViewController(withIdentifier: Constants.ViewControllers.HomeViewController)
-        }
-}
+//MARK: Extensions
+//@available(iOS 13.0, *)
+//extension AppDelegate: MOLHResetable {
+//    func reset() {
+//        let rootViewController: UIWindow = ((UIApplication.shared.delegate?.window)!)!
+//        let story = UIStoryboard(name: "Main", bundle: nil)
+//        rootViewController.rootViewController = story.instantiateViewController(withIdentifier: Constants.ViewControllers.HomeViewController)
+//    }
+//}

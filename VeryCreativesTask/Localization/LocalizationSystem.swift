@@ -5,115 +5,71 @@
 //  Created by Noor Walid on 17/04/2022.
 //
 
+
 import Foundation
 import UIKit
 
-protocol LocalizationDelegate: AnyObject {
-    func resetApp()
-}
-
-class LocalizationSystem: NSObject {
-    enum LanguageDirection {
-        case leftToRight
-        case rightToLeft
-    }
+class LocalizationSystem:NSObject {
     
-    enum Language: String {
-        case English = "en"
-        case Arabic = "ar"
-    }
+    var bundle: Bundle!
     
-    static let shared = LocalizationSystem()
-    private var bundle: Bundle? = nil
-    private var languageKey = "UKPrefLang"
-    weak var delegate: LocalizationDelegate?
-    
-    // get currently selected language from el user defaults
-    func getLanguage() -> Language? {
-        if let languageCode = UserDefaults.standard.string(forKey: languageKey), let language = Language(rawValue: languageCode) {
-            return language
+    class var sharedInstance: LocalizationSystem {
+        struct Singleton {
+            static let instance: LocalizationSystem = LocalizationSystem()
         }
-        return nil
+        return Singleton.instance
     }
     
-    // check if the language is available
-    private func isLanguageAvailable(_ code: String) -> Language? {
-        var finalCode = ""
-        if code.contains("ar") {
-            finalCode = "ar"
-        } else if code.contains("en") {
-            finalCode = "en"
+    override init() {
+        super.init()
+        bundle = Bundle.main
+    }
+    
+    func localizedStringForKey(key:String, comment:String) -> String {
+        return bundle.localizedString(forKey: key, value: comment, table: nil)
+    }
+    
+    func localizedImagePathForImg(imagename:String, type:String) -> String {
+        guard let imagePath =  bundle.path(forResource: imagename, ofType: type) else {
+            return ""
         }
-        return Language(rawValue: finalCode)
+        return imagePath
     }
     
-    // check the language direction
-    private func getLanguageDirection() -> LanguageDirection {
-        if let lang = getLanguage() {
-            switch lang {
-            case .English:
-                return .leftToRight
-            case .Arabic:
-                return .rightToLeft
-            }
-        }
-        return .leftToRight
-    }
-    
-    // get localized string for a given code from the active bundle
-    func localizedString(for key: String, value comment: String) -> String {
-        let localized = bundle!.localizedString(forKey: key, value: comment, table: nil)
-        return localized
-    }
-    
-    // set language for localization
-    func setLanguage(language: Language) {
-        UserDefaults.standard.set(language.rawValue, forKey: languageKey)
-        if let path = Bundle.main.path(forResource: language.rawValue, ofType: "lproj") {
-            bundle = Bundle(path: path)
+    //MARK:- setLanguage
+    // Sets the desired language of the ones you have.
+    // If this function is not called it will use the default OS language.
+    // If the language does not exists y returns the default OS language.
+    func setLanguage(languageCode:String) {
+        var appleLanguages = UserDefaults.standard.object(forKey: "AppleLanguages") as! [String]
+        appleLanguages.remove(at: 0)
+        appleLanguages.insert(languageCode, at: 0)
+        UserDefaults.standard.set(appleLanguages, forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize() //needs restrat
+        
+        if let languageDirectoryPath = Bundle.main.path(forResource: languageCode, ofType: "lproj")  {
+            bundle = Bundle.init(path: languageDirectoryPath)
         } else {
-            // fallback
             resetLocalization()
         }
-        UserDefaults.standard.synchronize()
-        resetApp()
     }
     
-    // reset bundle
+    //MARK:- resetLocalization
+    //Resets the localization system, so it uses the OS default language.
     func resetLocalization() {
         bundle = Bundle.main
     }
     
-    // reset app for the new language
-    func resetApp() {
-        let dir = getLanguageDirection()
-        var semantic: UISemanticContentAttribute!
-        switch dir {
-        case .leftToRight:
-            semantic = .forceLeftToRight
-        case .rightToLeft:
-            semantic = .forceRightToLeft
+    //MARK:- getLanguage
+    // Just gets the current setted up language.
+    func getLanguage() -> String {
+        let appleLanguages = UserDefaults.standard.object(forKey: "AppleLanguages") as! [String]
+        let prefferedLanguage = appleLanguages[0]
+        if prefferedLanguage.contains("-") {
+            let array = prefferedLanguage.components(separatedBy: "-")
+            return array[0]
         }
-        UITabBar.appearance().semanticContentAttribute = semantic
-        UIView.appearance().semanticContentAttribute = semantic
-        UINavigationBar.appearance().semanticContentAttribute = semantic
-        delegate?.resetApp()
+        return prefferedLanguage
     }
     
-    // configure startup language
-    func setAppInnitLanguage() {
-        if let selectedLanguage = getLanguage() {
-            setLanguage(language: selectedLanguage)
-        } else {
-            // no language was selected
-            let languageCode = Locale.preferredLanguages.first
-            if let code = languageCode, let language = isLanguageAvailable(code) {
-                setLanguage(language: language)
-            } else {
-                // default fall back
-                setLanguage(language: .English)
-            }
-        }
-        resetApp()
-    }
 }
