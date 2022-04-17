@@ -68,6 +68,8 @@
                     <navigationItem key="navigationItem" id="mtD-BL-Ufx"/>
                     <connections>
                         <outlet property="collectionView" destination="Bc3-E1-Y9c" id="87r-qH-PKk"/>
+                        <outlet property="helloLabel" destination="GBU-2D-k5V" id="1wJ-EQ-wCG"/>
+                        <outlet property="moviesLabel" destination="OUw-1x-jlc" id="0in-Tk-Avm"/>
                         <outlet property="usernameLabel" destination="GgL-k4-weo" id="s9d-5X-m2Y"/>
                     </connections>
                 </viewController>
@@ -139,6 +141,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="VIo-VF-CP7"/>
                     <connections>
+                        <outlet property="noMoviesLabel" destination="NJF-g7-5NZ" id="hoI-HW-UKS"/>
                         <outlet property="noMoviesView" destination="hhn-TB-FaH" id="y1U-WN-dA6"/>
                         <outlet property="tableView" destination="QEP-JO-dlA" id="t0b-H2-KOP"/>
                     </connections>

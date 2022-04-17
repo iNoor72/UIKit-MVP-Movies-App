@@ -12,8 +12,6 @@ class MockedDatabase: DatabaseProtocol {
         
     }
     
-    
-    
     func save(movie: MovieData) {
         
     }

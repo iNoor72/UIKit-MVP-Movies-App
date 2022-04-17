@@ -18,5 +18,9 @@
 "No favorited movies yet" = "No favorited movies yet";
 "Edit" = "Edit";
 "Done" = "Done";
-"Name" = "Name";
 "Rating:" = "Rating:";
+"Dismiss" = "Dismiss";
+"You're disconnected to Internet." = "You're disconnected to Internet.";
+"Your phone is not connected to internet. You have been switched to Favorites movies." = "Your phone is not connected to internet. You have been switched to Favorites movies.";
+"Show movies menu" = "Show movies menu";
+"Details" = "Details";

@@ -13,7 +13,8 @@ protocol FavoritesViewControllerProtocol: AnyObject, NavigationRoute {
 
 class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol {
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet weak var noMoviesView: UIView!
+    @IBOutlet private weak var noMoviesView: UIView!
+    @IBOutlet private weak var noMoviesLabel: UILabel!
     
     private var favoritesPresenter: FavoritesPresenterProtocol?
     private var isTableViewEditable = false
@@ -42,10 +43,15 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
         }
     }
     
+    private func localization() {
+        noMoviesLabel.text = NSLocalizedString("No favorited movies yet", comment: "")
+    }
+    
     private func setupViews() {
-        title = "Favorites"
+        localization()
+        title = NSLocalizedString("Favorites", comment: "")
         updateView()
-        editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
+        editButton = UIBarButtonItem(title: NSLocalizedString("Edit", comment: ""), style: .plain, target: self, action: #selector(editButtonTapped))
         editButton.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
         self.navigationItem.rightBarButtonItem  = editButton
     }
@@ -53,10 +59,10 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
     @objc private func editButtonTapped() {
         if tableView.isEditing {
             tableView.isEditing = false
-            editButton.title = "Edit"
+            editButton.title = NSLocalizedString("Edit", comment: "")
         } else {
             tableView.isEditing = true
-            editButton.title = "Done"
+            editButton.title = NSLocalizedString("Done", comment: "")
         }
     }
     

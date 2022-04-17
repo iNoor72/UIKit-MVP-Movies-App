@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: Protocols
 protocol HomePresenterProtocol {
     var popularMoviesList: MovieResponse? { get }
     var topRatedMoviesList: MovieResponse? { get }
@@ -18,6 +19,7 @@ protocol HomePresenterProtocol {
 }
 
 class HomePresenter: HomePresenterProtocol {
+    //MARK: Variables
     var popularMoviesList: MovieResponse?
     var topRatedMoviesList: MovieResponse?
     var userMoviePreference: MovieType = .topRated
@@ -25,11 +27,14 @@ class HomePresenter: HomePresenterProtocol {
     private let DatabaseManager : DatabaseProtocol
     weak var homeView: HomeViewControllerProtocol?
     
+    //MARK: Init
     init(DatabaseManager: DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile), homeView: HomeViewControllerProtocol) {
         self.DatabaseManager = DatabaseManager
         self.homeView = homeView
     }
     
+    
+    //MARK: Protocol Functions
     func fetchPopularMovies(page: Int = 1) {
         NetworkManager.shared.fetchMovies(page: page, type: MovieType.popular) {[weak self] (movies: MovieResponse?, error: Error?) in
             if error != nil {

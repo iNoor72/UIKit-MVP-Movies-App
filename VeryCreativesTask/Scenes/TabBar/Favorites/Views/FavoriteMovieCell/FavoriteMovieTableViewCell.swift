@@ -31,7 +31,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         self.movieImage.kf.setImage(with: imageURL)
         self.movie = movie
         self.movieNameLabel.text = movie.title
-        self.movieRatingLabel.text! = "Rating: \(movie.rating)/10"
+        self.movieRatingLabel.text! = NSLocalizedString("Rating:", comment: "").appending(" \(movie.rating)/10")
     }
     
 }

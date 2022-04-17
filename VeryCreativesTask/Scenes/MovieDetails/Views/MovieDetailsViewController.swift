@@ -30,7 +30,8 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     }
     
     private func setupViews() {
-        title = "Details"
+        navigationController?.navigationBar.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
+        title = NSLocalizedString("Details", comment: "")
         guard let imageURL = URL(string: Constants.imagesBaseURL + (detailsPresenter?.movie?.backdrop_path ?? Constants.noImageURL)) else { return }
         
         movieNameLabel.text = detailsPresenter?.movie?.title ?? ""

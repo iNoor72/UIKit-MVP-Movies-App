@@ -118,6 +118,8 @@ class CoreDataManager: DatabaseProtocol {
         }
     }
     
+    
+    //Used for unit testing. It can also be used if we want the user to delete his account or add a button to favorites screen allowing him to delete all favorite movies at once.
     func deleteAll() {
         let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
         do {

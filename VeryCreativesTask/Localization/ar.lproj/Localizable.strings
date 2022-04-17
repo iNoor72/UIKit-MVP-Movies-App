@@ -22,6 +22,9 @@
 "No favorited movies yet" = "لا يوجد أفلام مفضلة الآن";
 "Edit" = "تعديل";
 "Done" = "تم";
-"Name" = "الاسم";
 "Rating:" = "التقييم:";
-
+"Dismiss" = "الغاء";
+"You're disconnected to Internet." = "انت غير متصل بالانترنت.";
+"Your phone is not connected to internet. You have been switched to Favorites movies." = "جهازك غير متصل بالانترنت. تم تحويلك الى الأفلام المفضلة.";
+"Show movies menu" = "تصفح قائمة الأفلام";
+"Details" = "تفاصيل";

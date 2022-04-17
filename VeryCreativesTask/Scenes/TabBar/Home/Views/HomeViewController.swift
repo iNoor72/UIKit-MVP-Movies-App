@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MOLH
 
 protocol HomeViewControllerProtocol: AnyObject, NavigationRoute {
     func reloadData()
@@ -13,9 +14,14 @@ protocol HomeViewControllerProtocol: AnyObject, NavigationRoute {
 
 @available(iOS 13.0, *)
 class HomeViewController: UIViewController, HomeViewControllerProtocol {
+    //MARK: IBOutlets
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var usernameLabel: UILabel!
+    @IBOutlet private weak var helloLabel: UILabel!
+    @IBOutlet private weak var moviesLabel: UILabel!
     
+    
+    //MARK: Variables
     private var homePresenter: HomePresenterProtocol?
     private var result : (Int, MovieType)?
     private var page = 1
@@ -36,30 +42,67 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         checkConnectivity()
     }
     
+    @objc private func languageButtonTapped() {
+        //Do some logic here to change language, I've written some code but it requires the app to be forced to exit, the code is commented here (This code doesn't require any pods)
+        
+        if Locale.current.languageCode == "ar" {
+            LocalizationSystem.shared.setLanguage(language: .English)
+//            exit(0)
+        } else {
+            LocalizationSystem.shared.setLanguage(language: .Arabic)
+//            exit(0)
+        }
+        
+        //Another way is using the MOLH pod, activiting it in the AppDelegate file
+//        MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
+//        MOLH.reset()
+    }
+    
+    private func localization() {
+        usernameLabel.text = NSLocalizedString("VeryCreatives!", comment: "")
+        helloLabel.text = NSLocalizedString("Hello,", comment: "")
+        moviesLabel.text = NSLocalizedString("Checkout these movies!", comment: "")
+        
+        if Locale.current.languageCode == "en" {
+            let languageButton = UIBarButtonItem(image: UIImage(systemName: "textformat.size.smaller.ar"), style: .plain, target: self, action: #selector(languageButtonTapped))
+            languageButton.tintColor = UIColor.systemYellow
+            self.navigationItem.leftBarButtonItem  = languageButton
+        } else if Locale.current.languageCode == "ar" {
+            let languageButton = UIBarButtonItem(image: UIImage(systemName: "textformat.size.smaller"), style: .plain, target: self, action: #selector(languageButtonTapped))
+            languageButton.tintColor = UIColor.systemYellow
+            self.navigationItem.leftBarButtonItem  = languageButton
+        }
+        
+        self.tabBarController?.viewControllers?[0].title = NSLocalizedString("Top Rated Movies", comment: "")
+        self.tabBarController?.viewControllers![1].title = NSLocalizedString("Favorites", comment: "")
+    }
+    
     private func setupViews() {
-        title = "Top Rated Movies"
+        localization()
+        navigationController?.navigationBar.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
+        title = NSLocalizedString("Top Rated Movies", comment: "")
         if #available(iOS 14.0, *) {
             
-            topRatedItem = UIAction(title: "Top Rated Movies", image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { [weak self] _ in
+            topRatedItem = UIAction(title: NSLocalizedString("Top Rated Movies", comment: ""), image: UIImage(systemName: "chart.line.uptrend.xyaxis.circle"), handler: { [weak self] _ in
                 guard let self = self else { return }
                 UserDefaults.standard.set(MovieType.topRated.rawValue, forKey: "UserPreference")
                 self.homePresenter?.fetchTopRatedMovies(page: self.page)
                 self.result = self.getMovieCountAndType(preference: MovieType.topRated.rawValue)
-                self.title = "Top Rated Movies"
+                self.title = NSLocalizedString("Top Rated Movies", comment: "")
             })
             
-            popularItem = UIAction(title: "Popular Movies", image: UIImage(systemName: "flame"), handler: { [weak self] _ in
+            popularItem = UIAction(title: NSLocalizedString("Popular Movies", comment: ""), image: UIImage(systemName: "flame"), handler: { [weak self] _ in
                 guard let self = self else { return }
                 UserDefaults.standard.set(MovieType.popular.rawValue, forKey: "UserPreference")
                 self.homePresenter?.fetchPopularMovies(page: self.page)
                 self.result = self.getMovieCountAndType(preference: MovieType.popular.rawValue)
-                self.title = "Popular Movies"
+                self.title = NSLocalizedString("Popular Movies", comment: "")
             })
             
             let menuItems: [UIAction] = [topRatedItem, popularItem]
             
             let menu =
-            UIMenu(title: "Show movies menu", image: nil, identifier: nil, options: [], children: menuItems)
+            UIMenu(title: NSLocalizedString("Show movies menu", comment: ""), image: nil, identifier: nil, options: [], children: menuItems)
             let sortButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: menu)
             
             navigationItem.rightBarButtonItem = sortButton
@@ -79,8 +122,8 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
             homePresenter?.fetchTopRatedMovies(page: page)
         } else {
             //Switch to Favorites Tab
-            let alert = UIAlertController(title: "You're disconnected to Internet.", message: "Your phone is not connected to internet. You have been switched to Favorites movies.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            let alert = UIAlertController(title: NSLocalizedString("You're disconnected to Internet.", comment: ""), message: NSLocalizedString("Your phone is not connected to internet. You have been switched to Favorites movies.", comment: ""), preferredStyle: .alert)
+            let action = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil)
             alert.addAction(action)
             present(alert, animated: true)
             self.tabBarController?.selectedIndex = 1
@@ -97,14 +140,9 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         flowLayout.itemSize = CGSize(width: 170, height: 285)
         flowLayout.minimumLineSpacing = 8.0
         flowLayout.minimumInteritemSpacing = 8.0
+        self.collectionView.semanticContentAttribute = .unspecified
         self.collectionView.collectionViewLayout = flowLayout
         self.collectionView.showsHorizontalScrollIndicator = false
-    }
-    
-    func reloadData() {
-        DispatchQueue.main.async {[weak self] in
-            self?.collectionView.reloadData()
-        }
     }
     
     private func getMovieCountAndType(preference: String) -> (Int, MovieType) {
@@ -126,6 +164,12 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         return (0, MovieType.topRated)
     }
     
+    //MARK: Protocol Functions
+    func reloadData() {
+        DispatchQueue.main.async {[weak self] in
+            self?.collectionView.reloadData()
+        }
+    }
     
 }
 
