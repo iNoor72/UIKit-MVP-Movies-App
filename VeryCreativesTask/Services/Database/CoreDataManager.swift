@@ -89,7 +89,6 @@ final class CoreDataManager: DatabaseProtocol {
             for movie in favoriteMovies {
                 moviesArray.append(movie)
             }
-            CoreDataRepository.shared.favoriteMovies = moviesArray
             return moviesArray
         } catch {
             print("There was a problem fetching data from Core Data. Error: \(error)")
@@ -118,7 +117,7 @@ final class CoreDataManager: DatabaseProtocol {
         } catch {
             print("There was a problem fetching data from Core Data. Error: \(error)")
         }
-        
-        
     }
+    
+    
 }
