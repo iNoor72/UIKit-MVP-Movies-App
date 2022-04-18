@@ -14,11 +14,15 @@ protocol MovieDetailsViewControllerProtocol: AnyObject {
 class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerProtocol {
     @IBOutlet private weak var movieNameLabel: UILabel!
     @IBOutlet private weak var movieImage: UIImageView!
-    @IBOutlet private weak var movieOverviewLabel: UILabel!
+    @IBOutlet private weak var movieOverviewTextView: UITextView!
+   
+    @IBOutlet weak var overviewHeightConstraint: NSLayoutConstraint!
+    
     
     var detailsPresenter: MovieDetailsPresenterProtocol?
     private var favButton: UIBarButtonItem?
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -36,7 +40,17 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
         
         movieNameLabel.text = detailsPresenter?.movie?.title ?? ""
         movieImage.kf.setImage(with: imageURL)
-        movieOverviewLabel.text = detailsPresenter?.movie?.overview ?? ""
+        movieOverviewTextView.text = detailsPresenter?.movie?.overview ?? ""
+        movieOverviewTextView.layer.borderColor = UIColor(rgb: Constants.Colors.primaryYellowColor).cgColor
+        movieOverviewTextView.layer.borderWidth = 0.7
+        movieOverviewTextView.layer.cornerRadius = 8.0
+        if movieOverviewTextView.contentSize.height > 200 {
+        overviewHeightConstraint.constant = movieOverviewTextView.contentSize.height
+        }
+        
+        
+        
+        
     }
     
     private func setupFavoriteButton() {

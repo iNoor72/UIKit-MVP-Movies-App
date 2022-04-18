@@ -66,7 +66,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mtD-BL-Ufx">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="textformat.size.smaller.hi" catalog="system" id="7fd-0e-1eY">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="textd" id="7fd-0e-1eY">
                             <color key="tintColor" red="0.96078431369999995" green="0.67450980390000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </barButtonItem>
                     </navigationItem>
@@ -202,7 +202,7 @@
     <resources>
         <image name="house.circle" catalog="system" width="128" height="121"/>
         <image name="star.circle" catalog="system" width="128" height="121"/>
-        <image name="textformat.size.smaller.hi" catalog="system" width="128" height="105"/>
+        <image name="textd" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

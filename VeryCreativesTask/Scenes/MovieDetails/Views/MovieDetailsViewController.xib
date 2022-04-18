@@ -13,7 +13,8 @@
             <connections>
                 <outlet property="movieImage" destination="2tX-E5-9zf" id="ZXE-qV-t0z"/>
                 <outlet property="movieNameLabel" destination="64V-Gr-R18" id="cqy-qb-hCz"/>
-                <outlet property="movieOverviewLabel" destination="jxY-F1-5vJ" id="74I-Wg-BFq"/>
+                <outlet property="movieOverviewTextView" destination="G9J-pk-wya" id="UBb-ZR-FhT"/>
+                <outlet property="overviewHeightConstraint" destination="eQp-7M-vwX" id="LQt-iJ-47d"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,30 +35,38 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Movie overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxY-F1-5vJ">
-                    <rect key="frame" x="24" y="392.5" width="366" height="25"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9J-pk-wya">
+                    <rect key="frame" x="24" y="396.5" width="366" height="200"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="eQp-7M-vwX"/>
+                    </constraints>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="64V-Gr-R18" secondAttribute="trailing" constant="24" id="0Nb-Y8-WHD"/>
-                <constraint firstItem="jxY-F1-5vJ" firstAttribute="top" secondItem="64V-Gr-R18" secondAttribute="bottom" constant="16" id="2sH-TH-1JX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="G9J-pk-wya" secondAttribute="trailing" constant="24" id="1Zm-I8-KwY"/>
                 <constraint firstItem="2tX-E5-9zf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="CS8-P9-mir"/>
-                <constraint firstItem="jxY-F1-5vJ" firstAttribute="trailing" secondItem="64V-Gr-R18" secondAttribute="trailing" id="Edo-47-gAy"/>
-                <constraint firstItem="jxY-F1-5vJ" firstAttribute="leading" secondItem="64V-Gr-R18" secondAttribute="leading" id="JgW-6u-SZp"/>
+                <constraint firstItem="G9J-pk-wya" firstAttribute="top" secondItem="64V-Gr-R18" secondAttribute="bottom" constant="16" id="DOc-ft-fyZ"/>
                 <constraint firstItem="2tX-E5-9zf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="QFN-la-5eg"/>
                 <constraint firstItem="64V-Gr-R18" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Qaa-7z-6Ps"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2tX-E5-9zf" secondAttribute="trailing" constant="32" id="fEX-Ox-SSC"/>
+                <constraint firstItem="G9J-pk-wya" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="sQA-wJ-hSG"/>
                 <constraint firstItem="64V-Gr-R18" firstAttribute="top" secondItem="2tX-E5-9zf" secondAttribute="bottom" constant="40" id="xts-hA-PHq"/>
             </constraints>
             <point key="canvasLocation" x="139" y="110"/>
         </view>
     </objects>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
