@@ -7,6 +7,7 @@
 
 import Foundation
 
+//This class is used to save all the data fetched.
 class NetworkDataRepository: NetworkRepositoryProtocol {
     typealias T = MovieData
     

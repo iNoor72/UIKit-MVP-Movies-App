@@ -8,6 +8,7 @@
 import UIKit
 import MOLH
 
+//MARK: Protocols
 protocol HomeViewControllerProtocol: AnyObject, NavigationRoute {
     func reloadData()
 }
@@ -42,25 +43,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         checkConnectivity()
     }
     
-    @objc private func languageButtonTapped() {
-        //Do some logic here to change language, I've written some code but it requires the app to be forced to exit, the code is commented here (This code doesn't require any pods)
-        
-        //You can run: command+option+R and specify the device language from: Run -> Options -> App Language
-        //Change it to Arabic or English to see the difference
-        
-//        if Locale.current.languageCode == "ar" {
-//            LocalizationSystem.sharedInstance.setLanguage(languageCode: "en")
-//            exit(0)
-//        } else {
-//            LocalizationSystem.sharedInstance.setLanguage(languageCode: "ar")
-//            exit(0)
-//        }
-        
-        //Another way is using the MOLH pod, activiting it in the AppDelegate file and conforming to MOLHResetable protocol
-//        MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
-//        MOLH.reset()
-    }
-    
+    //MARK: Helper Functions
     private func localization() {
         usernameLabel.text = NSLocalizedString("VeryCreatives!", comment: "")
         helloLabel.text = NSLocalizedString("Hello,", comment: "")
@@ -165,6 +148,27 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         
         return (0, MovieType.topRated)
     }
+    
+    //MARK: @objc Functions
+    @objc private func languageButtonTapped() {
+        //Do some logic here to change language, I've written some code but it requires the app to be forced to exit, the code is commented here (This code doesn't require any pods)
+        
+        //You can run: command+option+R and specify the device language from: Run -> Options -> App Language
+        //Change it to Arabic or English to see the difference
+        
+//        if Locale.current.languageCode == "ar" {
+//            LocalizationSystem.sharedInstance.setLanguage(languageCode: "en")
+//            exit(0)
+//        } else {
+//            LocalizationSystem.sharedInstance.setLanguage(languageCode: "ar")
+//            exit(0)
+//        }
+        
+        //Another way is using the MOLH pod, activiting it in the AppDelegate file and conforming to MOLHResetable protocol
+//        MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
+//        MOLH.reset()
+    }
+    
     
     //MARK: Protocol Functions
     func reloadData() {

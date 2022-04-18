@@ -19,11 +19,13 @@ protocol HomePresenterProtocol {
 }
 
 class HomePresenter: HomePresenterProtocol {
+    
     //MARK: Variables
     var popularMoviesList: MovieResponse?
     var topRatedMoviesList: MovieResponse?
     var userMoviePreference: MovieType = .topRated
     
+    //MARK: Variables
     private let DatabaseManager : DatabaseProtocol
     private let network: NetworkService
     weak var homeView: HomeViewControllerProtocol?
