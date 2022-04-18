@@ -25,57 +25,64 @@ class HomePresenter: HomePresenterProtocol {
     var userMoviePreference: MovieType = .topRated
     
     private let DatabaseManager : DatabaseProtocol
+    private let network: NetworkService
     weak var homeView: HomeViewControllerProtocol?
     
     //MARK: Init
-    init(DatabaseManager: DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile), homeView: HomeViewControllerProtocol) {
+    init(network: NetworkService = NetworkManager.shared, DatabaseManager: DatabaseProtocol = CoreDataManager(modelName: Constants.CoreDataModelFile), homeView: HomeViewControllerProtocol) {
         self.DatabaseManager = DatabaseManager
         self.homeView = homeView
+        self.network = network
     }
     
     
     //MARK: Protocol Functions
     func fetchPopularMovies(page: Int = 1) {
-        NetworkManager.shared.fetchMovies(page: page, type: MovieType.popular) {[weak self] (movies: MovieResponse?, error: Error?) in
-            if error != nil {
-                print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
+        let url = NetworkRouter.popular(page: page)
+        network.fetchData(url: url, expectedType: MovieResponse.self, completion: {[weak self] result in
+            switch result {
+            case .failure(let error):
+                print("There was an error fetching data in presenter. Error: \(error.localizedDescription)")
+            case .success(let movies):
+                if self?.popularMoviesList == nil {
+                    guard let moviesArray = movies.results else { return }
+                    self?.popularMoviesList = movies
+                    NetworkDataRepository.shared.fetchedMovies += moviesArray
+                } else {
+                    guard let moreMovies = movies.results else { return }
+                    self?.popularMoviesList?.results! += moreMovies
+                    NetworkDataRepository.shared.fetchedMovies += moreMovies
+                }
+                
+                DispatchQueue.main.async {
+                    self?.homeView?.reloadData()
+                }
+                
             }
-            
-            if self?.popularMoviesList == nil {
-                guard let moviesArray = movies?.results else { return }
-                self?.popularMoviesList = movies
-                NetworkRepository.shared.fetchedMovies += moviesArray
-            } else {
-                guard let moreMovies = movies?.results else { return }
-                self?.popularMoviesList?.results! += moreMovies
-                NetworkRepository.shared.fetchedMovies += moreMovies
-            }
-            
-            
-            DispatchQueue.main.async {
-                self?.homeView?.reloadData()
-            }
-        }
+        })
     }
     
     func fetchTopRatedMovies(page: Int = 1) {
-        NetworkManager.shared.fetchMovies(page: page, type: MovieType.topRated) {[weak self] (movies: MovieResponse?, error: Error?) in
-            if error != nil {
-                print("There was an error fetching data in presenter. Error: \(error!.localizedDescription)")
-            }
-            
-            if self?.topRatedMoviesList == nil {
-                guard let moviesArray = movies?.results else { return }
-                self?.topRatedMoviesList = movies
-                NetworkRepository.shared.fetchedMovies += moviesArray
-            } else {
-                guard let moreMovies = movies?.results else { return }
-                self?.topRatedMoviesList?.results! += moreMovies
-                NetworkRepository.shared.fetchedMovies += moreMovies
-            }
-            
-            DispatchQueue.main.async {
-                self?.homeView?.reloadData()
+        let url = NetworkRouter.topRated(page: page)
+        network.fetchData(url: url, expectedType: MovieResponse.self) {[weak self] result in
+            switch result {
+            case .failure(let error):
+                print("There was an error fetching data in presenter. Error: \(error.localizedDescription)")
+            case .success(let movies):
+                if self?.topRatedMoviesList == nil {
+                    guard let moviesArray = movies.results else { return }
+                    self?.topRatedMoviesList = movies
+                    NetworkDataRepository.shared.fetchedMovies += moviesArray
+                } else {
+                    guard let moreMovies = movies.results else { return }
+                    self?.topRatedMoviesList?.results! += moreMovies
+                    NetworkDataRepository.shared.fetchedMovies += moreMovies
+                }
+                
+                DispatchQueue.main.async {
+                    self?.homeView?.reloadData()
+                }
+                
             }
         }
     }
@@ -108,5 +115,4 @@ class HomePresenter: HomePresenterProtocol {
         }
         
     }
-    
 }

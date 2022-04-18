@@ -22,18 +22,13 @@ class NetworkManager: NetworkService {
         }
     }
     
-    func fetchMovies<T:Decodable>(page: Int, type: MovieType, completion: @escaping (T?, Error?) -> ()) {
-        let url = getURL(type: type, page: page)
-        
+    func fetchData<T:Decodable>(url: NetworkRouter, expectedType: T.Type, completion: @escaping (Result<T, Error>) -> ()) {
         AF.request(url).responseDecodable { (response: DataResponse<T, AFError>) in
             switch response.result {
             case .failure(let error):
-                print("There was a problem fetching data form API. Error: \(error)")
-                completion(nil, error)
-                
-            case .success(let movieData):
-                print("Data was fetched successfully! Data: \(movieData)")
-                completion(movieData, nil)
+                completion(.failure(error))
+            case .success(let data):
+                completion(.success(data))
             }
         }
     }

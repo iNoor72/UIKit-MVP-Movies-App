@@ -8,10 +8,11 @@
 @testable import VeryCreativesTask
 import XCTest
 
+//MARK: These tests are written to test the network itself, it's not something to be done and that's why we use mocks.
 
 class NetworkTests: XCTestCase {
     
-    var sut: NetworkManager!
+    var sut: NetworkService!
     var moviesList: [MovieData]!
     
     override func setUp() {
@@ -28,45 +29,34 @@ class NetworkTests: XCTestCase {
     
     func test_fetching_topRated_movies_from_network_manager() {
         let expectation = XCTestExpectation(description: "response")
-        //If device isn't connected to internet, the test should fail.
-        if Reachability.isConnectedToNetwork() {
-            sut.fetchMovies(page: 1, type: .topRated) {[weak self] (data: MovieResponse?, error: Error?) in
-                if error != nil {
-                    XCTFail("You data couldn't be fetched due to an error")
-                }
-                
-                if data != nil  {
-                    self?.moviesList = data?.results
-                    expectation.fulfill()
-                }
+        
+        sut.fetchData(url: .topRated(page: 1), expectedType: MovieResponse.self) { result in
+            switch result {
+            case .failure(_):
+                XCTFail("The network returned an error.")
+            case .success(_):
+                expectation.fulfill()
             }
-            
-            wait(for: [expectation], timeout: 1)
-            XCTAssertTrue(moviesList?.count ?? -1 >= 0)
-        } else {
-            XCTFail("There is no internet conenction.")
         }
+        
+        wait(for: [expectation], timeout: 1)
+        XCTAssertTrue(moviesList?.count ?? -1 >= 0)
+   
     }
     
     func test_fetching_popular_movies_from_network_manager() {
         let expectation = XCTestExpectation(description: "response")
-        //If device isn't connected to internet, the test should fail.
-        if Reachability.isConnectedToNetwork() {
-            sut.fetchMovies(page: 1, type: .popular) {[weak self] (data: MovieResponse?, error: Error?) in
-                if error != nil {
-                    XCTFail("You data couldn't be fetched due to an error")
-                }
-                
-                if data != nil  {
-                    self?.moviesList = data?.results
-                    expectation.fulfill()
-                }
+        
+        sut.fetchData(url: .popular(page: 1), expectedType: MovieResponse.self) { result in
+            switch result {
+            case .failure(_):
+                XCTFail("The network returned an error.")
+            case .success(_):
+                expectation.fulfill()
             }
-            
-            wait(for: [expectation], timeout: 1)
-            XCTAssertTrue(moviesList?.count ?? -1 >= 0)
-        } else {
-            XCTFail("There is no internet conenction.")
         }
+        
+        wait(for: [expectation], timeout: 1)
+        XCTAssertTrue(moviesList?.count ?? -1 >= 0)
     }
 }

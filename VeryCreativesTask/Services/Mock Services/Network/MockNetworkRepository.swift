@@ -11,7 +11,7 @@ class MockNetworkRepository: NetworkRepositoryProtocol {
     typealias T = MovieData
     
     static let shared = MockNetworkRepository()
-    var fetchedMovies: [MovieData] = {
+    lazy var fetchedMovies: [MovieData] = {
         var mockedMovies = [MovieData]()
         for index in 0...3 {
             let movie = MovieData()

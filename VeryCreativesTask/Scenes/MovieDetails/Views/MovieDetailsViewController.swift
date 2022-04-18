@@ -72,7 +72,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
             if presenter.isMovieFavorited(movie: movie) {
                 favButton?.image = UIImage(systemName: "star")
                 detailsPresenter?.movie?.movieState = .normal
-                let _ = NetworkRepository.shared.fetchedMovies.map { movieToBeUnsaved in
+                let _ = NetworkDataRepository.shared.fetchedMovies.map { movieToBeUnsaved in
                     if movieToBeUnsaved.id == movie.id {
                         movieToBeUnsaved.movieState = .normal
                     }
@@ -82,7 +82,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
             } else {
                 favButton?.image = UIImage(systemName: "star.fill")
                 detailsPresenter?.movie?.movieState = .favorited
-                let _ = NetworkRepository.shared.fetchedMovies.map { movieToBeUnsaved in
+                let _ = NetworkDataRepository.shared.fetchedMovies.map { movieToBeUnsaved in
                     if movieToBeUnsaved.id == movie.id {
                         movieToBeUnsaved.movieState = .favorited
                     }

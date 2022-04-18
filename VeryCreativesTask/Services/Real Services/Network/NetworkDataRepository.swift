@@ -7,10 +7,10 @@
 
 import Foundation
 
-class NetworkRepository: NetworkRepositoryProtocol {
+class NetworkDataRepository: NetworkRepositoryProtocol {
     typealias T = MovieData
     
-    static let shared = NetworkRepository()
+    static let shared = NetworkDataRepository()
     var fetchedMovies: [T]
     private init() {
         fetchedMovies = [MovieData]()
