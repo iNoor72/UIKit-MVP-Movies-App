@@ -139,7 +139,7 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol {
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: 170, height: 285)
+        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2)-28, height: 285)
         flowLayout.minimumLineSpacing = 8.0
         flowLayout.minimumInteritemSpacing = 8.0
         self.collectionView.semanticContentAttribute = .unspecified
