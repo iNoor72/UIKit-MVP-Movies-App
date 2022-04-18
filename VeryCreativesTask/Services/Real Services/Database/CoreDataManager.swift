@@ -81,7 +81,7 @@ class CoreDataManager: DatabaseProtocol {
         saveContext()
     }
     
-    func fetch() -> [MovieDataManagedObject] {
+    func fetch() -> [MovieDataManagedObject]? {
         var moviesArray = [MovieDataManagedObject]()
         let fetchRequest = NSFetchRequest<MovieDataManagedObject>(entityName: "MovieDataManagedObject")
         do {
@@ -94,7 +94,7 @@ class CoreDataManager: DatabaseProtocol {
             print("There was a problem fetching data from Core Data. Error: \(error)")
         }
 
-        return moviesArray
+        return nil
     }
     
     func delete(movie: MovieData) {
@@ -147,7 +147,7 @@ class CoreDataManager: DatabaseProtocol {
     }
     
     func convertResponseToModel(movie: MovieData) -> MovieDataManagedObject? {
-        let favMovieModels = fetch()
+        guard let favMovieModels = fetch() else { return nil }
         guard let movieID = movie.id else { return nil }
         for movieModel in favMovieModels {
             if movieModel.id == Int32(movieID) {

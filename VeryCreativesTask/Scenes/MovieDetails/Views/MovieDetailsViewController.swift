@@ -15,8 +15,6 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
     @IBOutlet private weak var movieNameLabel: UILabel!
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieOverviewTextView: UITextView!
-    @IBOutlet weak var overviewBottomAnchorConstraint: NSLayoutConstraint!
-    @IBOutlet weak var overviewHeightConstraint: NSLayoutConstraint!
     
     var detailsPresenter: MovieDetailsPresenterProtocol?
     private var favButton: UIBarButtonItem?
@@ -44,13 +42,8 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
         movieOverviewTextView.layer.borderWidth = 0.7
         movieOverviewTextView.layer.cornerRadius = 8.0
         
-        if movieOverviewTextView.contentSize.height > 50 {
-            overviewHeightConstraint.constant = movieOverviewTextView.contentSize.height
-        }
-        
-        
     }
-    
+        
     private func setupFavoriteButton() {
         if #available(iOS 13.0, *) {
             //Set the button based on the movie state
