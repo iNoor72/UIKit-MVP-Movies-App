@@ -38,7 +38,7 @@ class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     
     
     func isMovieFavorited(movie: MovieData) -> Bool {
-        let favMovieModels = DatabaseManager.fetch()
+        guard let favMovieModels = DatabaseManager.fetch() else { return false }
         guard let movieID = movie.id else { return false }
         for movieModel in favMovieModels {
             if movieModel.id == Int32(movieID) {

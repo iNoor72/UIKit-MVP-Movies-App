@@ -19,6 +19,7 @@
 		7C79A2BB280DB52400B9B7AA /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C79A2BA280DB52400B9B7AA /* MockNetworkManager.swift */; };
 		7C79A2BD280DB5DF00B9B7AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C79A2BC280DB5DF00B9B7AA /* NetworkService.swift */; };
 		7C79A2C2280DC19800B9B7AA /* MockNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C79A2C1280DC19800B9B7AA /* MockNetworkTests.swift */; };
+		7C79A2C6280DC43A00B9B7AA /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C79A2C5280DC43A00B9B7AA /* MockCoreDataManager.swift */; };
 		7CBE0AEA2808B59E0098B205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0AE92808B59E0098B205 /* AppDelegate.swift */; };
 		7CBE0AEC2808B59E0098B205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE0AEB2808B59E0098B205 /* SceneDelegate.swift */; };
 		7CBE0AF32808B5A00098B205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE0AF22808B5A00098B205 /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		7C79A2BA280DB52400B9B7AA /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		7C79A2BC280DB5DF00B9B7AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		7C79A2C1280DC19800B9B7AA /* MockNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkTests.swift; sourceTree = "<group>"; };
+		7C79A2C5280DC43A00B9B7AA /* MockCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
 		7CBE0AE62808B59E0098B205 /* VeryCreativesTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeryCreativesTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBE0AE92808B59E0098B205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CBE0AEB2808B59E0098B205 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,8 +225,8 @@
 		7C79A2B7280DB2EE00B9B7AA /* Mock Services */ = {
 			isa = PBXGroup;
 			children = (
-				7C79A2B8280DB31400B9B7AA /* MockNetworkRepository.swift */,
-				7C79A2BA280DB52400B9B7AA /* MockNetworkManager.swift */,
+				7C79A2C4280DC3E100B9B7AA /* Database */,
+				7C79A2C3280DC3DB00B9B7AA /* Network */,
 			);
 			path = "Mock Services";
 			sourceTree = "<group>";
@@ -232,9 +234,27 @@
 		7C79A2BE280DB63300B9B7AA /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				7CBE0B3A2808B79A0098B205 /* DatabaseProtocol.swift */,
 				7C79A2BC280DB5DF00B9B7AA /* NetworkService.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7C79A2C3280DC3DB00B9B7AA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7C79A2B8280DB31400B9B7AA /* MockNetworkRepository.swift */,
+				7C79A2BA280DB52400B9B7AA /* MockNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7C79A2C4280DC3E100B9B7AA /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				7C79A2C5280DC43A00B9B7AA /* MockCoreDataManager.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		7CBE0ADD2808B59E0098B205 = {
@@ -454,7 +474,6 @@
 			children = (
 				7CF1B7E82809E71800AE14AC /* Model.xcdatamodeld */,
 				7CBE0B392808B79A0098B205 /* CoreDataManager.swift */,
-				7CBE0B3A2808B79A0098B205 /* DatabaseProtocol.swift */,
 				7CBE0B3B2808B79A0098B205 /* Models */,
 			);
 			path = Database;
@@ -803,6 +822,7 @@
 				7C79A2BB280DB52400B9B7AA /* MockNetworkManager.swift in Sources */,
 				7C79A2B9280DB31400B9B7AA /* MockNetworkRepository.swift in Sources */,
 				7CBE0B652808C7160098B205 /* MovieDetailsViewController.swift in Sources */,
+				7C79A2C6280DC43A00B9B7AA /* MockCoreDataManager.swift in Sources */,
 				7CBE0B682808C7200098B205 /* MovieDetailsPresenter.swift in Sources */,
 				7CBE0B582808B79A0098B205 /* MovieResponse.swift in Sources */,
 				7CBE0B512808B79A0098B205 /* CoreDataManager.swift in Sources */,
