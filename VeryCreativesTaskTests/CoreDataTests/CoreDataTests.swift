@@ -37,8 +37,7 @@ class CoreDataTests: XCTestCase {
     
     func test_fetching_favorite_movies() {
         let movies = sut.fetch()
-        let isMovieSaved = movies.count == 1 ? true : false
-        print(movies.count)
+        let isMovieSaved = movies?.count == 1 ? true : false
         XCTAssertEqual(isMovieSaved, true)
     }
     
@@ -52,7 +51,7 @@ class CoreDataTests: XCTestCase {
         sut.save(movie: mockMovie2)
         
         let savedMovies = sut.fetch()
-        let isMovieSaved = savedMovies.contains { movieModel in
+        let isMovieSaved = savedMovies?.contains { movieModel in
             if movieModel.id == Int32(mockMovie2.id ?? -1) {
                 return true
             }
@@ -67,7 +66,7 @@ class CoreDataTests: XCTestCase {
     func test_deleting_an_existing_favorite_movie() {
         sut.delete(movie: mockMovie)
         let movies = sut.fetch()
-        XCTAssertEqual(movies.count, 0)
+        XCTAssertEqual(movies?.count, 0)
     }
     
     func test_deleting_non_existing_movie() {
@@ -80,13 +79,13 @@ class CoreDataTests: XCTestCase {
         sut.delete(movie: mockMovie2)
         
         let movies = sut.fetch() //Should equal 1 since we only saved mockedMovie
-        XCTAssertEqual(movies.count, 1)
+        XCTAssertEqual(movies?.count, 1)
     }
     
     func test_deleting_all_movies() {
         sut.deleteAll()
         let movies = sut.fetch()
         
-        XCTAssertEqual(movies.count, 0)
+        XCTAssertEqual(movies?.count, 0)
     }
 }

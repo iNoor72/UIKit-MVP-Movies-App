@@ -7,10 +7,11 @@
 
 import Foundation
 
-class NetworkRepository: NetworkRepositoryProtocol {
+//This class is used to save all the data fetched.
+class NetworkDataRepository: NetworkRepositoryProtocol {
     typealias T = MovieData
     
-    static let shared = NetworkRepository()
+    static let shared = NetworkDataRepository()
     var fetchedMovies: [T]
     private init() {
         fetchedMovies = [MovieData]()

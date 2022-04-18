@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkService {
-    func fetchMovies<T:Decodable>(page: Int, type: MovieType, completion: @escaping (T?, Error?) -> ())
+    func fetchData<T:Decodable>(url: NetworkRouter, expectedType: T.Type, completion: @escaping (Result<T, Error>) -> ())
 }
 
 protocol NetworkRepositoryProtocol {

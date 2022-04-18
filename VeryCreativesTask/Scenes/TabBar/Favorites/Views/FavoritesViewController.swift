@@ -7,15 +7,18 @@
 
 import UIKit
 
+//MARK: Protocols
 protocol FavoritesViewControllerProtocol: AnyObject, NavigationRoute {
     func reloadData()
 }
 
 class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol {
+    //MARK: IBOutlets
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var noMoviesView: UIView!
     @IBOutlet private weak var noMoviesLabel: UILabel!
     
+    //MARK: Variables
     private var favoritesPresenter: FavoritesPresenterProtocol?
     private var isTableViewEditable = false
     private var editButton: UIBarButtonItem!
@@ -34,6 +37,7 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
         updateView()
     }
     
+    //MARK: Helper Functions
     private func updateView() {
         guard let movies = favoritesPresenter?.favoritedMovies else { return }
         if movies.isEmpty {
@@ -56,6 +60,14 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
         self.navigationItem.rightBarButtonItem  = editButton
     }
     
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.setEditing(false, animated: true)
+        tableView.register(UINib(nibName: Constants.XIBs.FavoriteMovieTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.TableViewCells.FavoriteMovieCell)
+    }
+    
+    //MARK: @objc Functions
     @objc private func editButtonTapped() {
         if tableView.isEditing {
             tableView.isEditing = false
@@ -66,13 +78,7 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
         }
     }
     
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.setEditing(false, animated: true)
-        tableView.register(UINib(nibName: Constants.XIBs.FavoriteMovieTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.TableViewCells.FavoriteMovieCell)
-    }
-    
+    //MARK: Protocol Functions
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
@@ -81,6 +87,9 @@ class FavoritesViewController: UIViewController, FavoritesViewControllerProtocol
     
 }
 
+//MARK: Extentions
+
+//MARK: TableView Extension
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favoritesPresenter?.favoritedMovies?.count ?? 0

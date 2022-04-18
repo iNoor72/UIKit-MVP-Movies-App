@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: Protocols
 protocol MovieDetailsPresenterProtocol {
     var movie: MovieData? { get set }
     
@@ -18,6 +19,7 @@ protocol MovieDetailsPresenterProtocol {
 
 class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     
+    //MARK: Variables
     var movie: MovieData?
     weak var detailsView: MovieDetailsViewControllerProtocol?
     private let DatabaseManager : DatabaseProtocol
@@ -28,6 +30,7 @@ class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
         self.DatabaseManager = DatabaseManager
     }
     
+    //MARK: Protocol Functions
     func saveMovieAsFavorite(movie: MovieData) {
         DatabaseManager.save(movie: movie)
     }
@@ -35,7 +38,6 @@ class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     func deleteMovieFromFavorites(movie: MovieData) {
         DatabaseManager.delete(movie: movie)
     }
-    
     
     func isMovieFavorited(movie: MovieData) -> Bool {
         guard let favMovieModels = DatabaseManager.fetch() else { return false }
@@ -45,10 +47,7 @@ class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
                 return true
             }
         }
-        
         return false
     }
-    
-    
     
 }

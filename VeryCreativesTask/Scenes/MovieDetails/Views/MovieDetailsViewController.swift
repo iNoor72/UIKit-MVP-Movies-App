@@ -12,10 +12,13 @@ protocol MovieDetailsViewControllerProtocol: AnyObject {
 }
 
 class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerProtocol {
+    
+    //MARK: IBOutlets
     @IBOutlet private weak var movieNameLabel: UILabel!
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieOverviewTextView: UITextView!
     
+    //MARK: Variables
     var detailsPresenter: MovieDetailsPresenterProtocol?
     private var favButton: UIBarButtonItem?
     
@@ -30,6 +33,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
         setupFavoriteButton()
     }
     
+    //MARK: Helper Functions
     private func setupViews() {
         navigationController?.navigationBar.tintColor = UIColor(rgb: Constants.Colors.primaryYellowColor)
         title = NSLocalizedString("Details", comment: "")
@@ -64,6 +68,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
         
     }
     
+    //MARK: @objc functions
     @objc private func didTapFavButton() {
         guard let presenter = detailsPresenter, let movie = detailsPresenter?.movie else { return }
         
@@ -72,7 +77,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
             if presenter.isMovieFavorited(movie: movie) {
                 favButton?.image = UIImage(systemName: "star")
                 detailsPresenter?.movie?.movieState = .normal
-                let _ = NetworkRepository.shared.fetchedMovies.map { movieToBeUnsaved in
+                let _ = NetworkDataRepository.shared.fetchedMovies.map { movieToBeUnsaved in
                     if movieToBeUnsaved.id == movie.id {
                         movieToBeUnsaved.movieState = .normal
                     }
@@ -82,7 +87,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerPr
             } else {
                 favButton?.image = UIImage(systemName: "star.fill")
                 detailsPresenter?.movie?.movieState = .favorited
-                let _ = NetworkRepository.shared.fetchedMovies.map { movieToBeUnsaved in
+                let _ = NetworkDataRepository.shared.fetchedMovies.map { movieToBeUnsaved in
                     if movieToBeUnsaved.id == movie.id {
                         movieToBeUnsaved.movieState = .favorited
                     }

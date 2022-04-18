@@ -7,11 +7,11 @@
 
 import Foundation
 
-class MockNetworkRepository: NetworkRepositoryProtocol {
+class MockDataNetworkRepository: NetworkRepositoryProtocol {
     typealias T = MovieData
     
-    static let shared = MockNetworkRepository()
-    var fetchedMovies: [MovieData] = {
+    static let shared = MockDataNetworkRepository()
+    lazy var fetchedMovies: [MovieData] = {
         var mockedMovies = [MovieData]()
         for index in 0...3 {
             let movie = MovieData()

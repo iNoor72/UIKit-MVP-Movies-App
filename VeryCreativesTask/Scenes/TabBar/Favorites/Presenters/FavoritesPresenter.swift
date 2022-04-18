@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: Protocols
 protocol FavoritesPresenterProtocol {
     var favoritedMovies: [MovieDataManagedObject]? { get }
     
@@ -18,6 +19,7 @@ protocol FavoritesPresenterProtocol {
 
 class FavoritesPresenter: FavoritesPresenterProtocol {
     
+    //MARK: Variables
     var favoritedMovies: [MovieDataManagedObject]?
     weak var favoritesView: FavoritesViewControllerProtocol?
     private var DatabaseManager : DatabaseProtocol
@@ -27,6 +29,7 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
         self.DatabaseManager = DatabaseManager
     }
     
+    //MARK: Protocol Functions
     func fetchFavoriteMovies() {
         favoritedMovies = DatabaseManager.fetch()
         favoritesView?.reloadData()

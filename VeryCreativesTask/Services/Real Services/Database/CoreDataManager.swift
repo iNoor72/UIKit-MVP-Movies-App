@@ -136,7 +136,7 @@ class CoreDataManager: DatabaseProtocol {
     }
     
     func convertModelToResponse(model: MovieDataManagedObject) -> MovieData? {
-        for movie in NetworkRepository.shared.fetchedMovies {
+        for movie in NetworkDataRepository.shared.fetchedMovies {
             if model.id == movie.id ?? 0 {
                 return movie
             }

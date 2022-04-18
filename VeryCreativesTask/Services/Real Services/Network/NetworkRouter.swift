@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-
+//NetowrkRequest
 enum NetworkRouter: URLRequestConvertible {
     case topRated(page: Int)
     case popular(page: Int)
