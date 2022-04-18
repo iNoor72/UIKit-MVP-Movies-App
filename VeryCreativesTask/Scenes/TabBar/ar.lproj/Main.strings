@@ -1,0 +1,18 @@
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "CXf-d4-drx"; */
+"CXf-d4-drx.title" = "Home";
+
+/* Class = "UILabel"; text = "Hello,"; ObjectID = "GBU-2D-k5V"; */
+"GBU-2D-k5V.text" = "Hello,";
+
+/* Class = "UILabel"; text = "VeryCreatives!"; ObjectID = "GgL-k4-weo"; */
+"GgL-k4-weo.text" = "VeryCreatives!";
+
+/* Class = "UILabel"; text = "No favorited movies yet"; ObjectID = "NJF-g7-5NZ"; */
+"NJF-g7-5NZ.text" = "No favorited movies yet";
+
+/* Class = "UILabel"; text = "Checkout these movies!"; ObjectID = "OUw-1x-jlc"; */
+"OUw-1x-jlc.text" = "Checkout these movies!";
+
+/* Class = "UITabBarItem"; title = "Favorites"; ObjectID = "ger-zB-bpJ"; */
+"ger-zB-bpJ.title" = "Favorites";

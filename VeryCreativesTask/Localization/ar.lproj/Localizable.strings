@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  VeryCreativesTask
+
+  Created by Noor Walid on 17/04/2022.
+  
+*/
+
+//MARK: Arabic Localization
+
+"Home"  = "الرئيسية";
+"Favorites" = "المفضلة";
+"Hello," = "مرحبا،";
+
+//Note: "اسم المستخدم" means "Username" in English, I just put VeryCreatives in Storyboard as the Company name/Username.
+"VeryCreatives!" = "اسم المستخدم!";
+
+
+"Checkout these movies!" = "تصفح الأفلام التالية!";
+"Top Rated Movies" = "الأفلام الأعلى تقييماً";
+"Popular Movies" = "الأفلام الأكثر شهرة";
+"No favorited movies yet" = "لا يوجد أفلام مفضلة الآن";
+"Edit" = "تعديل";
+"Done" = "تم";
+"Rating:" = "التقييم:";
+"Dismiss" = "الغاء";
+"You're disconnected to Internet." = "انت غير متصل بالانترنت.";
+"Your phone is not connected to internet. You have been switched to Favorites movies." = "جهازك غير متصل بالانترنت. تم تحويلك الى الأفلام المفضلة.";
+"Show movies menu" = "تصفح قائمة الأفلام";
+"Details" = "تفاصيل";

@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  VeryCreativesTask
+
+  Created by Noor Walid on 17/04/2022.
+  
+*/
+
+//MARK: English Localization
+
+"Home"  = "Home";
+"Favorites" = "Favorites";
+"Hello," = "Hello,";
+"VeryCreatives!" = "VeryCreatives!";
+"Checkout these movies!" = "Checkout these movies!";
+"Top Rated Movies" = "Top Rated Movies";
+"Popular Movies" = "Popular Movies";
+"No favorited movies yet" = "No favorited movies yet";
+"Edit" = "Edit";
+"Done" = "Done";
+"Rating:" = "Rating:";
+"Dismiss" = "Dismiss";
+"You're disconnected to Internet." = "You're disconnected to Internet.";
+"Your phone is not connected to internet. You have been switched to Favorites movies." = "Your phone is not connected to internet. You have been switched to Favorites movies.";
+"Show movies menu" = "Show movies menu";
+"Details" = "Details";
