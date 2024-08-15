@@ -1,9 +1,5 @@
-# VeryCreatives-Task
-
-VeryCreativesTask is a project build for VeryCreatives company.
-
 ## Description
-This is my implementation for the task requested by VeryCreatives company. An iOS app to fetch movies from TMDB website with some cool features.
+An iOS app to fetch movies from TMDB website with some cool features.
 It's an iOS app that shows movies to the user with the ability to save favorited movies.
 
 ## Getting started
@@ -44,4 +40,4 @@ Run the app.
 - The last option is using MOLH pod, and it's described in the project.
 
 ## Project status
-The project is completed in what was mentioned in the requirements document, however, it could have been done with better Unit testing and it's missing the Landscape mode and Universal (iPhone & iPad) features.
+It could have been done with better Unit testing and it's missing the Landscape mode and Universal (iPhone & iPad) features.
